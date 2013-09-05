@@ -7,6 +7,7 @@ public class GUI extends JFrame
 {
 	/**
 	 * Eine GUI in Ehren kann keiner verwehren!
+	 * by me;
 	 */
 	private static final long serialVersionUID = 1L;
 	Kontroller kONTROLLER;
