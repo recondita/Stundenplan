@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class GUI extends JFrame
@@ -60,14 +59,14 @@ public class GUI extends JFrame
 		po.add(lehrer);
 		po.add(klasse);
 	}
-	
+
 	public void start()
 	{
-		kONTROLLER= new Kontroller(this);
-		start.setEnabled(false); 
+		kONTROLLER = new Kontroller(this);
+		start.setEnabled(false);
 		modul(laeuft);
 	}
-	
+
 	public void modul(JComponent j)
 	{
 		pc.removeAll();
