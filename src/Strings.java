@@ -6,6 +6,7 @@ public class Strings
 	String klasse;
 	String start;
 	String sprachen;
+	String laeuft;
 
 	public Strings()
 	{
@@ -15,5 +16,6 @@ public class Strings
 		klasse = "Klasse erstellen";
 		start = "Start";
 		sprachen = "Sprache";
+		laeuft = "Stundenplan wird erstellt";
 	}
 }

@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class GUI extends JFrame
@@ -17,10 +20,10 @@ public class GUI extends JFrame
 	JButton lehrer = new JButton(sT.lehrer);
 	JButton klasse = new JButton(sT.klasse);
 	JButton start = new JButton(sT.start);
+	JLabel laeuft = new JLabel(sT.laeuft);
 
 	public GUI()
 	{
-		// kONTROLLER= new Kontroller(this);
 		setLayout(new BorderLayout());
 		setLocation(200, 50);
 		setSize(800, 800);
@@ -41,6 +44,13 @@ public class GUI extends JFrame
 	public void unten()
 	{
 		pu.add(start);
+		start.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				start();
+			}
+		});
 	}
 
 	public void oben()
@@ -49,6 +59,20 @@ public class GUI extends JFrame
 		po.add(fach);
 		po.add(lehrer);
 		po.add(klasse);
+	}
+	
+	public void start()
+	{
+		kONTROLLER= new Kontroller(this);
+		start.setEnabled(false); 
+		modul(laeuft);
+	}
+	
+	public void modul(JComponent j)
+	{
+		pc.removeAll();
+		pc.add(j);
+		validate();
 	}
 
 	public static void main(String args[])
