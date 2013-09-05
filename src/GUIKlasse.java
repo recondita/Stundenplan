@@ -1,0 +1,13 @@
+import javax.swing.*;
+
+public class GUIKlasse extends JPanel
+{
+
+	/**
+	 * @author: Felix Schütze
+	 */
+	public GUIKlasse()
+	{
+
+	}
+}
