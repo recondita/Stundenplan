@@ -16,6 +16,6 @@ public class Strings
 		klasse = "Klasse erstellen";
 		start = "Start";
 		sprachen = "Sprache";
-		laeuft = "Stundenplan wird erstellt";
+		laeuft = "Stundenplan wird erstellt...";
 	}
 }
