@@ -9,10 +9,12 @@ import java.awt.event.*;
  */
 public class Menuleiste
 {
-	Strings sT = new Strings();
-
-	public Menuleiste()
+	Strings sT;
+	GUI gUI;
+	public Menuleiste(Strings sT, GUI gUI)
 	{
+		this.sT=sT;
+		this.gUI=gUI;
 		ml();
 	}
 
@@ -25,10 +27,21 @@ public class Menuleiste
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-
+				sT.sprache=1;
+				gUI.validate();
 			}
 		});
 		sprachen.add(deutsch);
+		MenuItem englisch = new MenuItem("English");
+		englisch.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				sT.sprache=2;
+				gUI.validate();
+			}
+		});
+		sprachen.add(englisch);
 		Menuleiste.add(sprachen);
 
 		return Menuleiste;

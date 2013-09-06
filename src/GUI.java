@@ -14,7 +14,7 @@ public class GUI extends JFrame
 	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
 	GUILehrer gUILEHRER=new GUILehrer(sT);
 	Kontroller kONTROLLER;
-	Menuleiste mL = new Menuleiste();
+	Menuleiste mL = new Menuleiste(sT, this);
 	JTabbedPane pc = new JTabbedPane();
 	JPanel pu = new JPanel();
 	JButton fach = new JButton(sT.fach);
@@ -35,9 +35,9 @@ public class GUI extends JFrame
 		laeuft.setHorizontalAlignment(JLabel.CENTER);
 		laeuft.setVerticalAlignment(JLabel.CENTER);
 		pu.setPreferredSize(new Dimension(50, 50));
-		pc.addTab("Fach erstellen", gUIFACH);
-		pc.addTab("Lehrer erstellen", gUILEHRER);
-		pc.addTab("Klasse erstellen", gUIKLASSE);
+		pc.addTab(sT.fach, gUIFACH);
+		pc.addTab(sT.lehrer, gUILEHRER);
+		pc.addTab(sT.klasse, gUIKLASSE);
 		unten();
 		add("South", (pu));
 		add("Center", (pc));
