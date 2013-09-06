@@ -47,7 +47,8 @@ public class Datenbank
 		String[] test = testDatenbank.gebeLehrerListe();
 		for (int i = 0; i < test.length; i++)
 		{
-			System.out.println(test[i]);
+			String[] splittArray = test[i].split(".");
+			System.out.println(splittArray[0]);
 		}
 	}
 }
