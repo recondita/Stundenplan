@@ -103,11 +103,11 @@ public class Datenbank
 		String[] test = gebeLehrerListe();
 		for (int i = 0; i < test.length; i++)
 		{
-			String[] splittArray = test[i].split("\\.");
+			String[] splittArray = test[i].split("\\.lehrer");
 			String temp="";
 			if (splittArray.length > 1)
 			{
-				for (int j = 0; (j < splittArray.length - 1); j++)
+				for (int j = 0; (j < splittArray.length); j++)
 				{
 					temp = temp + splittArray[j];
 				}
