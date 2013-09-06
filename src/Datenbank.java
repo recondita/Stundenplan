@@ -25,6 +25,7 @@ public class Datenbank
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Fehler beim Lesen des Verzeichnisses");
 		}
 	}
 
