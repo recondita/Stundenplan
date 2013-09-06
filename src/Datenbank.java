@@ -173,7 +173,7 @@ public class Datenbank
 		}
 	}
 
-	public int fachToString(String name)
+	public int fachToInt(String name)
 	{
 		int f = 0;
 		try
@@ -198,7 +198,7 @@ public class Datenbank
 		try
 		{
 			FileReader fr = new FileReader(new File(pfad + sep + "Lehrer" + sep
-					+ name));
+					+ name +".lehrer"));
 			BufferedReader br = new BufferedReader(fr);
 			String temp = br.readLine();
 			while (temp != null)
@@ -217,9 +217,8 @@ public class Datenbank
 						} else
 						{
 							if (split[0].equals("faecher"))
-								;
 							{
-								tempfaecher = split[1].split("//,");
+								tempfaecher = split[1].split("\\,");
 							}
 						}
 					}
@@ -234,8 +233,16 @@ public class Datenbank
 			tempminh = null;
 		}
 
-		boolean[] faecher = new boolean[5];
-
+		boolean[] faecher = new boolean[gebeFaecherListe().length];
+		for (int i=0; i<faecher.length; i++)
+		{
+			faecher[0]=false;
+		}
+		for (int i=0; i<tempfaecher.length; i++)
+		{
+			faecher[fachToInt(tempfaecher[i])]=true;
+		}
+		
 		return new Lehrer(name, Integer.parseInt(tempminh),
 				Integer.parseInt(tempmaxh), faecher);
 	}
@@ -257,6 +264,7 @@ public class Datenbank
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
 		testDatenbank.print();
-
+		Lehrer testLehrer=testDatenbank.lehrerAuslesen("Scheibe");
+		System.out.println(testLehrer);
 	}
 }
