@@ -89,6 +89,7 @@ public class Datenbank
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Fehlerbeim Schreiben der Eigenschaften");
 			return null;
 		}
 	}
@@ -103,7 +104,7 @@ public class Datenbank
 		for (int i = 0; i < test.length; i++)
 		{
 			String[] splittArray = test[i].split("\\.");
-			if (test.length > 1)
+			if (splittArray.length > 1)
 			{
 				for (int j = 0; (j < test.length - 1); j++)
 				{
