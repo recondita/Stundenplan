@@ -38,20 +38,20 @@ public class Datenbank
 	{
 		try
 		{
-				String[] Liste = new String[lehrerVerzeichnis.list().length];
-				for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
+			String[] Liste = new String[lehrerVerzeichnis.list().length];
+			for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
+			{
+				String[] splittArray = lehrerVerzeichnis.list()[i]
+						.split("\\.lehrer");
+				String temp = "";
+				for (int j = 0; j < splittArray.length; j++)
 				{
-					String[] splittArray = lehrerVerzeichnis.list()[i]
-							.split("\\.lehrer");
-					String temp = "";
-					for (int j = 0; j < splittArray.length; j++)
-					{
-						temp = temp + splittArray[j];
-					}
-					Liste[i] = temp;
-					temp = "";
+					temp = temp + splittArray[j];
 				}
-				return Liste;
+				Liste[i] = temp;
+				temp = "";
+			}
+			return Liste;
 		} catch (Exception e)
 		{
 			System.out.println("Lesefehler");
@@ -108,7 +108,7 @@ public class Datenbank
 		{
 			try
 			{
-				BufferedWriter bw =new BufferedWriter(fw);
+				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write("" + anzahl);
 				bw.close();
 			} catch (IOException e)
@@ -173,13 +173,52 @@ public class Datenbank
 		}
 	}
 
-	/**
-	 * public Lehrer auslesen(String name) { FileReader fr=new FileReader(new
-	 * File(pfad + sep + "Lehrer" + sep + name)); BufferedReader br = new
-	 * BufferedReader(fr); String temp=br.readLine();
-	 * 
-	 * return Lehrer(name,4,5); }
-	 */
+	public Lehrer lehrerAuslesen(String name)
+	{
+		String tempminh=null;
+		String tempmaxh=null;
+		String[] tempfaecher = new String[1];
+		try
+		{
+			FileReader fr = new FileReader(new File(pfad + sep + "Lehrer" + sep
+					+ name));
+			BufferedReader br = new BufferedReader(fr);
+			String temp = br.readLine();
+			while (temp != null)
+			{
+				String split[] = temp.split("\\:");
+				if (split.length > 1)
+				{
+					if (split[0] == "minh")
+					{
+						tempminh = split[1];
+					} else
+					{
+						if (split[0] == "maxh")
+						{
+							tempmaxh = split[1];
+						} else
+						{
+							if (split[0] == "faecher")
+							{
+								tempfaecher = split[1].split("//,");
+							}
+						}
+					}
+				}
+				temp = br.readLine();
+
+			}
+			br.close();
+		} 
+		catch (Exception e)
+		{
+			System.out.println(e);
+			tempminh = null;
+		}
+
+		return new Lehrer(name, Integer.parseInt(tempminh),	Integer.parseInt(tempmaxh));
+	}
 
 	public void print()
 	{
