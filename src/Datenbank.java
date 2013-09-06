@@ -193,17 +193,15 @@ public class Datenbank
 
 	public int fachToInt(String name)
 	{
-		int f = -1;
-		try
+		int f = 0;
+		String [] faecherListe=gebeFaecherListe();
+		while(!faecherListe[f].equals(name))
 		{
-			FileReader fr = new FileReader(new File(pfad + sep + "Faecher"
-					+ sep + name +".fach"));
-			BufferedReader br = new BufferedReader(fr);
-			String temp = br.readLine();
-			br.close();
-			f = Integer.parseInt(temp);
-		} catch (Exception e)
-		{
+			f++;
+			if(f>=faecherListe.length)
+			{
+				return -1;
+			}
 		}
 		return f;
 	}
