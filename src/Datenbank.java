@@ -175,11 +175,11 @@ public class Datenbank
 
 	public int fachToInt(String name)
 	{
-		int f = 0;
+		int f = -1;
 		try
 		{
 			FileReader fr = new FileReader(new File(pfad + sep + "Faecher"
-					+ sep + name));
+					+ sep + name +".fach"));
 			BufferedReader br = new BufferedReader(fr);
 			String temp = br.readLine();
 			br.close();
