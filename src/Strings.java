@@ -14,6 +14,7 @@ public class Strings
 	String speichern;
 	String allefelder;
 	String nurzahlen;
+	String minmax;
 
 	public Strings()
 	{
@@ -31,5 +32,6 @@ public class Strings
 		speichern="Speichern";
 		allefelder="Bitte alle Felder ausfüllen!";
 		nurzahlen="Bitte bei der Stundenanzahl nur Zahlen eingeben";
+		minmax="Maximale Stunden müssen die Minimalen übertreffen";
 	}
 }

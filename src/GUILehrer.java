@@ -46,23 +46,30 @@ public class GUILehrer extends JPanel
 	{
 		try
 		{
-			if (!eingabe[0].getText().equals("")
-					&& !eingabe[1].getText().equals("")
-					&& !eingabe[2].getText().equals("")
-					&& !eingabe[3].getText().equals(""))
+			if (Integer.parseInt(eingabe[1].getText()) < Integer
+					.parseInt(eingabe[2].getText()))
 			{
-				Datenbank db = new Datenbank();
-				String[] temp = eingabe[3].getText().split("\\,");
-				db.schreibeLehrerEigeschaften(eingabe[0].getText(),
-						Integer.parseInt(eingabe[1].getText()),
-						Integer.parseInt(eingabe[2].getText()), temp);
-				for (int i = 0; i < 4; i++)
+				if (!eingabe[0].getText().equals("")
+						&& !eingabe[1].getText().equals("")
+						&& !eingabe[2].getText().equals("")
+						&& !eingabe[3].getText().equals(""))
 				{
-					eingabe[i].setText("");
+					Datenbank db = new Datenbank();
+					String[] temp = eingabe[3].getText().split("\\,");
+					db.schreibeLehrerEigeschaften(eingabe[0].getText(),
+							Integer.parseInt(eingabe[1].getText()),
+							Integer.parseInt(eingabe[2].getText()), temp);
+					for (int i = 0; i < 4; i++)
+					{
+						eingabe[i].setText("");
+					}
+				} else
+				{
+					ausgabe.setText(sT.allefelder);
 				}
 			} else
 			{
-				ausgabe.setText(sT.allefelder);
+				ausgabe.setText(sT.minmax);
 			}
 		} catch (Exception e)
 		{
@@ -70,5 +77,3 @@ public class GUILehrer extends JPanel
 		}
 	}
 }
-// (String name, int mindestStunden,
-// int maximalStunden, String[] fach)

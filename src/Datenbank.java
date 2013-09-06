@@ -10,11 +10,13 @@ public class Datenbank
 	String pfad;
 
 	File lehrerVerzeichnis;
+	File faecherVerzeichnis;
 
 	public Datenbank(String pfad)
 	{
 		this.pfad = pfad;
 		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
+		lehrerVerzeichnis = new File(pfad + sep + "Faecher");
 	}
 
 	public Datenbank()
@@ -23,6 +25,7 @@ public class Datenbank
 		{
 			this.pfad = ".";
 			lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
+			faecherVerzeichnis = new File(pfad + sep + "Faecher");
 		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block
@@ -35,7 +38,29 @@ public class Datenbank
 	{
 		try
 		{
-			return lehrerVerzeichnis.list();
+			String[] splittArray = null;
+			for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
+			{
+				splittArray = lehrerVerzeichnis.list()[i].split("\\.lehrer");
+			}
+			return splittArray;
+		} catch (Exception e)
+		{
+			System.out.println("Lesefehler");
+			return null;
+		}
+	}
+
+	public String[] gebeFaecherListe()
+	{
+		try
+		{
+			String[] splittArray = null;
+			for (int i = 0; i < faecherVerzeichnis.list().length; i++)
+			{
+				splittArray = faecherVerzeichnis.list()[i].split("\\.fach");
+			}
+			return splittArray;
 		} catch (Exception e)
 		{
 			System.out.println("Lesefehler");
@@ -51,6 +76,23 @@ public class Datenbank
 			try
 			{
 				fw.write("");
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void machFach(String name)
+	{
+		FileWriter fw = faecherFW(name);
+		int anzahl = gebeFaecherListe().length + 1;
+		if (fw != null)
+		{
+			try
+			{
+				fw.write("" + anzahl);
 			} catch (IOException e)
 			{
 				// TODO Auto-generated catch block
@@ -98,6 +140,21 @@ public class Datenbank
 		}
 	}
 
+	public FileWriter faecherFW(String name)
+	{
+		try
+		{
+			return new FileWriter(new File(pfad + sep + "Faecher" + sep + name
+					+ ".fach"));
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Fehler beim Anlegen des Filewriters " + e);
+			return null;
+		}
+	}
+
 	/**
 	 * public Lehrer auslesen(String name) { FileReader fr=new FileReader(new
 	 * File(pfad + sep + "Lehrer" + sep + name)); BufferedReader br = new
@@ -106,19 +163,17 @@ public class Datenbank
 	 * return Lehrer(name,4,5); }
 	 */
 
-	public void printLehrer(Datenbank db)
+	public void print()
 	{
-		machLehrer("Fank");
-		machLehrer("Hund");
-		machLehrer("Boje");
-		db.schreibeLehrerEigeschaften("B. Fank", 30, 40, gebeLehrerListe());
 		String[] test = gebeLehrerListe();
+		String[] test2 = gebeLehrerListe();
 		for (int i = 0; i < test.length; i++)
 		{
-			String[] splittArray = test[i].split("\\.lehrer");
-			String temp = splittArray[0];
-			System.out.println(temp);
-			temp = "";
+			System.out.println(test[i]);
+		}
+		for (int i = 0; i < test2.length; i++)
+		{
+			System.out.println(test2[i]);
 		}
 	}
 
@@ -126,6 +181,6 @@ public class Datenbank
 	{
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
-		testDatenbank.printLehrer(testDatenbank);
+		testDatenbank.print();
 	}
 }
