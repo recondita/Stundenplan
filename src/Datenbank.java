@@ -58,6 +58,25 @@ public class Datenbank
 			}
 	}
 	
+	 public void schreibeLehrerEigeschaften(String name, String mindestStunden, String maximalStunden, String[] fach)
+	 {
+	  String faecher="";
+	  for (int i=0; i<fach.length; i++)
+	  {
+	   faecher=faecher+fach[i]+",";
+	  }
+	  
+	  FileWriter fw = lehrerFW(name);
+	  try
+	  {
+	   fw.write("minh:" + mindestStunden + "\n" + "maxh:" + maximalStunden + "\n" + "faecher:" + faecher);
+	  } catch (IOException e)
+	  {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  }
+	 }
+	
 	public FileWriter lehrerFW(String name)
 	{
 		try
