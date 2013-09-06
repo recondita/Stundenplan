@@ -49,6 +49,7 @@ public class Datenbank
 		{
 			String[] splittArray = test[i].split(".");
 			System.out.println(splittArray[0]);
+			//Lehrer ohne Endung
 		}
 	}
 }
