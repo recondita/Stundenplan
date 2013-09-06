@@ -97,14 +97,17 @@ public class Datenbank
 			return null;
 		}
 	}
-
+/**
 	public Lehrer auslesen(String name)
 	{
 		FileReader fr=new FileReader(new File(pfad + sep + "Lehrer" + sep + name));
-		String temp=fr.read();
+		BufferedReader br = new BufferedReader(fr);
+		String temp=br.readLine();
 		
 		return Lehrer(name,4,5);
 	}
+	*/
+
 	
 	public void printLehrer(Datenbank db)
 	{

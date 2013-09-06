@@ -1,4 +1,3 @@
-
 public class Lehrer {
 
 	String name;
