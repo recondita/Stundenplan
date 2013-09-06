@@ -76,6 +76,7 @@ public class Datenbank
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Fehler beim Schreiben der Eigenschaften " + e);
 		}
 	}
 
@@ -89,7 +90,7 @@ public class Datenbank
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Fehlerbeim Schreiben der Eigenschaften");
+			System.out.println("Fehler beim Anlegen des Filewriters " + e);
 			return null;
 		}
 	}
