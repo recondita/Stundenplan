@@ -13,7 +13,7 @@ public class GUILehrer extends JPanel
 	JButton start;
 	JComboBox auswahl = new JComboBox();
 	JPanel p = new JPanel();
-	String Fach = "";
+	String Fach_liste = "";
 
 	/**
 	 * @author: Felix Schütze
@@ -45,6 +45,7 @@ public class GUILehrer extends JPanel
 		beschreibung[1].setText(sT.minstunden);
 		beschreibung[2].setText(sT.maxstunden);
 		beschreibung[3].setText(sT.faecher);
+		dropDown();
 		add(ausgabe);
 		add(start);
 		start.addActionListener(new ActionListener()
@@ -63,8 +64,8 @@ public class GUILehrer extends JPanel
 			public void itemStateChanged(ItemEvent e)
 			{
 				JComboBox selectedChoice = (JComboBox) e.getSource();
-				Fach=Fach+", "+selectedChoice.getSelectedItem();
-				eingabe[3].setText(Fach);
+				Fach_liste=Fach_liste+", "+selectedChoice.getSelectedItem();
+				eingabe[3].setText(Fach_liste);
 				validate();
 			}
 		});
@@ -90,7 +91,7 @@ public class GUILehrer extends JPanel
 					{
 						eingabe[i].setText("");
 					}
-					Fach="";
+					Fach_liste="";
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);
