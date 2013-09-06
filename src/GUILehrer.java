@@ -1,8 +1,7 @@
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class GUILehrer extends JPanel
 {
@@ -12,9 +11,9 @@ public class GUILehrer extends JPanel
 	JTextField eingabe[] = new JTextField[4];
 	JLabel ausgabe = new JLabel();
 	JButton start;
-	JComboBox auswahl= new JComboBox();
-	JPanel p=new JPanel();
-	String Fach="";
+	JComboBox auswahl = new JComboBox();
+	JPanel p = new JPanel();
+	String Fach = "";
 
 	/**
 	 * @author: Felix Schütze
@@ -24,7 +23,7 @@ public class GUILehrer extends JPanel
 		sT = new Strings();
 		start = new JButton(sT.speichern);
 		setLayout(new GridLayout(5, 2));
-		p.setLayout(new GridLayout(1,2));
+		p.setLayout(new GridLayout(1, 2));
 		for (int i = 0; i < 3; i++)
 		{
 			beschreibung[i] = new JLabel();
@@ -38,9 +37,9 @@ public class GUILehrer extends JPanel
 		p.add(auswahl);
 		add(p);
 		p.add(eingabe[3]);
-		for(int i=0;i<db.gebeFaecherListe().length;i++)
+		for (int i = 0; i < db.gebeFaecherListe().length; i++)
 		{
-		auswahl.addItem( db.gebeFaecherListe()[i] );
+			auswahl.addItem(db.gebeFaecherListe()[i]);
 		}
 		beschreibung[0].setText(sT.lehrername);
 		beschreibung[1].setText(sT.minstunden);
@@ -53,6 +52,20 @@ public class GUILehrer extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				listener();
+			}
+		});
+	}
+
+	public void dropDown()
+	{
+		auswahl.addItemListener(new ItemListener()
+		{
+			public void itemStateChanged(ItemEvent e)
+			{
+				JComboBox selectedChoice = (JComboBox) e.getSource();
+				Fach=Fach+", "+selectedChoice.getSelectedItem();
+				eingabe[3].setText(Fach);
+				validate();
 			}
 		});
 	}
@@ -77,17 +90,18 @@ public class GUILehrer extends JPanel
 					{
 						eingabe[i].setText("");
 					}
+					Fach="";
 				} else
 				{
-					//ausgabe.setText(sT.allefelder);
+					// ausgabe.setText(sT.allefelder);
 				}
 			} else
 			{
-				//ausgabe.setText(sT.minmax);
+				// ausgabe.setText(sT.minmax);
 			}
 		} catch (Exception e)
 		{
-			//ausgabe.setText(sT.nurzahlen);
+			// ausgabe.setText(sT.nurzahlen);
 		}
 	}
 }
