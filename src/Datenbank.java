@@ -189,17 +189,17 @@ public class Datenbank
 				String split[] = temp.split("\\:");
 				if (split.length > 1)
 				{
-					if (split[0] == "minh")
+					if (split[0].equals("minh"))
 					{
 						tempminh = split[1];
 					} else
 					{
-						if (split[0] == "maxh")
+						if (split[0].equals("maxh"))
 						{
 							tempmaxh = split[1];
 						} else
 						{
-							if (split[0] == "faecher")
+							if (split[0].equals("faecher"));
 							{
 								tempfaecher = split[1].split("//,");
 							}
@@ -217,7 +217,9 @@ public class Datenbank
 			tempminh = null;
 		}
 
-		return new Lehrer(name, Integer.parseInt(tempminh),	Integer.parseInt(tempmaxh));
+		boolean[] faecher=new boolean[5];
+		
+		return new Lehrer(name, Integer.parseInt(tempminh),	Integer.parseInt(tempmaxh),faecher );
 	}
 
 	public void print()
@@ -237,5 +239,6 @@ public class Datenbank
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
 		testDatenbank.print();
+		
 	}
 }
