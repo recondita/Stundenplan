@@ -15,8 +15,7 @@ public class GUI extends JFrame
 	GUILehrer gUILEHRER=new GUILehrer(sT);
 	Kontroller kONTROLLER;
 	Menuleiste mL = new Menuleiste();
-	JPanel po = new JPanel();
-	JPanel pc = new JPanel();
+	JTabbedPane pc = new JTabbedPane();
 	JPanel pu = new JPanel();
 	JButton fach = new JButton(sT.fach);
 	JButton lehrer = new JButton(sT.lehrer);
@@ -34,10 +33,10 @@ public class GUI extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle(sT.name);
 		pu.setPreferredSize(new Dimension(50, 50));
-		po.setPreferredSize(new Dimension(20, 20));
-		oben();
+		pc.addTab("Fach erstellen", gUIFACH);
+		pc.addTab("Lehrer erstellen", gUILEHRER);
+		pc.addTab("Klasse erstellen", gUIKLASSE);
 		unten();
-		add("North", (po));
 		add("South", (pu));
 		add("Center", (pc));
 		setVisible(true);
@@ -55,35 +54,6 @@ public class GUI extends JFrame
 		});
 	}
 
-	public void oben()
-	{
-		po.setLayout(new GridLayout(1, 3));
-		po.add(fach);
-		fach.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				modul(gUIFACH);
-			}
-		});
-		po.add(lehrer);
-		lehrer.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				modul(gUILEHRER);
-			}
-		});
-		po.add(klasse);
-		klasse.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				modul(gUIKLASSE);
-			}
-		});
-	}
-
 	public void start()
 	{
 		kONTROLLER = new Kontroller(this);
@@ -93,8 +63,10 @@ public class GUI extends JFrame
 
 	public void modul(JComponent j)
 	{
+		remove(pc);
 		pc.removeAll();
 		pc.add(j);
+		add("Center", (pc));
 		validate();
 	}
 

@@ -183,7 +183,6 @@ public class Datenbank
 
 	public void print()
 	{
-		machFach("Deutsch");
 		for (int i = 0; i < gebeLehrerListe().length; i++)
 		{
 			System.out.println(gebeLehrerListe()[i]);

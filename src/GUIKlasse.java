@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+
 import javax.swing.*;
 
 public class GUIKlasse extends JPanel
@@ -8,6 +10,5 @@ public class GUIKlasse extends JPanel
 	 */
 	public GUIKlasse(Strings sT)
 	{
-
 	}
 }

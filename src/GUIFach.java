@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+
 import javax.swing.*;
 
 public class GUIFach extends JPanel
@@ -8,6 +10,5 @@ public class GUIFach extends JPanel
 	 */
 	public GUIFach(Strings sT)
 	{
-
 	}
 }
