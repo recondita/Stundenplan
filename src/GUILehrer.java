@@ -3,51 +3,64 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUILehrer extends JPanel
+public class GUILehrer extends JScrollPane
 {
+	JPanel panel=new JPanel();
 	Datenbank db = new Datenbank();
+	int fach_anzahl=(db.gebeFaecherListe().length);
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
-	JTextField eingabe[] = new JTextField[4];
+	JTextField eingabe[] = new JTextField[3];
+	JTextField[] eingabe_fach=new JTextField[fach_anzahl];
+	JPanel[] p = new JPanel[fach_anzahl];
+	p[0]=new JPanel();
 	JLabel ausgabe = new JLabel();
 	JButton start;
-	JComboBox auswahl = new JComboBox();
-	JPanel p = new JPanel();
+	JPanel unten=new JPanel();
+	JPanel oben=new JPanel();
+	JComboBox[] auswahl = new JComboBox[fach_anzahl];
 	String Fach_liste = "";
+	int anzahl=0;
 
 	/**
 	 * @author: Felix Schütze
 	 */
 	public GUILehrer(Strings sT)
 	{
+		setViewportView(panel);
 		sT = new Strings();
 		start = new JButton(sT.speichern);
-		setLayout(new GridLayout(5, 2));
-		p.setLayout(new GridLayout(1, 2));
+		panel.setLayout(new BorderLayout());
+		oben.setLayout(new GridLayout(anzahl+4, 2));
+		unten.setLayout(new GridLayout(1,1));
+		unten.setPreferredSize(new Dimension(25,25));
+		panel.add("Center",(oben));
+		panel.add("South",(unten));
+		p[0].setLayout(new GridLayout(1, 2));
 		for (int i = 0; i < 3; i++)
 		{
 			beschreibung[i] = new JLabel();
 			eingabe[i] = new JTextField();
-			add(beschreibung[i]);
-			add(eingabe[i]);
+			oben.add(beschreibung[i]);
+			oben.add(eingabe[i]);
 		}
 		beschreibung[3] = new JLabel();
-		eingabe[3] = new JTextField();
-		add(beschreibung[3]);
-		p.add(auswahl);
-		add(p);
-		p.add(eingabe[3]);
+		eingabe_fach[0] = new JTextField();
+		oben.add(beschreibung[3]);
+		p[0].add(auswahl[0]);
+		oben.add(p[0]);
+		p[0].add(eingabe[3]);
 		for (int i = 0; i < db.gebeFaecherListe().length; i++)
 		{
-			auswahl.addItem(db.gebeFaecherListe()[i]);
+			auswahl[0].addItem(db.gebeFaecherListe()[i]);
 		}
 		beschreibung[0].setText(sT.lehrername);
 		beschreibung[1].setText(sT.minstunden);
 		beschreibung[2].setText(sT.maxstunden);
 		beschreibung[3].setText(sT.faecher);
 		dropDown();
-		add(ausgabe);
-		add(start);
+		unten.add(ausgabe);
+		unten.add(start);
 		start.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -59,16 +72,31 @@ public class GUILehrer extends JPanel
 
 	public void dropDown()
 	{
-		auswahl.addItemListener(new ItemListener()
+		for(int j=0;j<anzahl;j++)
+		{
+		auswahl[anzahl].addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(ItemEvent e)
 			{
 				JComboBox selectedChoice = (JComboBox) e.getSource();
-				Fach_liste=Fach_liste+", "+selectedChoice.getSelectedItem();
+				Fach_liste=""+selectedChoice.getSelectedItem();
 				eingabe[3].setText(Fach_liste);
+				anzahl++;
+				oben.add(new JPanel());
+				oben.add(p[anzahl]);
+				p[anzahl].setLayout(new GridLayout(1, 2));
+				auswahl[anzahl]=new JComboBox();
+				eingabe_fach[anzahl]=new JTextField();
+				for (int i = 0; i < fach_anzahl; i++)
+				{
+					auswahl[anzahl].addItem(db.gebeFaecherListe()[i]);
+				}
+				p[anzahl].add(auswahl[anzahl]);
+				p[anzahl].add(eingabe_fach[anzahl]);
 				validate();
 			}
 		});
+		}
 	}
 
 	public void listener()
@@ -91,7 +119,7 @@ public class GUILehrer extends JPanel
 					{
 						eingabe[i].setText("");
 					}
-					Fach_liste="";
+					Fach_liste = "";
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);
