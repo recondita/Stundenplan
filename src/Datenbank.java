@@ -38,19 +38,20 @@ public class Datenbank
 	{
 		try
 		{
-			String[] Liste=new String[lehrerVerzeichnis.list().length];
-			for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
-			{
-				String[] splittArray = lehrerVerzeichnis.list()[i].split("\\.lehrer");
-				String temp="";
-				for(int j=0;j<splittArray.length;j++)
+				String[] Liste = new String[lehrerVerzeichnis.list().length];
+				for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
 				{
-					temp=temp+splittArray[j];
+					String[] splittArray = lehrerVerzeichnis.list()[i]
+							.split("\\.lehrer");
+					String temp = "";
+					for (int j = 0; j < splittArray.length; j++)
+					{
+						temp = temp + splittArray[j];
+					}
+					Liste[i] = temp;
+					temp = "";
 				}
-				Liste[i]=temp;
-				temp="";
-			}
-			return Liste;
+				return Liste;
 		} catch (Exception e)
 		{
 			System.out.println("Lesefehler");
@@ -60,18 +61,20 @@ public class Datenbank
 
 	public String[] gebeFaecherListe()
 	{
-		try {
-			String[] Liste=new String[faecherVerzeichnis.list().length];
+		try
+		{
+			String[] Liste = new String[faecherVerzeichnis.list().length];
 			for (int i = 0; i < faecherVerzeichnis.list().length; i++)
 			{
-				String[] splittArray = faecherVerzeichnis.list()[i].split("\\.fach");
-				String temp="";
-				for(int j=0;j<splittArray.length;j++)
+				String[] splittArray = faecherVerzeichnis.list()[i]
+						.split("\\.fach");
+				String temp = "";
+				for (int j = 0; j < splittArray.length; j++)
 				{
-					temp=temp+splittArray[j];
+					temp = temp + splittArray[j];
 				}
-				Liste[i]=temp;
-				temp="";
+				Liste[i] = temp;
+				temp = "";
 			}
 			return Liste;
 		} catch (Exception e)
@@ -100,12 +103,14 @@ public class Datenbank
 	public void machFach(String name)
 	{
 		FileWriter fw = faecherFW(name);
-		int anzahl = gebeFaecherListe().length + 1;
+		int anzahl = gebeFaecherListe().length;
 		if (fw != null)
 		{
 			try
 			{
-				fw.write("" + anzahl);
+				BufferedWriter bw =new BufferedWriter(fw);
+				bw.write("" + anzahl);
+				bw.close();
 			} catch (IOException e)
 			{
 				// TODO Auto-generated catch block
@@ -179,10 +184,6 @@ public class Datenbank
 	public void print()
 	{
 		machFach("Deutsch");
-		machFach("Mathe");
-		machFach("Englisch");
-		machLehrer("Boje");
-		machLehrer("Hund");
 		for (int i = 0; i < gebeLehrerListe().length; i++)
 		{
 			System.out.println(gebeLehrerListe()[i]);
