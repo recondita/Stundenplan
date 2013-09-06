@@ -14,21 +14,44 @@ public class Datenbank
 		this.pfad = pfad;
 		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
 	}
-	
+
 	public Datenbank()
 	{
-		this.pfad = ".";
-		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
+		try
+		{
+			this.pfad = ".";
+			lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
+		} catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String[] gebeLehrerListe()
 	{
-		return lehrerVerzeichnis.list();
+		try
+		{
+			return lehrerVerzeichnis.list();
+		} catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			return null;
+		}
 	}
-	
+
 	public static void main(String args[])
 	{
-		Datenbank test=new Datenbank();
+		Datenbank test = new Datenbank();
+		try
+		{
+			Thread.sleep(100);
+		} catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		;
 		System.out.println(test.gebeLehrerListe());
 	}
 }
