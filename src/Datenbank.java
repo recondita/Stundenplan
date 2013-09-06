@@ -70,8 +70,10 @@ public class Datenbank
 		FileWriter fw = lehrerFW(name);
 		try
 		{
-			fw.write("minh:" + mindestStunden + "\n" + "maxh:" + maximalStunden
+			BufferedWriter bw =new BufferedWriter(fw);
+			bw.write("minh:" + mindestStunden + "\n" + "maxh:" + maximalStunden
 					+ "\n" + "faecher:" + faecher);
+			bw.close();
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
