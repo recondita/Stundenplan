@@ -12,11 +12,11 @@ public class GUILehrer extends JScrollPane
 	JLabel beschreibung[] = new JLabel[4];
 	JTextField eingabe[] = new JTextField[3];
 	JTextField[] eingabe_fach=new JTextField[fach_anzahl];
-	JPanel[] p = new JPanel[fach_anzahl];
-	p[0]=new JPanel();
+	JPanel[] p =new JPanel[fach_anzahl];
 	JLabel ausgabe = new JLabel();
 	JButton start;
 	JPanel unten=new JPanel();
+	JPanel mitte=new JPanel();
 	JPanel oben=new JPanel();
 	JComboBox[] auswahl = new JComboBox[fach_anzahl];
 	String Fach_liste = "";
@@ -28,13 +28,17 @@ public class GUILehrer extends JScrollPane
 	public GUILehrer(Strings sT)
 	{
 		setViewportView(panel);
+		p[0]=new JPanel();
 		sT = new Strings();
 		start = new JButton(sT.speichern);
 		panel.setLayout(new BorderLayout());
-		oben.setLayout(new GridLayout(anzahl+4, 2));
+		oben.setLayout(new GridLayout(3,2));
 		unten.setLayout(new GridLayout(1,1));
 		unten.setPreferredSize(new Dimension(25,25));
-		panel.add("Center",(oben));
+		mitte.setLayout(new GridLayout(anzahl+1,2));
+		oben.setPreferredSize(new Dimension(100,100));
+		panel.add("North",(oben));
+		panel.add("Center",(mitte));
 		panel.add("South",(unten));
 		p[0].setLayout(new GridLayout(1, 2));
 		for (int i = 0; i < 3; i++)
@@ -46,10 +50,11 @@ public class GUILehrer extends JScrollPane
 		}
 		beschreibung[3] = new JLabel();
 		eingabe_fach[0] = new JTextField();
-		oben.add(beschreibung[3]);
+		mitte.add(beschreibung[3]);
+		auswahl[0]=new JComboBox();
 		p[0].add(auswahl[0]);
-		oben.add(p[0]);
-		p[0].add(eingabe[3]);
+		mitte.add(p[0]);
+		p[0].add(eingabe_fach[0]);
 		for (int i = 0; i < db.gebeFaecherListe().length; i++)
 		{
 			auswahl[0].addItem(db.gebeFaecherListe()[i]);
@@ -72,18 +77,17 @@ public class GUILehrer extends JScrollPane
 
 	public void dropDown()
 	{
-		for(int j=0;j<anzahl;j++)
+		for(int j=0;j<anzahl+1;j++)
 		{
 		auswahl[anzahl].addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(ItemEvent e)
 			{
 				JComboBox selectedChoice = (JComboBox) e.getSource();
-				Fach_liste=""+selectedChoice.getSelectedItem();
-				eingabe[3].setText(Fach_liste);
+				eingabe_fach[anzahl].setText(""+selectedChoice.getSelectedItem());
 				anzahl++;
-				oben.add(new JPanel());
-				oben.add(p[anzahl]);
+				mitte.add(new JPanel());
+				mitte.add(p[anzahl]);
 				p[anzahl].setLayout(new GridLayout(1, 2));
 				auswahl[anzahl]=new JComboBox();
 				eingabe_fach[anzahl]=new JTextField();
