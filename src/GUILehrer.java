@@ -61,7 +61,7 @@ public class GUILehrer extends JPanel
 	{
 		try
 		{
-			if (Integer.parseInt(eingabe[1].getText()) < Integer
+			if (Integer.parseInt(eingabe[1].getText()) <= Integer
 					.parseInt(eingabe[2].getText()))
 			{
 				if (!eingabe[0].getText().equals("")
