@@ -6,11 +6,15 @@ import java.awt.event.ActionListener;
 
 public class GUILehrer extends JPanel
 {
+	Datenbank db = new Datenbank();
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
 	JTextField eingabe[] = new JTextField[4];
 	JLabel ausgabe = new JLabel();
 	JButton start;
+	JComboBox auswahl= new JComboBox();
+	JPanel p=new JPanel();
+	String Fach="";
 
 	/**
 	 * @author: Felix Schütze
@@ -20,12 +24,23 @@ public class GUILehrer extends JPanel
 		sT = new Strings();
 		start = new JButton(sT.speichern);
 		setLayout(new GridLayout(5, 2));
-		for (int i = 0; i < 4; i++)
+		p.setLayout(new GridLayout(1,2));
+		for (int i = 0; i < 3; i++)
 		{
 			beschreibung[i] = new JLabel();
 			eingabe[i] = new JTextField();
 			add(beschreibung[i]);
 			add(eingabe[i]);
+		}
+		beschreibung[3] = new JLabel();
+		eingabe[3] = new JTextField();
+		add(beschreibung[3]);
+		p.add(auswahl);
+		add(p);
+		p.add(eingabe[3]);
+		for(int i=0;i<db.gebeFaecherListe().length;i++)
+		{
+		auswahl.addItem( db.gebeFaecherListe()[i] );
 		}
 		beschreibung[0].setText(sT.lehrername);
 		beschreibung[1].setText(sT.minstunden);
@@ -54,8 +69,7 @@ public class GUILehrer extends JPanel
 						&& !eingabe[2].getText().equals("")
 						&& !eingabe[3].getText().equals(""))
 				{
-					Datenbank db = new Datenbank();
-					String[] temp = eingabe[3].getText().split("\\,");
+					String[] temp = eingabe[3].getText().split("\\, ");
 					db.schreibeLehrerEigeschaften(eingabe[0].getText(),
 							Integer.parseInt(eingabe[1].getText()),
 							Integer.parseInt(eingabe[2].getText()), temp);
@@ -65,15 +79,15 @@ public class GUILehrer extends JPanel
 					}
 				} else
 				{
-					ausgabe.setText(sT.allefelder);
+					//ausgabe.setText(sT.allefelder);
 				}
 			} else
 			{
-				ausgabe.setText(sT.minmax);
+				//ausgabe.setText(sT.minmax);
 			}
 		} catch (Exception e)
 		{
-			ausgabe.setText(sT.nurzahlen);
+			//ausgabe.setText(sT.nurzahlen);
 		}
 	}
 }

@@ -32,6 +32,8 @@ public class GUI extends JFrame
 		setMenuBar(mL.ml());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle(sT.name);
+		laeuft.setHorizontalAlignment(JLabel.CENTER);
+		laeuft.setVerticalAlignment(JLabel.CENTER);
 		pu.setPreferredSize(new Dimension(50, 50));
 		pc.addTab("Fach erstellen", gUIFACH);
 		pc.addTab("Lehrer erstellen", gUILEHRER);
