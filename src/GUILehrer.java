@@ -77,30 +77,30 @@ public class GUILehrer extends JScrollPane
 
 	public void dropDown()
 	{
-		auswahl[anzahl].addItemListener(new ItemListener()
-		{
-			public void itemStateChanged(ItemEvent e)
+			auswahl[anzahl].addActionListener(new ActionListener() 
 			{
-				JComboBox selectedChoice = (JComboBox) e.getSource();
-				eingabe_fach[anzahl].setText(""
-						+ selectedChoice.getSelectedItem());
-				anzahl++;
-				mitte.setLayout(new GridLayout(anzahl + 1, 2));
-				mitte.add(new JPanel());
-				p[anzahl] = new JPanel();
-				mitte.add(p[anzahl]);
-				p[anzahl].setLayout(new GridLayout(1, 2));
-				auswahl[anzahl] = new JComboBox();
-				eingabe_fach[anzahl] = new JTextField();
-				for (int i = 0; i < fach_anzahl; i++)
-				{
-					auswahl[anzahl].addItem(db.gebeFaecherListe()[i]);
-				}
-				p[anzahl].add(auswahl[anzahl]);
-				p[anzahl].add(eingabe_fach[anzahl]);
-				validate();
-			}
-		});
+				 public void actionPerformed(ActionEvent e)
+				 {
+					 JComboBox selectedChoice = (JComboBox) e.getSource();
+					eingabe_fach[anzahl].setText(""+selectedChoice.getSelectedItem());
+					anzahl++;
+					mitte.setLayout(new GridLayout(anzahl + 1, 2));
+					mitte.add(new JPanel());
+					p[anzahl] = new JPanel();
+					mitte.add(p[anzahl]);
+					p[anzahl].setLayout(new GridLayout(1, 2));
+					auswahl[anzahl] = new JComboBox();
+					eingabe_fach[anzahl] = new JTextField();
+					for (int i = 0; i < fach_anzahl; i++)
+					{
+						auswahl[anzahl].addItem(db.gebeFaecherListe()[i]);
+					}
+					p[anzahl].add(auswahl[anzahl]);
+					p[anzahl].add(eingabe_fach[anzahl]);
+					dropDown();
+					validate();
+				 }
+			});
 	}
 
 	public void listener()
@@ -114,7 +114,7 @@ public class GUILehrer extends JScrollPane
 						&& !eingabe[1].getText().equals("")
 						&& !eingabe[2].getText().equals(""))
 				{
-					String[] temp=new String[anzahl+1];
+					String[] temp = new String[anzahl + 1];
 					for (int i = 0; i < anzahl + 1; i++)
 					{
 						temp[i] = eingabe_fach[i].getText();
