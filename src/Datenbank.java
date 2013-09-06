@@ -91,6 +91,5 @@ public class Datenbank
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
 		testDatenbank.printLehrer(testDatenbank);
-		
 	}
 }
