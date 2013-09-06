@@ -92,7 +92,7 @@ public class Datenbank
 	
 	public void printLehrer(Datenbank db)
 	{
-		db.machLehrer("B. Fank");
+		db.schreibeLehrerEigeschaften("B. Fank",30, 40, gebeLehrerListe());
 		String[] test = gebeLehrerListe();
 		for (int i = 0; i < test.length; i++)
 		{
