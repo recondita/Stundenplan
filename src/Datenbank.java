@@ -44,44 +44,47 @@ public class Datenbank
 
 	public void machLehrer(String name)
 	{
-			FileWriter fw= lehrerFW(name);
-			if(fw!=null)
+		FileWriter fw = lehrerFW(name);
+		if (fw != null)
+		{
+			try
 			{
-				try
-				{
-					fw.write("");
-				} catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				fw.write("");
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}
 	}
-	
-	 public void schreibeLehrerEigeschaften(String name, int mindestStunden, int maximalStunden, String[] fach)
-	 {
-	  String faecher="";
-	  for (int i=0; i<fach.length; i++)
-	  {
-	   faecher=faecher+fach[i]+",";
-	  }
-	  
-	  FileWriter fw = lehrerFW(name);
-	  try
-	  {
-	   fw.write("minh:" + mindestStunden + "\n" + "maxh:" + maximalStunden + "\n" + "faecher:" + faecher);
-	  } catch (IOException e)
-	  {
-	   // TODO Auto-generated catch block
-	   e.printStackTrace();
-	  }
-	 }
-	
+
+	public void schreibeLehrerEigeschaften(String name, int mindestStunden,
+			int maximalStunden, String[] fach)
+	{
+		String faecher = "";
+		for (int i = 0; i < fach.length; i++)
+		{
+			faecher = faecher + fach[i] + ",";
+		}
+
+		FileWriter fw = lehrerFW(name);
+		try
+		{
+			fw.write("minh:" + mindestStunden + "\n" + "maxh:" + maximalStunden
+					+ "\n" + "faecher:" + faecher);
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public FileWriter lehrerFW(String name)
 	{
 		try
 		{
-			return new FileWriter(new File(pfad + sep + "Lehrer" + sep + name + "lehrer"));
+			return new FileWriter(new File(pfad + sep + "Lehrer" + sep + name
+					+ ".lehrer"));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -89,22 +92,29 @@ public class Datenbank
 			return null;
 		}
 	}
-	
+
 	public void printLehrer(Datenbank db)
 	{
-		db.schreibeLehrerEigeschaften("B. Fank",30, 40, gebeLehrerListe());
+		machLehrer("Fank");
+		machLehrer("Hund");
+		machLehrer("Boje");
+		db.schreibeLehrerEigeschaften("B. Fank", 30, 40, gebeLehrerListe());
 		String[] test = gebeLehrerListe();
 		for (int i = 0; i < test.length; i++)
 		{
 			String[] splittArray = test[i].split("\\.");
-			for(int j=0;(j<test.length-1);j++)
-			temp = temp+splittArray[j];
+			if (test.length > 1)
+			{
+				for (int j = 0; (j < test.length - 1); j++)
+				{
+					temp = temp + splittArray[j];
+				}
+			}
 			System.out.println(temp);
-			temp="";
+			temp = "";
 		}
 	}
-	
-	
+
 	public static void main(String args[])
 	{
 		System.out.println(System.getProperty("user.dir"));
