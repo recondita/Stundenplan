@@ -106,7 +106,7 @@ public class Datenbank
 			String[] splittArray = test[i].split("\\.");
 			if (splittArray.length > 1)
 			{
-				for (int j = 0; (j < test.length - 1); j++)
+				for (int j = 0; (j < splittArray.length - 1); j++)
 				{
 					temp = temp + splittArray[j];
 				}
