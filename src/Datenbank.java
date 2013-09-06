@@ -81,7 +81,7 @@ public class Datenbank
 	{
 		try
 		{
-			return new FileWriter(new File(pfad + sep + "Lehrer" + sep + name));
+			return new FileWriter(new File(pfad + sep + "Lehrer" + sep + name + "lehrer"));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
