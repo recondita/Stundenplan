@@ -58,15 +58,8 @@ public class GUI extends JFrame
 	{
 		kONTROLLER = new Kontroller(this);
 		start.setEnabled(false);
-		modul(laeuft);
-	}
-
-	public void modul(JComponent j)
-	{
 		remove(pc);
-		pc.removeAll();
-		pc.add(j);
-		add("Center", (pc));
+		add("Center", (laeuft));
 		validate();
 	}
 
