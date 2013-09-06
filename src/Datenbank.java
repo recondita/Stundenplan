@@ -7,6 +7,7 @@ public class Datenbank
 {
 	String sep = System.getProperty("file.separator");
 	String pfad;
+	String temp;
 	File lehrerVerzeichnis;
 
 	public Datenbank(String pfad)
@@ -70,17 +71,26 @@ public class Datenbank
 		}
 	}
 	
+	public void printLehrer(Datenbank db)
+	{
+		db.machLehrer("B. Fank");
+		String[] test = gebeLehrerListe();
+		for (int i = 0; i < test.length; i++)
+		{
+			String[] splittArray = test[i].split("\\.");
+			for(int j=0;(j<test.length-1);j++)
+			temp = temp+splittArray[j];
+			System.out.println(temp);
+			temp="";
+		}
+	}
+	
 	
 	public static void main(String args[])
 	{
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
-		String[] test = testDatenbank.gebeLehrerListe();
-		for (int i = 0; i < test.length; i++)
-		{
-			String[] splittArray = test[i].split("\\.");
-
-			System.out.println(splittArray[0]);
-		}
+		testDatenbank.printLehrer(testDatenbank);
+		
 	}
 }
