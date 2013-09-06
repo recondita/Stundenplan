@@ -35,23 +35,19 @@ public class Datenbank
 			return lehrerVerzeichnis.list();
 		} catch (Exception e)
 		{
-			// TODO Auto-generated catch block
+			System.out.println("Lesefehler");
 			return null;
 		}
 	}
 
 	public static void main(String args[])
 	{
-		Datenbank test = new Datenbank();
-		try
+		System.out.println(System.getProperty("user.dir"));
+		Datenbank testDatenbank = new Datenbank();
+		String[] test = testDatenbank.gebeLehrerListe();
+		for (int i = 0; i < test.length; i++)
 		{
-			Thread.sleep(100);
-		} catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(test[i]);
 		}
-		;
-		System.out.println(test.gebeLehrerListe());
 	}
 }
