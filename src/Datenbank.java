@@ -38,12 +38,19 @@ public class Datenbank
 	{
 		try
 		{
-			String[] splittArray = null;
+			String[] Liste=new String[lehrerVerzeichnis.list().length];
 			for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
 			{
-				splittArray = lehrerVerzeichnis.list()[i].split("\\.lehrer");
+				String[] splittArray = lehrerVerzeichnis.list()[i].split("\\.lehrer");
+				String temp="";
+				for(int j=0;j<splittArray.length;j++)
+				{
+					temp=temp+splittArray[j];
+				}
+				Liste[i]=temp;
+				temp="";
 			}
-			return splittArray;
+			return Liste;
 		} catch (Exception e)
 		{
 			System.out.println("Lesefehler");
@@ -53,14 +60,20 @@ public class Datenbank
 
 	public String[] gebeFaecherListe()
 	{
-		try
-		{
-			String[] splittArray = null;
+		try {
+			String[] Liste=new String[faecherVerzeichnis.list().length];
 			for (int i = 0; i < faecherVerzeichnis.list().length; i++)
 			{
-				splittArray = faecherVerzeichnis.list()[i].split("\\.fach");
+				String[] splittArray = faecherVerzeichnis.list()[i].split("\\.fach");
+				String temp="";
+				for(int j=0;j<splittArray.length;j++)
+				{
+					temp=temp+splittArray[j];
+				}
+				Liste[i]=temp;
+				temp="";
 			}
-			return splittArray;
+			return Liste;
 		} catch (Exception e)
 		{
 			System.out.println("Lesefehler");
@@ -165,15 +178,18 @@ public class Datenbank
 
 	public void print()
 	{
-		String[] test = gebeLehrerListe();
-		String[] test2 = gebeLehrerListe();
-		for (int i = 0; i < test.length; i++)
+		machFach("Deutsch");
+		machFach("Mathe");
+		machFach("Englisch");
+		machLehrer("Boje");
+		machLehrer("Hund");
+		for (int i = 0; i < gebeLehrerListe().length; i++)
 		{
-			System.out.println(test[i]);
+			System.out.println(gebeLehrerListe()[i]);
 		}
-		for (int i = 0; i < test2.length; i++)
+		for (int i = 0; i < gebeFaecherListe().length; i++)
 		{
-			System.out.println(test2[i]);
+			System.out.println(gebeFaecherListe()[i]);
 		}
 	}
 
