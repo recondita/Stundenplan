@@ -58,7 +58,7 @@ public class Datenbank
 			}
 	}
 	
-	 public void schreibeLehrerEigeschaften(String name, String mindestStunden, String maximalStunden, String[] fach)
+	 public void schreibeLehrerEigeschaften(String name, int mindestStunden, int maximalStunden, String[] fach)
 	 {
 	  String faecher="";
 	  for (int i=0; i<fach.length; i++)
