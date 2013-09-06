@@ -6,7 +6,7 @@ public class GUIFach extends JPanel
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUIFach()
+	public GUIFach(Strings sT)
 	{
 
 	}

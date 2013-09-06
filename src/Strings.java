@@ -7,6 +7,10 @@ public class Strings
 	String start;
 	String sprachen;
 	String laeuft;
+	String lehrername;
+	String minstunden;
+	String maxstunden;
+	String faecher;
 
 	public Strings()
 	{
@@ -17,5 +21,9 @@ public class Strings
 		start = "Start";
 		sprachen = "Sprache";
 		laeuft = "Stundenplan wird erstellt...";
+		lehrername="Name des Lehrers:";
+		minstunden="Minimale Anzahl Stunden:";
+		maxstunden="Maximale Anzahl Stunden:";
+		faecher="Mögliche Fächer (durch Kommata getrennt)";
 	}
 }

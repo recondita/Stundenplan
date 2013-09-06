@@ -8,7 +8,7 @@ public class Datenbank
 	String sep = System.getProperty("file.separator");
 	String zumbruch = System.getProperty("line.separator");
 	String pfad;
-	
+
 	File lehrerVerzeichnis;
 
 	public Datenbank(String pfad)
@@ -71,9 +71,9 @@ public class Datenbank
 		FileWriter fw = lehrerFW(name);
 		try
 		{
-			BufferedWriter bw =new BufferedWriter(fw);
-			bw.write("minh:" + mindestStunden + zumbruch + "maxh:" + maximalStunden
-					+ zumbruch + "faecher:" + faecher);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("minh:" + mindestStunden + zumbruch + "maxh:"
+					+ maximalStunden + zumbruch + "faecher:" + faecher);
 			bw.close();
 		} catch (IOException e)
 		{
@@ -97,18 +97,15 @@ public class Datenbank
 			return null;
 		}
 	}
-/**
-	public Lehrer auslesen(String name)
-	{
-		FileReader fr=new FileReader(new File(pfad + sep + "Lehrer" + sep + name));
-		BufferedReader br = new BufferedReader(fr);
-		String temp=br.readLine();
-		
-		return Lehrer(name,4,5);
-	}
-	*/
 
-	
+	/**
+	 * public Lehrer auslesen(String name) { FileReader fr=new FileReader(new
+	 * File(pfad + sep + "Lehrer" + sep + name)); BufferedReader br = new
+	 * BufferedReader(fr); String temp=br.readLine();
+	 * 
+	 * return Lehrer(name,4,5); }
+	 */
+
 	public void printLehrer(Datenbank db)
 	{
 		machLehrer("Fank");
@@ -119,7 +116,7 @@ public class Datenbank
 		for (int i = 0; i < test.length; i++)
 		{
 			String[] splittArray = test[i].split("\\.lehrer");
-			String temp=splittArray[0];
+			String temp = splittArray[0];
 			System.out.println(temp);
 			temp = "";
 		}

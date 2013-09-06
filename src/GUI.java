@@ -9,10 +9,12 @@ public class GUI extends JFrame
 	 * Eine GUI in Ehren kann keiner verwehren!
 	 * by me;
 	 */
-	private static final long serialVersionUID = 1L;
+	Strings sT = new Strings();
+	GUIFach gUIFACH=new GUIFach(sT);
+	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
+	GUILehrer gUILEHRER=new GUILehrer(sT);
 	Kontroller kONTROLLER;
 	Menuleiste mL = new Menuleiste();
-	Strings sT = new Strings();
 	JPanel po = new JPanel();
 	JPanel pc = new JPanel();
 	JPanel pu = new JPanel();
@@ -57,8 +59,29 @@ public class GUI extends JFrame
 	{
 		po.setLayout(new GridLayout(1, 3));
 		po.add(fach);
+		fach.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				modul(gUIFACH);
+			}
+		});
 		po.add(lehrer);
+		lehrer.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				modul(gUILEHRER);
+			}
+		});
 		po.add(klasse);
+		klasse.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				modul(gUIKLASSE);
+			}
+		});
 	}
 
 	public void start()

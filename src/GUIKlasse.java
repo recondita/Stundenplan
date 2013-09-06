@@ -6,7 +6,7 @@ public class GUIKlasse extends JPanel
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUIKlasse()
+	public GUIKlasse(Strings sT)
 	{
 
 	}
