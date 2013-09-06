@@ -6,6 +6,7 @@ import java.io.*;
 public class Datenbank
 {
 	String sep = System.getProperty("file.separator");
+	String zumbruch = System.getProperty("line.separator");
 	String pfad;
 	
 	File lehrerVerzeichnis;
@@ -71,8 +72,8 @@ public class Datenbank
 		try
 		{
 			BufferedWriter bw =new BufferedWriter(fw);
-			bw.write("minh:" + mindestStunden + "\n" + "maxh:" + maximalStunden
-					+ "\n" + "faecher:" + faecher);
+			bw.write("minh:" + mindestStunden + zumbruch + "maxh:" + maximalStunden
+					+ zumbruch + "faecher:" + faecher);
 			bw.close();
 		} catch (IOException e)
 		{
@@ -97,6 +98,14 @@ public class Datenbank
 		}
 	}
 
+	public Lehrer auslesen(String name)
+	{
+		FileReader fr=new FileReader(new File(pfad + sep + "Lehrer" + sep + name));
+		String temp=fr.read();
+		
+		return Lehrer(name,4,5);
+	}
+	
 	public void printLehrer(Datenbank db)
 	{
 		machLehrer("Fank");
