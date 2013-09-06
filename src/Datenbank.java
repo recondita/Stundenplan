@@ -7,7 +7,7 @@ public class Datenbank
 {
 	String sep = System.getProperty("file.separator");
 	String pfad;
-	String temp;
+	
 	File lehrerVerzeichnis;
 
 	public Datenbank(String pfad)
@@ -104,6 +104,7 @@ public class Datenbank
 		for (int i = 0; i < test.length; i++)
 		{
 			String[] splittArray = test[i].split("\\.");
+			String temp="";
 			if (splittArray.length > 1)
 			{
 				for (int j = 0; (j < splittArray.length - 1); j++)
