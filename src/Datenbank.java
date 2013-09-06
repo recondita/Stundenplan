@@ -8,6 +8,8 @@ public class Datenbank
 	String sep = System.getProperty("file.separator");
 	String zumbruch = System.getProperty("line.separator");
 	String pfad;
+	
+	private String[] faecherListe;
 
 	File lehrerVerzeichnis;
 	File faecherVerzeichnis;
@@ -34,6 +36,11 @@ public class Datenbank
 		}
 	}
 
+	public void aktualisiereFaecherListe()
+	{
+		faecherListe=leseFaecherListe();
+	}
+	
 	public String[] gebeLehrerListe()
 	{
 		try
@@ -59,7 +66,17 @@ public class Datenbank
 		}
 	}
 
+	
 	public String[] gebeFaecherListe()
+	{
+		if(faecherListe==null)
+		{
+			aktualisiereFaecherListe();
+		}
+		return faecherListe;
+	}
+	
+	private String[] leseFaecherListe()
 	{
 		try
 		{
@@ -116,6 +133,7 @@ public class Datenbank
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			aktualisiereFaecherListe();
 		}
 	}
 
