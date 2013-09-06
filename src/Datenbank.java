@@ -41,6 +41,36 @@ public class Datenbank
 		}
 	}
 
+	public void machLehrer(String name)
+	{
+			FileWriter fw= lehrerFW(name);
+			if(fw!=null)
+			{
+				try
+				{
+					fw.write("");
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
+	
+	public FileWriter lehrerFW(String name)
+	{
+		try
+		{
+			return new FileWriter(new File(pfad + sep + "Lehrer" + sep + name));
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 	public static void main(String args[])
 	{
 		System.out.println(System.getProperty("user.dir"));
