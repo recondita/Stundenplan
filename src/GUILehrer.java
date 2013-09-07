@@ -55,12 +55,12 @@ public class GUILehrer extends JScrollPane
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			p_stufe[i] = new JPanel();
-			p_stufe[i].setLayout(new GridLayout(1,2));
+			p_stufe[i].setLayout(new GridLayout(1,4));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
-			stufe[i][1]=new JTextField(sT.vonStufe);
-			stufe[i][2]=new JTextField(sT.bisStufe);
+			stufe[i][0]=new JTextField(sT.vonStufe);
+			stufe[i][1]=new JTextField(sT.bisStufe);
+			p_stufe[i].add(stufe[i][0]);
 			p_stufe[i].add(stufe[i][1]);
-			p_stufe[i].add(stufe[i][2]);
 			mitte.add(auswahl[i]);
 			mitte.add(p_stufe[i]);
 		}
