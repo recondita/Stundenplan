@@ -434,15 +434,16 @@ public class Datenbank
 
 		for (int i = 0; i < vonFaecher.length; i++)
 		{
-			vonFaecher[0] = 0;
-			bisFaecher[0] = 0;
+			vonFaecher[i] = 0;
+			bisFaecher[i] = 0;
 		}
 
-		for (int i = 0; i < tempfaecher.length; i = i + 3)
+		for (int i = 0; i < tempfaecher.length; i = i + 2)
 		{
 			int index = fachToInt(tempfaecher[i]);
-			vonFaecher[index] = Integer.parseInt(tempfaecher[i + 1]);
-			bisFaecher[index] = Integer.parseInt(tempfaecher[i + 2]);
+			String[] stufenSplit=tempfaecher[i + 1].split("\\-");
+			vonFaecher[index] = Integer.parseInt(stufenSplit[0]);
+			bisFaecher[index] = Integer.parseInt(stufenSplit[1]);
 		}
 
 		return new Lehrer(name, Integer.parseInt(tempminh),
