@@ -58,7 +58,15 @@ public class GUILehrer extends JScrollPane
 			{
 				public void actionPerformed(ActionEvent arg0)
 				{
-					
+					Object Quelle=arg0.getSource();
+					for(int i=0; i<lehrer_auswahl.length; i++)
+					{
+						if(Quelle==lehrer_auswahl[i])
+						{
+							Lehrer lehrer=db.lehrerAuslesen(lehrer_auswahl[i].getText());
+							eingabe[0].setText(lehrer.name);
+						}
+					}
 				}
 			});
 			lehrer.add(lehrer_auswahl[i]);
