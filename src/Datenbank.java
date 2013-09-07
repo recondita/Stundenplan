@@ -11,30 +11,26 @@ public class Datenbank
 
 	private String[] faecherListe;
 	private String[] lehrerListe;
+	private String[][] klassenListe;
 
 	File lehrerVerzeichnis;
 	File faecherVerzeichnis;
+	File stufenVerzeichnis;
 
 	public Datenbank(String pfad)
 	{
 		this.pfad = pfad;
 		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
 		lehrerVerzeichnis = new File(pfad + sep + "Faecher");
+		stufenVerzeichnis = new File(pfad + sep + "Stufen");
 	}
 
 	public Datenbank()
 	{
-		try
-		{
-			this.pfad = ".";
-			lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
-			faecherVerzeichnis = new File(pfad + sep + "Faecher");
-		} catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Fehler beim Lesen des Verzeichnisses");
-		}
+		this.pfad = ".";
+		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
+		lehrerVerzeichnis = new File(pfad + sep + "Faecher");
+		stufenVerzeichnis = new File(pfad + sep + "Stufen");
 	}
 
 	public void aktualisiereFaecherListe()
@@ -45,6 +41,74 @@ public class Datenbank
 	public void aktualisiereLehrerListe()
 	{
 		faecherListe = leseLehrerListe();
+	}
+
+	public void aktualisiereKlassenListe()
+	{
+		String[] stufen = leseStufenListe();
+		int maxstufen = 0;
+		int maxklassen = 0;
+		for (int i = 0; i < stufen.length; i++)
+		{
+
+			try
+			{
+				int index = Integer.parseInt(stufen[i]);
+				maxstufen++;
+				int breite = leseKlassenListe(index).length;
+				if (breite > maxklassen)
+				{
+					maxklassen = breite;
+				}
+
+			} catch (Exception e)
+			{
+			}
+		}
+
+		klassenListe = new String[maxstufen][maxklassen];
+		for (int i = 0; i < stufen.length; i++)
+		{
+
+			try
+			{
+				int index = Integer.parseInt(stufen[i]);
+				String[] klassen = leseKlassenListe(index);
+				for (int j = 0; j < klassen.length; j++)
+				{
+					klassenListe[index][j] = klassen[j];
+				}
+
+			} catch (Exception e)
+			{
+			}
+		}
+
+	}
+
+	private String[] leseFaecherListe()
+	{
+		try
+		{
+			String[] Liste = new String[faecherVerzeichnis.list().length];
+			for (int i = 0; i < faecherVerzeichnis.list().length; i++)
+			{
+				String[] splittArray = faecherVerzeichnis.list()[i]
+						.split("\\.fach");
+				String temp = "";
+				for (int j = 0; j < splittArray.length; j++)
+				{
+					temp = temp + splittArray[j];
+				}
+				Liste[i] = temp;
+				temp = "";
+			}
+			return Liste;
+		} catch (Exception e)
+		{
+			System.out.println("Lesefehler");
+			return null;
+		}
 	}
 
 	private String[] leseLehrerListe()
@@ -72,33 +136,15 @@ public class Datenbank
 		}
 	}
 
-	public String[] gebeFaecherListe()
-	{
-		if (faecherListe == null)
-		{
-			aktualisiereFaecherListe();
-		}
-		return faecherListe.clone();
-	}
-
-	public String[] gebeLehrerListe()
-	{
-		if (lehrerListe == null)
-		{
-			aktualisiereLehrerListe();
-		}
-		return lehrerListe.clone();
-	}
-
-	private String[] leseFaecherListe()
+	private String[] leseStufenListe()
 	{
 		try
 		{
-			String[] Liste = new String[faecherVerzeichnis.list().length];
-			for (int i = 0; i < faecherVerzeichnis.list().length; i++)
+			String[] Liste = new String[stufenVerzeichnis.list().length];
+			for (int i = 0; i < stufenVerzeichnis.list().length; i++)
 			{
-				String[] splittArray = faecherVerzeichnis.list()[i]
-						.split("\\.fach");
+				String[] splittArray = stufenVerzeichnis.list()[i]
+						.split("\\.lehrer");
 				String temp = "";
 				for (int j = 0; j < splittArray.length; j++)
 				{
@@ -113,6 +159,59 @@ public class Datenbank
 			System.out.println("Lesefehler");
 			return null;
 		}
+	}
+
+	private String[] leseKlassenListe(int stufe)
+	{
+		try
+		{
+			File Verzeichnis = new File(pfad + sep + "stufen" + sep + stufe);
+			String[] Liste = new String[Verzeichnis.list().length];
+			for (int i = 0; i < Verzeichnis.list().length; i++)
+			{
+				String[] splittArray = Verzeichnis.list()[i].split("\\.fach");
+				String temp = "";
+				for (int j = 0; j < splittArray.length; j++)
+				{
+					temp = temp + splittArray[j];
+				}
+				Liste[i] = temp;
+				temp = "";
+			}
+			return Liste;
+		} catch (Exception e)
+		{
+			System.out.println("Lesefehler");
+			return null;
+		}
+	}
+
+	public String[] gebeFaecherListe()
+	{
+		if (faecherListe == null)
+		{
+			aktualisiereFaecherListe();
+		}
+		return faecherListe.clone();
+	}
+
+	public String[] gebeLehrerListe()
+
+	{
+		if (lehrerListe == null)
+		{
+			aktualisiereLehrerListe();
+		}
+		return lehrerListe.clone();
+	}
+
+	public String[][] gebeKlassenListe()
+	{
+		if (klassenListe == null)
+		{
+			aktualisiereLehrerListe();
+		}
+		return klassenListe.clone();
 	}
 
 	public void machLehrer(String name)
@@ -350,9 +449,9 @@ public class Datenbank
 
 	public Klasse klasseAuslesen(int stufe, String name)
 	{
-		int klassenLehrer=-1;
-		int[] fachStunden= new int[gebeFaecherListe().length];
-		int[] fachLehrer= new int[gebeFaecherListe().length];
+		int klassenLehrer = -1;
+		int[] fachStunden = new int[gebeFaecherListe().length];
+		int[] fachLehrer = new int[gebeFaecherListe().length];
 		try
 		{
 			FileReader fr = new FileReader(new File(pfad + sep + "Klassen"
@@ -362,20 +461,19 @@ public class Datenbank
 			while (temp != null)
 			{
 				String split[] = temp.split("\\:");
-				if(split[0].equals("Klassenlehrer"))
+				if (split[0].equals("Klassenlehrer"))
 				{
-					klassenLehrer=lehrerToInt(split[1]);
-				}
-				else
+					klassenLehrer = lehrerToInt(split[1]);
+				} else
 				{
-					int index=fachToInt(split[0]);
-					if(index>=0)
+					int index = fachToInt(split[0]);
+					if (index >= 0)
 					{
-						String fachSplit []= split[1].split("\\,");
-						fachStunden[index]=Integer.parseInt(fachSplit[0]);
-						if(fachSplit.length>1)
+						String fachSplit[] = split[1].split("\\,");
+						fachStunden[index] = Integer.parseInt(fachSplit[0]);
+						if (fachSplit.length > 1)
 						{
-							fachLehrer[index]=lehrerToInt(fachSplit[1]);
+							fachLehrer[index] = lehrerToInt(fachSplit[1]);
 						}
 					}
 				}
@@ -383,12 +481,12 @@ public class Datenbank
 			}
 			br.close();
 
-			return new Klasse(stufe,fachStunden, fachLehrer, klassenLehrer);
+			return new Klasse(stufe, fachStunden, fachLehrer, klassenLehrer);
 		} catch (Exception e)
 		{
 			return null;
 		}
-		
+
 	}
 
 	public void print()
