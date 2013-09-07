@@ -4,7 +4,8 @@ public class Generator
 	Lehrer[] lehrer;
 	Klasse[] klasse;
 	
-
+	boolean [][][] lehrerFrei;
+	int [][] prioritaetLehrer;
 	
 	
 	public Generator(GUI gUI, Lehrer[] lehrer, Klasse[] klassen)
@@ -13,6 +14,8 @@ public class Generator
 		this.lehrer=lehrer;
 		this.klasse=klassen;
 		//fach=new int[5*10*lehrer.length*klasse.length][5][10][lehrer.length][klasse.length];
+		lehrerFrei=new boolean[lehrer.length][5][10];
+		prioritaetLehrer= new int[klasse.length][lehrer.length];
 	}
 	
 	public void generieren()
