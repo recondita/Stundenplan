@@ -1,5 +1,4 @@
-
-public class Kontroller 
+public class Generator
 {
 	GUI gUI;
 	Lehrer[] lehrer;
@@ -8,7 +7,7 @@ public class Kontroller
 
 	
 	
-	public Kontroller(GUI gUI, Lehrer[] lehrer, Klasse[] klassen)
+	public Generator(GUI gUI, Lehrer[] lehrer, Klasse[] klassen)
 	{
 		this.gUI=gUI;
 		this.lehrer=lehrer;
@@ -34,8 +33,3 @@ public class Kontroller
 	}
 	
 	public int[] tag(int stunde, int fach)
-	
-	
-}
-
-
