@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 public class GUILehrer extends JScrollPane
 {
+	GUI gUI;
 	Datenbank db = new Datenbank();
 	JPanel panel = new JPanel();
 	JScrollPane lehrer_liste=new JScrollPane();
@@ -30,8 +31,9 @@ public class GUILehrer extends JScrollPane
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUILehrer(Strings sT)
+	public GUILehrer(Strings sT, GUI gUI)
 	{
+		this.gUI=gUI;
 		setViewportView(panel);
 		sT = new Strings();
 		start = new JButton(sT.speichern);
@@ -144,7 +146,9 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-
+					gUI.dispose();
+					new GUI();
+					
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);

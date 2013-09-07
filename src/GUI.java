@@ -14,7 +14,7 @@ public class GUI extends JFrame
 	 */
 	Strings sT = new Strings();
 	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
-	GUILehrer gUILEHRER=new GUILehrer(sT);
+	GUILehrer gUILEHRER=new GUILehrer(sT, this);
 	GUIFach gUIFACH=new GUIFach(sT, this);
 	Generator gENERATOR;
 	Menuleiste mL = new Menuleiste(sT, this);
