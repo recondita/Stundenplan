@@ -11,9 +11,9 @@ public class GUI extends JFrame
 	 * Das DropDown Menü ist Dynamisch!
 	 */
 	Strings sT = new Strings();
-	GUIFach gUIFACH=new GUIFach(sT);
 	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
 	GUILehrer gUILEHRER=new GUILehrer(sT);
+	GUIFach gUIFACH=new GUIFach(sT, this);
 	Generator gENERATOR;
 	Menuleiste mL = new Menuleiste(sT, this);
 	JTabbedPane pc = new JTabbedPane();
@@ -28,7 +28,7 @@ public class GUI extends JFrame
 	{
 		setLayout(new BorderLayout());
 		setLocation(200, 50);
-		setSize(800, 300);
+		setSize(800, 500);
 		setResizable(true);
 		setMenuBar(mL.ml());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

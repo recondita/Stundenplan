@@ -15,7 +15,7 @@ GUI gUI;
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUIFach(Strings sT)
+	public GUIFach(Strings sT, GUI gUI)
 	{
 		this.gUI=gUI;
 		p.setPreferredSize(new Dimension(80,80));
@@ -42,6 +42,7 @@ GUI gUI;
 	{
 		db.machFach(eingabe.getText());
 		eingabe.setText("");
-		db.aktualisiereFaecherListe();
+		gUI.dispose();
+		new GUI();
 	}
 }
