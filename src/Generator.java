@@ -21,15 +21,4 @@ public class Generator
 		//boolean [][][][][] fach = new boolean[5][10][lehrer.length][klasse.length];
 	}
 
-	public void Einzeplan()	
-	{
-		for(int tag=0; tage<5; tage++)
-		{
-			for(int stunde=0; stunde<10; stunde++)
-			{
-				
-			}
-		}
-	}
-	
-	public int[] tag(int stunde, int fach)
+}
