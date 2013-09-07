@@ -28,7 +28,8 @@ public class Menuleiste
 			public void actionPerformed(ActionEvent arg0)
 			{
 				sT.sprache=1;
-				gUI.validate();
+				System.err.println("Warum wird dieser ActionListener nicht ausgeführt?");
+				gUI.repaint();
 			}
 		});
 		sprachen.add(deutsch);
@@ -38,7 +39,7 @@ public class Menuleiste
 			public void actionPerformed(ActionEvent arg0)
 			{
 				sT.sprache=2;
-				gUI.validate();
+				gUI.repaint();
 			}
 		});
 		sprachen.add(englisch);
