@@ -11,11 +11,13 @@ JLabel beschreibung;
 JTextField eingabe=new JTextField();
 JPanel leer=new JPanel();
 JButton speichern;
+GUI gUI;
 	/**
 	 * @author: Felix Schütze
 	 */
 	public GUIFach(Strings sT)
 	{
+		this.gUI=gUI;
 		p.setPreferredSize(new Dimension(80,80));
 		this.sT=sT;
 		beschreibung=new JLabel(sT.facheingeben);
@@ -31,9 +33,15 @@ JButton speichern;
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				db.machFach(eingabe.getText());
-				eingabe.setText("");
+				listener();
 			}
 		});
+	}
+	
+	public void listener()
+	{
+		db.machFach(eingabe.getText());
+		eingabe.setText("");
+		db.aktualisiereFaecherListe();
 	}
 }
