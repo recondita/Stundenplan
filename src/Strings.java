@@ -20,6 +20,7 @@ public class Strings
 	String nurzahlen;
 	String minmax;
 	String facheingeben;
+	String wahlfach;
 
 	public Strings()
 	{
@@ -55,6 +56,7 @@ public class Strings
 		nurzahlen = "Bitte bei der Stundenanzahl nur Zahlen eingeben";
 		minmax = "Maximale Stunden müssen die Minimalen übertreffen";
 		facheingeben="neues Fach eingeben";
+		wahlfach="Wahlfach erstellen";
 	}
 
 	public void englisch()
@@ -75,5 +77,6 @@ public class Strings
 		nurzahlen = "Please only insert numbers";
 		minmax = "Max must be bigger than min";
 		facheingeben="Insert new Lesson";
+		wahlfach="Create choseabel lesson";
 	}
 }
