@@ -24,7 +24,6 @@ public class GUILehrer extends JScrollPane
 	public GUILehrer(Strings sT)
 	{
 		setViewportView(panel);
-		// p[0] = new JPanel();
 		sT = new Strings();
 		start = new JButton(sT.speichern);
 		panel.setLayout(new BorderLayout());
@@ -36,7 +35,6 @@ public class GUILehrer extends JScrollPane
 		panel.add("North", (oben));
 		panel.add("Center", (mitte));
 		panel.add("South", (unten));
-		// p[0].setLayout(new GridLayout(1, 2));
 		for (int i = 0; i < 3; i++)
 		{
 			beschreibung[i] = new JLabel();
