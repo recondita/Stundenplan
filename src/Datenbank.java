@@ -489,6 +489,33 @@ public class Datenbank
 
 	}
 
+	public void loescheLehrer(int name)
+	{
+		File lehrer=new File(pfad+ sep +"Lehrer" +sep + name + ".lehrer");
+		if(lehrer.exists())
+		{
+			lehrer.delete();
+		}
+	}
+	
+	public void loescheFach(int name)
+	{
+		File fach=new File(pfad+ sep +"Fach" +sep + name + ".fach");
+		if(fach.exists())
+		{
+			fach.delete();
+		}
+	}
+	
+	public void loescheKlasse(int stufe, int name)
+	{
+		File klasse=new File(pfad+ sep +"Stufe" +sep + stufe + sep + name + ".klasse");
+		if(klasse.exists())
+		{
+			klasse.delete();
+		}
+	}
+	
 	public void print()
 	{
 		for (int i = 0; i < gebeLehrerListe().length; i++)

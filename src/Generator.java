@@ -4,6 +4,7 @@ public class Generator
 	Lehrer[] lehrer;
 	Klasse[] klasse;
 	
+	//Lehrer,Tag,Stunde
 	boolean [][][] lehrerFrei;
 	int [][] prioritaetLehrer;
 	
