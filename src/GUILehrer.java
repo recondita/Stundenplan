@@ -102,6 +102,8 @@ public class GUILehrer extends JScrollPane
 						if (auswahl[i].isSelected())
 						{
 							fach[f] = db.gebeFaecherListe()[i];
+							vonStufe[f]=Integer.parseInt(stufe[i][0].getText());
+							bisStufe[f]=Integer.parseInt(stufe[i][1].getText());
 							f++;
 						}
 					}
