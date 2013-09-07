@@ -5,8 +5,12 @@ import java.awt.event.*;
 
 public class GUILehrer extends JScrollPane
 {
-	JPanel panel = new JPanel();
 	Datenbank db = new Datenbank();
+	JPanel panel = new JPanel();
+	JScrollPane lehrer_liste=new JScrollPane();
+	int lehrer_anzahl = (db.gebeLehrerListe().length);
+	JButton[] lehrer_auswahl=new JButton[lehrer_anzahl];
+	JPanel lehrer=new JPanel();
 	int fach_anzahl = (db.gebeFaecherListe().length);
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
@@ -20,6 +24,7 @@ public class GUILehrer extends JScrollPane
 	JPanel unten = new JPanel();
 	JPanel mitte = new JPanel();
 	JPanel leer = new JPanel();
+	JPanel leer_oben = new JPanel();
 	JPanel oben = new JPanel();
 
 	/**
@@ -35,7 +40,27 @@ public class GUILehrer extends JScrollPane
 		unten.setLayout(new GridLayout(1, 1));
 		unten.setPreferredSize(new Dimension(25, 25));
 		mitte.setLayout(new GridLayout(fach_anzahl, 2));
-		leer.setLayout(new GridLayout(fach_anzahl, 1));
+		leer.setLayout(new BorderLayout());
+		leer_oben.setPreferredSize(new Dimension(25,25));
+		leer_oben.setLayout(new GridLayout(1,1));
+		leer.add("North",(leer_oben));
+		lehrer_liste.setLayout(new GridLayout(lehrer_anzahl,1));
+		lehrer.add(lehrer_liste);
+		for(int i=0;i<lehrer_anzahl;i++)
+		{
+			lehrer_auswahl[i]=new JButton();
+			lehrer_auswahl[i].setText(db.gebeLehrerListe()[i]);
+			lehrer_auswahl[i].setBackground(new Color(0,178,238));
+			lehrer_auswahl[i].addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent arg0)
+				{
+					
+				}
+			});
+			lehrer.add(lehrer_auswahl[i]);
+		}
+		leer.add("Center",(lehrer_liste));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
 		center.add(mitte);
@@ -51,7 +76,7 @@ public class GUILehrer extends JScrollPane
 			oben.add(eingabe[i]);
 		}
 		beschreibung[3] = new JLabel();
-		leer.add(beschreibung[3]);
+		leer_oben.add(beschreibung[3]);
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			p_stufe[i] = new JPanel();
