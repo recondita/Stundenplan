@@ -47,11 +47,12 @@ public class GUILehrer extends JScrollPane
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
-			if (i != 0)
+			if(i!=0)
 			{
 				mitte.add(new JPanel());
 			}
 			mitte.add(auswahl[i]);
+			
 		}
 		beschreibung[0].setText(sT.lehrername);
 		beschreibung[1].setText(sT.minstunden);
@@ -79,20 +80,21 @@ public class GUILehrer extends JScrollPane
 						&& !eingabe[1].getText().equals("")
 						&& !eingabe[2].getText().equals(""))
 				{
-					//fehlerbereich fängt hier an
-					String[] temp = new String[arrayZaehler()];
+					String[] fach = new String[arrayZaehler()];
+					int[] vonStufe = new int[arrayZaehler()];
+					int[] bisStufe = new int[arrayZaehler()];
 					int f=0;
 					for (int i = 0; i < fach_anzahl; i++)
 					{
 						if (auswahl[i].isSelected())
 						{
-							temp[f] = db.gebeFaecherListe()[i];
+							fach[f] = db.gebeFaecherListe()[i];
 							f++;
 						}
 					}
 					db.schreibeLehrerEigeschaften(eingabe[0].getText(),
 							Integer.parseInt(eingabe[1].getText()),
-							Integer.parseInt(eingabe[2].getText()), temp);
+							Integer.parseInt(eingabe[2].getText()), fach, vonStufe, bisStufe);
 					for (int i = 0; i < 3; i++)
 					{
 						eingabe[i].setText("");
@@ -101,7 +103,6 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-					//Fehlerbereich hört hier auf
 					
 				} else
 				{
