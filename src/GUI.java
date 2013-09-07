@@ -13,7 +13,7 @@ public class GUI extends JFrame
 	GUIFach gUIFACH=new GUIFach(sT);
 	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
 	GUILehrer gUILEHRER=new GUILehrer(sT);
-	Kontroller kONTROLLER;
+	Generator gENERATOR;
 	Menuleiste mL = new Menuleiste(sT, this);
 	JTabbedPane pc = new JTabbedPane();
 	JPanel pu = new JPanel();
@@ -58,7 +58,7 @@ public class GUI extends JFrame
 
 	public void start()
 	{
-		kONTROLLER = new Kontroller(this);
+		//gENERATOR = new Generator(this);
 		start.setEnabled(false);
 		remove(pc);
 		add("Center", (laeuft));
