@@ -17,6 +17,7 @@ public class Strings
 	String allefelder;
 	String nurzahlen;
 	String minmax;
+	String facheingeben;
 
 	public Strings()
 	{
@@ -43,6 +44,7 @@ public class Strings
 		allefelder = "Bitte alle Felder ausfüllen!";
 		nurzahlen = "Bitte bei der Stundenanzahl nur Zahlen eingeben";
 		minmax = "Maximale Stunden müssen die Minimalen übertreffen";
+		facheingeben="neues Fach eingeben";
 	}
 
 	public void englisch()
@@ -62,5 +64,6 @@ public class Strings
 		allefelder = "Please fill in all Fields";
 		nurzahlen = "Please only insert numbers";
 		minmax = "Max must be bigger than min";
+		facheingeben="Insert new Lesson";
 	}
 }

@@ -1,14 +1,39 @@
-import java.awt.Dimension;
-
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class GUIFach extends JPanel
 {
-
+	Strings sT;
+JPanel p=new JPanel();
+Datenbank db=new Datenbank();
+JLabel beschreibung;
+JTextField eingabe=new JTextField();
+JPanel leer=new JPanel();
+JButton speichern;
 	/**
 	 * @author: Felix Schütze
 	 */
 	public GUIFach(Strings sT)
 	{
+		p.setPreferredSize(new Dimension(80,80));
+		this.sT=sT;
+		beschreibung=new JLabel(sT.facheingeben);
+		speichern=new JButton(sT.speichern);
+		setLayout(new BorderLayout());
+		p.setLayout(new GridLayout(2,2));
+		add("North",(p));
+		p.add(beschreibung);
+		p.add(eingabe);
+		p.add(leer);
+		p.add(speichern);
+		speichern.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				db.machFach(eingabe.getText());
+				eingabe.setText("");
+			}
+		});
 	}
 }

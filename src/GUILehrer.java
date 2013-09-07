@@ -114,17 +114,21 @@ public class GUILehrer extends JScrollPane
 						&& !eingabe[1].getText().equals("")
 						&& !eingabe[2].getText().equals(""))
 				{
-					String[] temp = new String[anzahl + 1];
-					for (int i = 0; i < anzahl + 1; i++)
+					String[] temp = new String[anzahl];
+					for (int i = 0; i < anzahl; i++)
 					{
 						temp[i] = eingabe_fach[i].getText();
 					}
 					db.schreibeLehrerEigeschaften(eingabe[0].getText(),
 							Integer.parseInt(eingabe[1].getText()),
 							Integer.parseInt(eingabe[2].getText()), temp);
-					for (int i = 0; i < 4; i++)
+					for (int i = 0; i < 3; i++)
 					{
 						eingabe[i].setText("");
+					}
+					for (int i = 0; i < fach_anzahl; i++)
+					{
+						eingabe_fach[i].setText("");
 					}
 					Fach_liste = "";
 				} else
