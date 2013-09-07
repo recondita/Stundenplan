@@ -21,7 +21,7 @@ public class Datenbank
 	{
 		this.pfad = pfad;
 		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
-		lehrerVerzeichnis = new File(pfad + sep + "Faecher");
+		faecherVerzeichnis = new File(pfad + sep + "Faecher");
 		stufenVerzeichnis = new File(pfad + sep + "Stufen");
 	}
 
@@ -29,7 +29,7 @@ public class Datenbank
 	{
 		this.pfad = ".";
 		lehrerVerzeichnis = new File(pfad + sep + "Lehrer");
-		lehrerVerzeichnis = new File(pfad + sep + "Faecher");
+		faecherVerzeichnis = new File(pfad + sep + "Faecher");
 		stufenVerzeichnis = new File(pfad + sep + "Stufen");
 	}
 
