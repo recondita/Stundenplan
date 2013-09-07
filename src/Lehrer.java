@@ -3,13 +3,15 @@ public class Lehrer {
 	String name;
 	int minstunden;
 	int maxstunden;
-	boolean [] faecher;
+	int [] vonFaecher;
+	int [] bisFaecher;
 	
-	public Lehrer(String name, int minimalstunden, int maximalstunden, boolean [] faecher)
+	public Lehrer(String name, int minimalstunden, int maximalstunden,int [] vonFaecher, int [] bisFaecher)
 	{
 		this.name=name;
 		this.minstunden=minimalstunden;
 		this.maxstunden=maximalstunden;
-		this.faecher=faecher;
+		this.vonFaecher=vonFaecher;
+		this.bisFaecher=bisFaecher;
 	}
 }

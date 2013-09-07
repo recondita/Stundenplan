@@ -78,7 +78,7 @@ public class Datenbank
 		{
 			aktualisiereFaecherListe();
 		}
-		return faecherListe;
+		return faecherListe.clone();
 	}
 
 	public String[] gebeLehrerListe()
@@ -87,7 +87,7 @@ public class Datenbank
 		{
 			aktualisiereLehrerListe();
 		}
-		return lehrerListe;
+		return lehrerListe.clone();
 	}
 
 	private String[] leseFaecherListe()
@@ -152,12 +152,13 @@ public class Datenbank
 	}
 
 	public void schreibeLehrerEigeschaften(String name, int mindestStunden,
-			int maximalStunden, String[] fach)
+			int maximalStunden, String[] fach, int[] vonStufe, int[] bisStufe)
 	{
 		String faecher = "";
 		for (int i = 0; i < fach.length; i++)
 		{
-			faecher = faecher + fach[i] + ",";
+			faecher = faecher + fach[i] + "," + vonStufe[i] + "-" + bisStufe[i]
+					+ ",";
 		}
 
 		FileWriter fw = lehrerFW(name);
@@ -175,8 +176,8 @@ public class Datenbank
 		}
 	}
 
-	public void schreibeKlassenEigeschaften(String name, int fachStunden[],
-			String fachLehrer[], String klassenlehrer)
+	public void schreibeKlassenEigeschaften(String name, int stufe,
+			int fachStunden[], String fachLehrer[], String klassenlehrer)
 	{
 
 		String temp = "Klassenlehrer:" + klassenlehrer + zumbruch;
@@ -191,11 +192,11 @@ public class Datenbank
 
 		for (int i = 0; i < fachListe.length; i++)
 		{
-			temp = fachListe[i] + ":" + fachStunden[i] + "," + fachLehrer[i]
-					+ zumbruch;
+			temp = temp + fachListe[i] + ":" + fachStunden[i] + ","
+					+ fachLehrer[i] + zumbruch;
 		}
 
-		FileWriter fw = fachFW(name);
+		FileWriter fw = klassenFW(stufe, name);
 		try
 		{
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -239,12 +240,12 @@ public class Datenbank
 		}
 	}
 
-	public FileWriter klassenFW(String name)
+	public FileWriter klassenFW(int stufe, String name)
 	{
 		try
 		{
-			return new FileWriter(new File(pfad + sep + "Klassen" + sep + name
-					+ ".klasse"));
+			return new FileWriter(new File(pfad + sep + "Klassen" + sep + stufe
+					+ sep + name + ".klasse"));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -262,6 +263,21 @@ public class Datenbank
 		{
 			f++;
 			if (f >= faecherListe.length)
+			{
+				return -1;
+			}
+		}
+		return f;
+	}
+
+	public int lehrerToInt(String name)
+	{
+		int f = 0;
+		String[] liste = gebeLehrerListe();
+		while (!liste[f].equals(name))
+		{
+			f++;
+			if (f >= liste.length)
 			{
 				return -1;
 			}
@@ -312,24 +328,67 @@ public class Datenbank
 			tempminh = null;
 		}
 
-		boolean[] faecher = new boolean[gebeFaecherListe().length];
-		for (int i = 0; i < faecher.length; i++)
+		int[] vonFaecher = new int[gebeFaecherListe().length];
+		int[] bisFaecher = new int[gebeFaecherListe().length];
+
+		for (int i = 0; i < vonFaecher.length; i++)
 		{
-			faecher[0] = false;
+			vonFaecher[0] = 0;
+			bisFaecher[0] = 0;
 		}
-		for (int i = 0; i < tempfaecher.length; i++)
+
+		for (int i = 0; i < tempfaecher.length; i = i + 3)
 		{
-			faecher[fachToInt(tempfaecher[i])] = true;
+			int index = fachToInt(tempfaecher[i]);
+			vonFaecher[index] = Integer.parseInt(tempfaecher[i + 1]);
+			bisFaecher[index] = Integer.parseInt(tempfaecher[i + 2]);
 		}
 
 		return new Lehrer(name, Integer.parseInt(tempminh),
-				Integer.parseInt(tempmaxh), faecher);
+				Integer.parseInt(tempmaxh), vonFaecher, bisFaecher);
 	}
 
-	public Klasse klasseAuslesen()
+	public Klasse klasseAuslesen(int stufe, String name)
 	{
+		int klassenLehrer=-1;
+		int[] fachStunden= new int[gebeFaecherListe().length];
+		int[] fachLehrer= new int[gebeFaecherListe().length];
+		try
+		{
+			FileReader fr = new FileReader(new File(pfad + sep + "Klassen"
+					+ sep + stufe + sep + name + ".lehrer"));
+			BufferedReader br = new BufferedReader(fr);
+			String temp = br.readLine();
+			while (temp != null)
+			{
+				String split[] = temp.split("\\:");
+				if(split[0].equals("Klassenlehrer"))
+				{
+					klassenLehrer=lehrerToInt(split[1]);
+				}
+				else
+				{
+					int index=fachToInt(split[0]);
+					if(index>=0)
+					{
+						String fachSplit []= split[1].split("\\,");
+						fachStunden[index]=Integer.parseInt(fachSplit[0]);
+						if(fachSplit.length>1)
+						{
+							fachLehrer[index]=lehrerToInt(fachSplit[1]);
+						}
+					}
+				}
+				br.readLine();
+			}
+			br.close();
 
-		return null;
+			return new Klasse(stufe,fachStunden, fachLehrer, klassenLehrer);
+		} catch (Exception e)
+		{
+			return null;
+		}
+		
 	}
 
 	public void print()
