@@ -1,6 +1,5 @@
-import java.awt.Dimension;
-
 import javax.swing.*;
+import java.awt.*;
 
 public class GUIKlasse extends JPanel
 {

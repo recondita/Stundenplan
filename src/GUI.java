@@ -1,14 +1,16 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
+import javax.swing.plaf.InsetsUIResource;
 
 public class GUI extends JFrame
 {
 	/**
 	 * Eine GUI in Ehren kann keiner verwehren!
 	 * by me;
-	 * Das DropDown Menü ist Dynamisch!
+	 * Das DropDown Menü ist Dynamisch, aber gelöscht
 	 */
 	Strings sT = new Strings();
 	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
@@ -26,6 +28,9 @@ public class GUI extends JFrame
 
 	public GUI()
 	{
+		UIManager.put("TabbedPane.contentBorderInsets", new InsetsUIResource(10,10,5,5)); 
+		//UIManager.put("TabbedPane.selected", Color.blue);
+		pc.updateUI();
 		setLayout(new BorderLayout());
 		setLocation(200, 50);
 		setSize(800, 500);
@@ -39,6 +44,9 @@ public class GUI extends JFrame
 		pc.addTab(sT.fach, gUIFACH);
 		pc.addTab(sT.lehrer, gUILEHRER);
 		pc.addTab(sT.klasse, gUIKLASSE);
+		pc.setBackgroundAt(0, new Color(0,154,205));
+		pc.setBackgroundAt(1, new Color(0,178,238));
+		pc.setBackgroundAt(2, new Color(0,191,255));
 		unten();
 		add("South", (pu));
 		add("Center", (pc));

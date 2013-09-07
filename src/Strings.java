@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Strings
 {
 	int sprache = 1;
@@ -18,9 +20,18 @@ public class Strings
 	String nurzahlen;
 	String minmax;
 	String facheingeben;
+	String wahlfach;
 
 	public Strings()
 	{
+		try
+		{
+			FileReader fr=new FileReader("sprache.sp");
+			BufferedReader br = new BufferedReader(fr);
+			sprache=Integer.parseInt(br.readLine());
+			br.close();
+		}
+		catch(Exception e){}
 		if (sprache == 1)
 			deutsch();
 		if (sprache == 2)
@@ -44,7 +55,8 @@ public class Strings
 		allefelder = "Bitte alle Felder ausfüllen!";
 		nurzahlen = "Bitte bei der Stundenanzahl nur Zahlen eingeben";
 		minmax = "Maximale Stunden müssen die Minimalen übertreffen";
-		facheingeben="neues Fach eingeben";
+		facheingeben="Neues Fach eingeben:";
+		wahlfach="Wahlfach erstellen";
 	}
 
 	public void englisch()
@@ -55,7 +67,7 @@ public class Strings
 		klasse = "Create Class";
 		start = "Start";
 		sprachen = "Language";
-		laeuft = "Timetable is going to be created";
+		laeuft = "Timetable is going to be created...";
 		lehrername = "Name of the teacher:";
 		minstunden = "Minimal number of lessons:";
 		maxstunden = "Maximal number of lessons:";
@@ -64,6 +76,7 @@ public class Strings
 		allefelder = "Please fill in all Fields";
 		nurzahlen = "Please only insert numbers";
 		minmax = "Max must be bigger than min";
-		facheingeben="Insert new Lesson";
+		facheingeben="Insert new Lesson:";
+		wahlfach="Create choseabel lesson";
 	}
 }

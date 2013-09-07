@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 /**
  * Beschreiben Sie hier die Klasse Menuleiste.
@@ -11,10 +12,11 @@ public class Menuleiste
 {
 	Strings sT;
 	GUI gUI;
+
 	public Menuleiste(Strings sT, GUI gUI)
 	{
-		this.sT=sT;
-		this.gUI=gUI;
+		this.sT = sT;
+		this.gUI = gUI;
 		ml();
 	}
 
@@ -27,9 +29,9 @@ public class Menuleiste
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				sT.sprache=1;
-				System.err.println("Warum wird dieser ActionListener nicht ausgeführt?");
-				gUI.repaint();
+				spracheAendern(1);
+				gUI.dispose();
+				new GUI();
 			}
 		});
 		sprachen.add(deutsch);
@@ -38,8 +40,9 @@ public class Menuleiste
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				sT.sprache=2;
-				gUI.repaint();
+				spracheAendern(2);
+				gUI.dispose();
+				new GUI();
 			}
 		});
 		sprachen.add(englisch);
@@ -48,4 +51,17 @@ public class Menuleiste
 		return Menuleiste;
 	}
 
+	public void spracheAendern(int s)
+	{
+		try
+		{
+			FileWriter fw = new FileWriter("sprache.sp");
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(""+s);
+			bw.close();
+		} catch (Exception e)
+		{
+
+		}
+	}
 }
