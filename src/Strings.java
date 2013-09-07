@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Strings
 {
 	int sprache = 1;
@@ -21,6 +23,14 @@ public class Strings
 
 	public Strings()
 	{
+		try
+		{
+			FileReader fr=new FileReader("sprache.sp");
+			BufferedReader br = new BufferedReader(fr);
+			sprache=Integer.parseInt(br.readLine());
+			br.close();
+		}
+		catch(Exception e){}
 		if (sprache == 1)
 			deutsch();
 		if (sprache == 2)

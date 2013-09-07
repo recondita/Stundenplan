@@ -17,7 +17,6 @@ public class GUILehrer extends JScrollPane
 	JPanel unten = new JPanel();
 	JPanel mitte = new JPanel();
 	JPanel oben = new JPanel();
-	String Fach_liste = "";
 
 	/**
 	 * @author: Felix Schütze
@@ -46,12 +45,7 @@ public class GUILehrer extends JScrollPane
 			oben.add(eingabe[i]);
 		}
 		beschreibung[3] = new JLabel();
-		// eingabe_fach[0] = new JTextField();
 		mitte.add(beschreibung[3]);
-		// auswahl[0] = new JComboBox();
-		// p[0].add(auswahl[0]);
-		// mitte.add(p[0]);
-		// p[0].add(eingabe_fach[0]);
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
@@ -65,7 +59,6 @@ public class GUILehrer extends JScrollPane
 		beschreibung[1].setText(sT.minstunden);
 		beschreibung[2].setText(sT.maxstunden);
 		beschreibung[3].setText(sT.faecher);
-		// dropDown();
 		unten.add(ausgabe);
 		unten.add(start);
 		start.addActionListener(new ActionListener()
@@ -88,20 +81,15 @@ public class GUILehrer extends JScrollPane
 						&& !eingabe[1].getText().equals("")
 						&& !eingabe[2].getText().equals(""))
 				{
-					int f = 0;
+					//fehlerbereich fängt hier an
+					String[] temp = new String[arrayZaehler()];
+					int f=0;
 					for (int i = 0; i < fach_anzahl; i++)
 					{
 						if (auswahl[i].isSelected())
 						{
+							temp[f] = db.gebeFaecherListe()[i];
 							f++;
-						}
-					}
-					String[] temp = new String[f];
-					for (int i = 0; i < fach_anzahl; i++)
-					{
-						if (auswahl[i].isSelected())
-						{
-							temp[i] = db.gebeFaecherListe()[i];
 						}
 					}
 					db.schreibeLehrerEigeschaften(eingabe[0].getText(),
@@ -115,7 +103,8 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-					Fach_liste = "";
+					//Fehlerbereich hört hier auf
+					
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);
@@ -128,5 +117,18 @@ public class GUILehrer extends JScrollPane
 		{
 			// ausgabe.setText(sT.nurzahlen);
 		}
+	}
+	
+	public int arrayZaehler()
+	{
+		int f = 0;
+		for (int i = 0; i < fach_anzahl; i++)
+		{
+			if (auswahl[i].isSelected())
+			{
+				f++;
+			}
+		}
+		return f;
 	}
 }
