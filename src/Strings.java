@@ -21,6 +21,8 @@ public class Strings
 	String minmax;
 	String facheingeben;
 	String wahlfach;
+	String vonStufe;
+	String bisStufe;
 
 	public Strings()
 	{
@@ -57,6 +59,8 @@ public class Strings
 		minmax = "Maximale Stunden müssen die Minimalen übertreffen";
 		facheingeben="Neues Fach eingeben:";
 		wahlfach="Wahlfach erstellen";
+		vonStufe="von Stufe";
+		bisStufe="bis Stufe";
 	}
 
 	public void englisch()
@@ -78,5 +82,7 @@ public class Strings
 		minmax = "Max must be bigger than min";
 		facheingeben="Insert new Lesson:";
 		wahlfach="Create choseabel lesson";
+		vonStufe="by grade level";
+		bisStufe="to grade level";
 	}
 }

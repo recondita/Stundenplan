@@ -12,10 +12,14 @@ public class GUILehrer extends JScrollPane
 	JLabel beschreibung[] = new JLabel[4];
 	JTextField eingabe[] = new JTextField[3];
 	JCheckBox[] auswahl = new JCheckBox[fach_anzahl];
+	JPanel[] p_stufe = new JPanel[fach_anzahl];
+	JTextField[][] stufe = new JTextField[fach_anzahl][2];
 	JLabel ausgabe = new JLabel();
 	JButton start;
+	JPanel center=new JPanel();
 	JPanel unten = new JPanel();
 	JPanel mitte = new JPanel();
+	JPanel leer = new JPanel();
 	JPanel oben = new JPanel();
 
 	/**
@@ -30,10 +34,14 @@ public class GUILehrer extends JScrollPane
 		oben.setLayout(new GridLayout(3, 2));
 		unten.setLayout(new GridLayout(1, 1));
 		unten.setPreferredSize(new Dimension(25, 25));
-		mitte.setLayout(new GridLayout(fach_anzahl, 2));
+		mitte.setLayout(new GridLayout(fach_anzahl*2, 1));
+		leer.setLayout(new GridLayout(fach_anzahl*2, 1));
+		center.setLayout(new GridLayout(1, 2));
+		center.add(leer);
+		center.add(mitte);
 		oben.setPreferredSize(new Dimension(100, 100));
 		panel.add("North", (oben));
-		panel.add("Center", (mitte));
+		panel.add("Center", (center));
 		panel.add("South", (unten));
 		for (int i = 0; i < 3; i++)
 		{
@@ -43,16 +51,18 @@ public class GUILehrer extends JScrollPane
 			oben.add(eingabe[i]);
 		}
 		beschreibung[3] = new JLabel();
-		mitte.add(beschreibung[3]);
+		leer.add(beschreibung[3]);
 		for (int i = 0; i < fach_anzahl; i++)
 		{
+			p_stufe[i] = new JPanel();
+			p_stufe[i].setLayout(new GridLayout(1,2));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
-			if(i!=0)
-			{
-				mitte.add(new JPanel());
-			}
+			stufe[i][1]=new JTextField(sT.vonStufe);
+			stufe[i][2]=new JTextField(sT.bisStufe);
+			p_stufe[i].add(stufe[i][1]);
+			p_stufe[i].add(stufe[i][2]);
 			mitte.add(auswahl[i]);
-			
+			mitte.add(p_stufe[i]);
 		}
 		beschreibung[0].setText(sT.lehrername);
 		beschreibung[1].setText(sT.minstunden);
