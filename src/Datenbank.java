@@ -40,7 +40,7 @@ public class Datenbank
 
 	public void aktualisiereLehrerListe()
 	{
-		faecherListe = leseLehrerListe();
+		lehrerListe = leseLehrerListe();
 	}
 
 	public void aktualisiereKlassenListe()
@@ -115,18 +115,20 @@ public class Datenbank
 	{
 		try
 		{
-			String[] Liste = new String[lehrerVerzeichnis.list().length];
-			for (int i = 0; i < lehrerVerzeichnis.list().length; i++)
+			String []verzeichnis=lehrerVerzeichnis.list();
+			String[] Liste = new String[verzeichnis.length];
+			for (int i = 0; i < verzeichnis.length; i++)
 			{
-				String[] splittArray = lehrerVerzeichnis.list()[i]
-						.split("\\.lehrer");
+				String[] splittArray = verzeichnis[i].split("\\.lehrer");
 				String temp = "";
+				/**
 				for (int j = 0; j < splittArray.length; j++)
 				{
 					temp = temp + splittArray[j];
 				}
-				Liste[i] = temp;
-				temp = "";
+				*/
+				Liste[i] = splittArray[0];
+				//temp = "";
 			}
 			return Liste;
 		} catch (Exception e)
