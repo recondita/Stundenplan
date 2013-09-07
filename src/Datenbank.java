@@ -8,8 +8,9 @@ public class Datenbank
 	String sep = System.getProperty("file.separator");
 	String zumbruch = System.getProperty("line.separator");
 	String pfad;
-	
+
 	private String[] faecherListe;
+	private String[] lehrerListe;
 
 	File lehrerVerzeichnis;
 	File faecherVerzeichnis;
@@ -38,10 +39,15 @@ public class Datenbank
 
 	public void aktualisiereFaecherListe()
 	{
-		faecherListe=leseFaecherListe();
+		faecherListe = leseFaecherListe();
 	}
-	
-	public String[] gebeLehrerListe()
+
+	public void aktualisiereLehrerListe()
+	{
+		faecherListe = leseLehrerListe();
+	}
+
+	private String[] leseLehrerListe()
 	{
 		try
 		{
@@ -66,16 +72,24 @@ public class Datenbank
 		}
 	}
 
-	
 	public String[] gebeFaecherListe()
 	{
-		if(faecherListe==null)
+		if (faecherListe == null)
 		{
 			aktualisiereFaecherListe();
 		}
 		return faecherListe;
 	}
-	
+
+	public String[] gebeLehrerListe()
+	{
+		if (lehrerListe == null)
+		{
+			aktualisiereLehrerListe();
+		}
+		return lehrerListe;
+	}
+
 	private String[] leseFaecherListe()
 	{
 		try
@@ -119,7 +133,7 @@ public class Datenbank
 
 	public void machFach(String name)
 	{
-		FileWriter fw = faecherFW(name);
+		FileWriter fw = fachFW(name);
 		int anzahl = gebeFaecherListe().length;
 		if (fw != null)
 		{
@@ -161,6 +175,40 @@ public class Datenbank
 		}
 	}
 
+	public void schreibeKlassenEigeschaften(String name, int fachStunden[],
+			String fachLehrer[], String klassenlehrer)
+	{
+
+		String temp = "Klassenlehrer:" + klassenlehrer + zumbruch;
+
+		String fachListe[] = gebeFaecherListe();
+
+		if ((fachStunden.length < fachListe.length)
+				| (fachLehrer.length < fachListe.length))
+		{
+			System.out.println("Arrays zu klein --> Felix ist Schuld");
+		}
+
+		for (int i = 0; i < fachListe.length; i++)
+		{
+			temp = fachListe[i] + ":" + fachStunden[i] + "," + fachLehrer[i]
+					+ zumbruch;
+		}
+
+		FileWriter fw = fachFW(name);
+		try
+		{
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(temp);
+			bw.close();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Fehler beim Schreiben der Eigenschaften " + e);
+		}
+	}
+
 	public FileWriter lehrerFW(String name)
 	{
 		try
@@ -176,7 +224,7 @@ public class Datenbank
 		}
 	}
 
-	public FileWriter faecherFW(String name)
+	public FileWriter fachFW(String name)
 	{
 		try
 		{
@@ -191,14 +239,29 @@ public class Datenbank
 		}
 	}
 
+	public FileWriter klassenFW(String name)
+	{
+		try
+		{
+			return new FileWriter(new File(pfad + sep + "Klassen" + sep + name
+					+ ".klasse"));
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Fehler beim Anlegen des Filewriters " + e);
+			return null;
+		}
+	}
+
 	public int fachToInt(String name)
 	{
 		int f = 0;
-		String [] faecherListe=gebeFaecherListe();
-		while(!faecherListe[f].equals(name))
+		String[] faecherListe = gebeFaecherListe();
+		while (!faecherListe[f].equals(name))
 		{
 			f++;
-			if(f>=faecherListe.length)
+			if (f >= faecherListe.length)
 			{
 				return -1;
 			}
@@ -214,7 +277,7 @@ public class Datenbank
 		try
 		{
 			FileReader fr = new FileReader(new File(pfad + sep + "Lehrer" + sep
-					+ name +".lehrer"));
+					+ name + ".lehrer"));
 			BufferedReader br = new BufferedReader(fr);
 			String temp = br.readLine();
 			while (temp != null)
@@ -250,17 +313,23 @@ public class Datenbank
 		}
 
 		boolean[] faecher = new boolean[gebeFaecherListe().length];
-		for (int i=0; i<faecher.length; i++)
+		for (int i = 0; i < faecher.length; i++)
 		{
-			faecher[0]=false;
+			faecher[0] = false;
 		}
-		for (int i=0; i<tempfaecher.length; i++)
+		for (int i = 0; i < tempfaecher.length; i++)
 		{
-			faecher[fachToInt(tempfaecher[i])]=true;
+			faecher[fachToInt(tempfaecher[i])] = true;
 		}
-		
+
 		return new Lehrer(name, Integer.parseInt(tempminh),
 				Integer.parseInt(tempmaxh), faecher);
+	}
+
+	public Klasse klasseAuslesen()
+	{
+
+		return null;
 	}
 
 	public void print()
@@ -280,7 +349,7 @@ public class Datenbank
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
 		testDatenbank.print();
-		Lehrer testLehrer=testDatenbank.lehrerAuslesen("Scheibe");
+		Lehrer testLehrer = testDatenbank.lehrerAuslesen("Scheibe");
 		System.out.println(testLehrer);
 	}
 }
