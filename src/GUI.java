@@ -8,6 +8,7 @@ public class GUI extends JFrame
 	/**
 	 * Eine GUI in Ehren kann keiner verwehren!
 	 * by me;
+	 * Das DropDown Menü ist Dynamisch!
 	 */
 	Strings sT = new Strings();
 	GUIFach gUIFACH=new GUIFach(sT);
