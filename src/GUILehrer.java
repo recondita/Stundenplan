@@ -46,13 +46,14 @@ public class GUILehrer extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25,25));
 		leer_oben.setLayout(new GridLayout(1,1));
 		leer.add("North",(leer_oben));
-		lehrer_liste.setLayout(new GridLayout(lehrer_anzahl,1));
-		lehrer.add(lehrer_liste);
+		lehrer.setLayout(new GridLayout(lehrer_anzahl,1));
+		lehrer_liste.setPreferredSize(new Dimension(250,250));
+		lehrer_liste.setViewportView(lehrer);
 		for(int i=0;i<lehrer_anzahl;i++)
 		{
 			lehrer_auswahl[i]=new JButton();
 			lehrer_auswahl[i].setText(db.gebeLehrerListe()[i]);
-			lehrer_auswahl[i].setBackground(new Color(0,178,238));
+			lehrer_auswahl[i].setBackground(Color.white);
 			lehrer_auswahl[i].addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent arg0)
@@ -62,7 +63,7 @@ public class GUILehrer extends JScrollPane
 			});
 			lehrer.add(lehrer_auswahl[i]);
 		}
-		leer.add("Center",(lehrer_liste));
+		leer.add("South",(lehrer_liste));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
 		center.add(mitte);
