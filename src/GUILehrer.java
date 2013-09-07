@@ -65,6 +65,8 @@ public class GUILehrer extends JScrollPane
 						{
 							Lehrer lehrer=db.lehrerAuslesen(lehrer_auswahl[i].getText());
 							eingabe[0].setText(lehrer.name);
+							eingabe[1].setText(lehrer.minstunden+"");
+							eingabe[2].setText(lehrer.maxstunden+"");
 						}
 					}
 				}

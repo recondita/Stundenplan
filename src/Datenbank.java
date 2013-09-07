@@ -386,6 +386,21 @@ public class Datenbank
 		return f;
 	}
 
+	public int klasseToInt(int stufe, String name)
+	{
+		int f = 0;
+		String[][] liste = gebeKlassenListe();
+		while (!liste[stufe][f].equals(name))
+		{
+			f++;
+			if (f >= liste[stufe].length)
+			{
+				return -1;
+			}
+		}
+		return f;
+	}
+	
 	public Lehrer lehrerAuslesen(String name)
 	{
 		String tempminh = null;
