@@ -16,7 +16,7 @@ public class GUILehrer extends JScrollPane
 	JTextField[][] stufe = new JTextField[fach_anzahl][2];
 	JLabel ausgabe = new JLabel();
 	JButton start;
-	JPanel center=new JPanel();
+	JPanel center = new JPanel();
 	JPanel unten = new JPanel();
 	JPanel mitte = new JPanel();
 	JPanel leer = new JPanel();
@@ -34,8 +34,8 @@ public class GUILehrer extends JScrollPane
 		oben.setLayout(new GridLayout(3, 2));
 		unten.setLayout(new GridLayout(1, 1));
 		unten.setPreferredSize(new Dimension(25, 25));
-		mitte.setLayout(new GridLayout(fach_anzahl*2, 1));
-		leer.setLayout(new GridLayout(fach_anzahl*2, 1));
+		mitte.setLayout(new GridLayout(fach_anzahl * 2, 1));
+		leer.setLayout(new GridLayout(fach_anzahl * 2, 1));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
 		center.add(mitte);
@@ -55,15 +55,22 @@ public class GUILehrer extends JScrollPane
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			p_stufe[i] = new JPanel();
-			p_stufe[i].setLayout(new GridLayout(1,4));
+			p_stufe[i].setLayout(new GridLayout(1, 4));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
-			stufe[i][0]=new JTextField(sT.vonStufe);
-			stufe[i][1]=new JTextField(sT.bisStufe);
-			p_stufe[i].add(stufe[i][0]);
-			p_stufe[i].add(stufe[i][1]);
+			stufe[i][0] = new JTextField(sT.vonStufe);
+			stufe[i][1] = new JTextField(sT.bisStufe);
+			for (int f = 0; f < 2; f++)
+			{
+				p_stufe[i].add(stufe[i][f]);
+			}
+			for (int f = 0; f < 2; f++)
+			{
+				p_stufe[i].add(new JPanel());
+			}
 			mitte.add(auswahl[i]);
 			mitte.add(p_stufe[i]);
 		}
+		klickLeer();
 		beschreibung[0].setText(sT.lehrername);
 		beschreibung[1].setText(sT.minstunden);
 		beschreibung[2].setText(sT.maxstunden);
@@ -93,7 +100,7 @@ public class GUILehrer extends JScrollPane
 					String[] fach = new String[arrayZaehler()];
 					int[] vonStufe = new int[arrayZaehler()];
 					int[] bisStufe = new int[arrayZaehler()];
-					int f=0;
+					int f = 0;
 					for (int i = 0; i < fach_anzahl; i++)
 					{
 						if (auswahl[i].isSelected())
@@ -104,7 +111,8 @@ public class GUILehrer extends JScrollPane
 					}
 					db.schreibeLehrerEigeschaften(eingabe[0].getText(),
 							Integer.parseInt(eingabe[1].getText()),
-							Integer.parseInt(eingabe[2].getText()), fach, vonStufe, bisStufe);
+							Integer.parseInt(eingabe[2].getText()), fach,
+							vonStufe, bisStufe);
 					for (int i = 0; i < 3; i++)
 					{
 						eingabe[i].setText("");
@@ -113,7 +121,7 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-					
+
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);
@@ -127,7 +135,49 @@ public class GUILehrer extends JScrollPane
 			// ausgabe.setText(sT.nurzahlen);
 		}
 	}
-	
+
+	public void klickLeer()
+	{
+		for (int i = 0; i < fach_anzahl; i++)
+		{
+			for (int f = 0; f < 2; f++)
+			{
+				final int i2 = i;
+				final int f2 = f;
+				stufe[i][f].addFocusListener(new java.awt.event.FocusAdapter()
+				{
+					public void focusGained(java.awt.event.FocusEvent evt)
+					{
+
+						stufe[i2][f2].setText("");
+					}
+				});
+			}
+		}
+		for (int i = 0; i < fach_anzahl; i++)
+		{
+			final int i2 = i;
+			stufe[i2][0].setEditable(false);
+			stufe[i2][1].setEditable(false);
+			auswahl[i].addItemListener(new ItemListener()
+			{
+				public void itemStateChanged(ItemEvent e)
+				{
+					if(e.getStateChange() == ItemEvent.SELECTED)
+					{
+						stufe[i2][0].setEditable(true);
+						stufe[i2][1].setEditable(true);
+					}
+					else
+					{
+						stufe[i2][0].setEditable(false);
+						stufe[i2][1].setEditable(false);
+					}
+				}
+			});
+		}
+	}
+
 	public int arrayZaehler()
 	{
 		int f = 0;
