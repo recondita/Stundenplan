@@ -34,8 +34,8 @@ public class GUILehrer extends JScrollPane
 		oben.setLayout(new GridLayout(3, 2));
 		unten.setLayout(new GridLayout(1, 1));
 		unten.setPreferredSize(new Dimension(25, 25));
-		mitte.setLayout(new GridLayout(fach_anzahl * 2, 1));
-		leer.setLayout(new GridLayout(fach_anzahl * 2, 1));
+		mitte.setLayout(new GridLayout(fach_anzahl, 2));
+		leer.setLayout(new GridLayout(fach_anzahl, 1));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
 		center.add(mitte);
@@ -55,17 +55,13 @@ public class GUILehrer extends JScrollPane
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			p_stufe[i] = new JPanel();
-			p_stufe[i].setLayout(new GridLayout(1, 4));
+			p_stufe[i].setLayout(new GridLayout(1, 2));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
 			stufe[i][0] = new JTextField(sT.vonStufe);
 			stufe[i][1] = new JTextField(sT.bisStufe);
 			for (int f = 0; f < 2; f++)
 			{
 				p_stufe[i].add(stufe[i][f]);
-			}
-			for (int f = 0; f < 2; f++)
-			{
-				p_stufe[i].add(new JPanel());
 			}
 			mitte.add(auswahl[i]);
 			mitte.add(p_stufe[i]);
@@ -148,8 +144,10 @@ public class GUILehrer extends JScrollPane
 				{
 					public void focusGained(java.awt.event.FocusEvent evt)
 					{
-
-						stufe[i2][f2].setText("");
+						if (auswahl[i2].isSelected())
+						{
+							stufe[i2][f2].setText("");
+						}
 					}
 				});
 			}
@@ -163,12 +161,11 @@ public class GUILehrer extends JScrollPane
 			{
 				public void itemStateChanged(ItemEvent e)
 				{
-					if(e.getStateChange() == ItemEvent.SELECTED)
+					if (e.getStateChange() == ItemEvent.SELECTED)
 					{
 						stufe[i2][0].setEditable(true);
 						stufe[i2][1].setEditable(true);
-					}
-					else
+					} else
 					{
 						stufe[i2][0].setEditable(false);
 						stufe[i2][1].setEditable(false);

@@ -33,7 +33,7 @@ public class GUI extends JFrame
 		pc.updateUI();
 		setLayout(new BorderLayout());
 		setLocation(200, 50);
-		setSize(800, 500);
+		setSize(900, 500);
 		setResizable(true);
 		setMenuBar(mL.ml());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
