@@ -507,7 +507,7 @@ public class Datenbank
 
 	}
 
-	public void loescheLehrer(int name)
+	public void loescheLehrer(String name)
 	{
 		File lehrer=new File(pfad+ sep +"Lehrer" +sep + name + ".lehrer");
 		if(lehrer.exists())
@@ -516,7 +516,7 @@ public class Datenbank
 		}
 	}
 	
-	public void loescheFach(int name)
+	public void loescheFach(String name)
 	{
 		File fach=new File(pfad+ sep +"Fach" +sep + name + ".fach");
 		if(fach.exists())
@@ -525,7 +525,7 @@ public class Datenbank
 		}
 	}
 	
-	public void loescheKlasse(int stufe, int name)
+	public void loescheKlasse(int stufe, String name)
 	{
 		File klasse=new File(pfad+ sep +"Stufe" +sep + stufe + sep + name + ".klasse");
 		if(klasse.exists())

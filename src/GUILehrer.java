@@ -27,6 +27,7 @@ public class GUILehrer extends JScrollPane
 	JPanel leer = new JPanel();
 	JPanel leer_oben = new JPanel();
 	JPanel oben = new JPanel();
+	String aktuellerName;
 
 	/**
 	 * @author: Felix Schütze
@@ -66,7 +67,7 @@ public class GUILehrer extends JScrollPane
 							Lehrer lehrer = db.lehrerAuslesen(lehrer_auswahl[i]
 									.getText());
 							eingabe[0].setText(lehrer.name);
-							eingabe[0].setEditable(false);
+							aktuellerName=lehrer.name;
 							eingabe[1].setText(lehrer.minstunden + "");
 							eingabe[2].setText(lehrer.maxstunden + "");
 							for (int j = 0; j < auswahl.length; j++)
@@ -142,6 +143,7 @@ public class GUILehrer extends JScrollPane
 	{
 		try
 		{
+			
 			if (Integer.parseInt(eingabe[1].getText()) <= Integer
 					.parseInt(eingabe[2].getText()))
 			{
@@ -169,6 +171,12 @@ public class GUILehrer extends JScrollPane
 							Integer.parseInt(eingabe[1].getText()),
 							Integer.parseInt(eingabe[2].getText()), fach,
 							vonStufe, bisStufe);
+					
+					if(!eingabe[0].getText().equals(aktuellerName))
+					{
+						db.loescheLehrer(aktuellerName);
+					}
+					aktuellerName="";
 					for (int i = 0; i < 3; i++)
 					{
 						eingabe[i].setText("");
