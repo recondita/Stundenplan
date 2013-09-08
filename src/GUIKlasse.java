@@ -12,7 +12,7 @@ public class GUIKlasse extends JScrollPane
 	String[][] klassenliste = db.gebeKlassenListe();
 	JScrollPane[] lehrer_liste = new JScrollPane[klassenliste.length];
 	JButton[][] lehrer_auswahl = new JButton[klassenliste.length][klassenliste[0].length];
-	JTabbedPane tab =new JTabbedPane();
+	JTabbedPane tab = new JTabbedPane();
 	JPanel lehrer[] = new JPanel[klassenliste.length];
 	int fach_anzahl = (db.gebeFaecherListe().length);
 	Strings sT;
@@ -56,18 +56,20 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
-			for (int i = 0; i < klassenliste.length; i++)
+		for (int i = 1; i < klassenliste.length; i++)
+		{
+			if (klassenliste[i] != null)
 			{
-				tab.addTab(""+klassenliste[i][0], lehrer_liste[i]);
-				lehrer_liste[i]=new JScrollPane();
-				lehrer[i]=new JPanel();
+				tab.addTab(sT.stufe_anzeigen + i, lehrer_liste[i]);
+				lehrer_liste[i] = new JScrollPane();
+				lehrer[i] = new JPanel();
 				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
 				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
 				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
 				lehrer_liste[i].setViewportView(lehrer[i]);
-				for (int j = 0; j < klassenliste[0].length; j++)
+				for (int j = 0; j < klassenliste[i].length; j++)
 				{
-					
+
 					lehrer_auswahl[i][j] = new JButton();
 					lehrer_auswahl[i][j].setText(klassenliste[i][j]);
 					lehrer_auswahl[i][j].setBackground(Color.white);
@@ -79,9 +81,9 @@ public class GUIKlasse extends JScrollPane
 						}
 					});
 					lehrer[i].add(lehrer_auswahl[i][j]);
-					
 				}
 			}
+		}
 		leer.add("South", (tab));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
