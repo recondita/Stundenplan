@@ -33,6 +33,7 @@ public class GUIKlasse extends JScrollPane
 	JPanel leer_oben = new JPanel();
 	JPanel oben = new JPanel();
 	JButton[] neu;
+	int[] zaehler;
 
 	/**
 	 * @author: Felix Schütze
@@ -54,6 +55,7 @@ public class GUIKlasse extends JScrollPane
 		klassenlehrer = new JComboBox(db.gebeLehrerListe());
 		lehrerliste = new String[lehrer_anzahl + 1];
 		neu = new JButton[klassenliste.length];
+		zaehler = new int[fach_anzahl];
 		setViewportView(panel);
 		sT = new Strings();
 		for (int i = 0; i < lehrer_anzahl; i++)
@@ -82,16 +84,16 @@ public class GUIKlasse extends JScrollPane
 				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
 				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
 				lehrer_liste[i].setViewportView(lehrer[i]);
-				tab.addTab(sT.stufe_anzeigen +" "+ i, lehrer_liste[i]);
+				tab.addTab(sT.stufe_anzeigen + " " + i, lehrer_liste[i]);
 				neu[i] = new JButton(sT.neueklasse);
 				lehrer[i].add(neu[i]);
 				neu[i].setBackground(new Color(0, 154, 205));
-				final int i2=i;
+				final int i2 = i;
 				neu[i].addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent arg0)
 					{
-						eingabe[2].setText(""+i2);
+						eingabe[2].setText("" + i2);
 					}
 				});
 				for (int j = 0; j < klassenliste[i].length; j++)
@@ -109,11 +111,11 @@ public class GUIKlasse extends JScrollPane
 
 									}
 								});
-						
+
 						lehrer[i].add(lehrer_auswahl[i][j]);
 					}
 				}
-				
+
 			}
 		}
 		leer.add("South", (tab));
@@ -140,35 +142,37 @@ public class GUIKlasse extends JScrollPane
 		eingabe[2].setText("5");
 		beschreibung[3] = new JLabel();
 		leer_oben.add(beschreibung[3]);
-		Lehrer[] lehrer = new Lehrer[lehrerliste.length];
-		for (int i = 0; i < lehrerliste.length; i++)
-		{
-			lehrer[i] = db.lehrerAuslesen(i);
-		}
-		int intStufe = Integer.parseInt(eingabe[2].getText());
 		for (int i = 0; i < fach_anzahl; i++)
 		{
+			zaehler[i] = 0;
+		}
+
+		for (int i = 0; i < fach_anzahl; i++)
+		{
+			final int i2 = i;
+			// richtigeLehrer(i);
+			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
+			// p_stufe[i].add(auswahl[i]);
+			auswahl[i].addItemListener(new ItemListener()
+			{
+
+				@Override
+				public void itemStateChanged(ItemEvent e)
+				{
+					richtigeLehrer(i2);
+					zaehler[i2]++;
+					validate();
+				}
+
+			});
+
 			p_stufe[i] = new JPanel();
 			p_stufe[i].setLayout(new GridLayout(1, 2));
-			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
 			stufe[i] = new JTextField(sT.stundenanzahl);
-			String[] lehrerliste=db.gebeLehrerListe();
-			String[] fachLehrerListe = new String[lehrerliste.length];
-			int fachLehrer = 0;
-			for (int j = 0; j < lehrerliste.length; j++)
-			{
-				if ((intStufe > lehrer[j].vonFaecher[i])
-						& (intStufe < lehrer[j].vonFaecher[i]))
-				{
-					fachLehrerListe[fachLehrer] = lehrerliste[j];
-					fachLehrer++;
-				}
-			}
-			String[] fachLehrerListeGekuerzt = new String[fachLehrer];
+
 			// falls die leeren indexe störn hier weitermachen
-			lehrer_wahl[i] = new JComboBox(fachLehrerListe);
+
 			p_stufe[i].add(stufe[i]);
-			p_stufe[i].add(lehrer_wahl[i]);
 			mitte.add(auswahl[i]);
 			mitte.add(p_stufe[i]);
 		}
@@ -185,6 +189,46 @@ public class GUIKlasse extends JScrollPane
 			{
 				listener();
 			}
+		});
+	}
+
+	public void richtigeLehrer(int i)
+	{
+		Lehrer[] lehrer = new Lehrer[lehrerliste.length];
+		for (int f = 0; f < lehrerliste.length; f++)
+		{
+			lehrer[f] = db.lehrerAuslesen(i);
+		}
+		int intStufe = Integer.parseInt(eingabe[2].getText());
+		String[] lehrerliste = db.gebeLehrerListe();
+		String[] fachLehrerListe = new String[lehrerliste.length];
+		int fachLehrer = 0;
+		for (int j = 0; j < lehrerliste.length; j++)
+		{
+			if ((intStufe > lehrer[j].vonFaecher[i])
+					& (intStufe < lehrer[j].vonFaecher[i]))
+			{
+				fachLehrerListe[fachLehrer] = lehrerliste[j];
+				fachLehrer++;
+			}
+		}
+		String[] fachLehrerListeGekuerzt = new String[fachLehrer];
+		lehrer_wahl[i] = new JComboBox(fachLehrerListe);
+		if (zaehler[i] == 0)
+		{
+			p_stufe[i].add(lehrer_wahl[i]);
+		}
+		final int i2 = i;
+		lehrer_wahl[i].addItemListener(new ItemListener()
+		{
+
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				richtigeLehrer(i2);
+				validate();
+			}
+
 		});
 	}
 
