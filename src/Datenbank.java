@@ -46,7 +46,7 @@ public class Datenbank
 	public void aktualisiereKlassenListe()
 	{
 		String[] stufen = leseStufenListe();
-		//int maxstufen = 0;
+		// int maxstufen = 0;
 		int maxklassen = 0;
 		for (int i = 0; i < stufen.length; i++)
 		{
@@ -54,7 +54,7 @@ public class Datenbank
 			try
 			{
 				int index = Integer.parseInt(stufen[i]);
-				//maxstufen++;
+				// maxstufen++;
 				int breite = leseKlassenListe(index).length;
 				if (breite > maxklassen)
 				{
@@ -66,7 +66,7 @@ public class Datenbank
 			}
 		}
 
-		klassenListe = new String[Integer.parseInt(stufen[stufen.length-1])+1][maxklassen];
+		klassenListe = new String[Integer.parseInt(stufen[stufen.length - 1]) + 1][maxklassen];
 		for (int i = 0; i < stufen.length; i++)
 		{
 
@@ -115,20 +115,18 @@ public class Datenbank
 	{
 		try
 		{
-			String []verzeichnis=lehrerVerzeichnis.list();
+			String[] verzeichnis = lehrerVerzeichnis.list();
 			String[] Liste = new String[verzeichnis.length];
 			for (int i = 0; i < verzeichnis.length; i++)
 			{
 				String[] splittArray = verzeichnis[i].split("\\.lehrer");
-				//String temp = "";
+				// String temp = "";
 				/**
-				for (int j = 0; j < splittArray.length; j++)
-				{
-					temp = temp + splittArray[j];
-				}
-				*/
+				 * for (int j = 0; j < splittArray.length; j++) { temp = temp +
+				 * splittArray[j]; }
+				 */
 				Liste[i] = splittArray[0];
-				//temp = "";
+				// temp = "";
 			}
 			return Liste;
 		} catch (Exception e)
@@ -142,7 +140,7 @@ public class Datenbank
 	{
 		try
 		{
-			String[] Liste =stufenVerzeichnis.list();
+			String[] Liste = stufenVerzeichnis.list();
 			return Liste;
 		} catch (Exception e)
 		{
@@ -388,7 +386,7 @@ public class Datenbank
 		}
 		return f;
 	}
-	
+
 	public Lehrer lehrerAuslesen(String name)
 	{
 		String tempminh = null;
@@ -441,15 +439,15 @@ public class Datenbank
 			bisFaecher[i] = 0;
 		}
 
-		if(tempfaecher.length>0)
+		if (tempfaecher.length > 1)
 		{
-		for (int i = 0; i < tempfaecher.length; i = i + 2)
-		{
-			int index = fachToInt(tempfaecher[i]);
-			String[] stufenSplit=tempfaecher[i + 1].split("\\-");
-			vonFaecher[index] = Integer.parseInt(stufenSplit[0]);
-			bisFaecher[index] = Integer.parseInt(stufenSplit[1]);
-		}
+			for (int i = 0; i < tempfaecher.length; i = i + 2)
+			{
+				int index = fachToInt(tempfaecher[i]);
+				String[] stufenSplit = tempfaecher[i + 1].split("\\-");
+				vonFaecher[index] = Integer.parseInt(stufenSplit[0]);
+				bisFaecher[index] = Integer.parseInt(stufenSplit[1]);
+			}
 		}
 
 		return new Lehrer(name, Integer.parseInt(tempminh),
@@ -500,31 +498,32 @@ public class Datenbank
 
 	public void loescheLehrer(String name)
 	{
-		File lehrer=new File(pfad+ sep +"Lehrer" +sep + name + ".lehrer");
-		if(lehrer.exists())
+		File lehrer = new File(pfad + sep + "Lehrer" + sep + name + ".lehrer");
+		if (lehrer.exists())
 		{
 			lehrer.delete();
 		}
 	}
-	
+
 	public void loescheFach(String name)
 	{
-		File fach=new File(pfad+ sep +"Fach" +sep + name + ".fach");
-		if(fach.exists())
+		File fach = new File(pfad + sep + "Fach" + sep + name + ".fach");
+		if (fach.exists())
 		{
 			fach.delete();
 		}
 	}
-	
+
 	public void loescheKlasse(int stufe, String name)
 	{
-		File klasse=new File(pfad+ sep +"Stufe" +sep + stufe + sep + name + ".klasse");
-		if(klasse.exists())
+		File klasse = new File(pfad + sep + "Stufe" + sep + stufe + sep + name
+				+ ".klasse");
+		if (klasse.exists())
 		{
 			klasse.delete();
 		}
 	}
-	
+
 	public void print()
 	{
 		for (int i = 0; i < gebeLehrerListe().length; i++)
@@ -539,10 +538,10 @@ public class Datenbank
 
 	public static void main(String args[])
 	{
-//		System.out.println(System.getProperty("user.dir"));
+		// System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
-//		testDatenbank.print();
-		String[][] kl= testDatenbank.gebeKlassenListe();
+		// testDatenbank.print();
+		String[][] kl = testDatenbank.gebeKlassenListe();
 		System.out.println(kl);
 	}
 }
