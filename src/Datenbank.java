@@ -199,7 +199,7 @@ public class Datenbank
 	{
 		if (klassenListe == null)
 		{
-			aktualisiereLehrerListe();
+			aktualisiereKlassenListe();
 		}
 		return klassenListe.clone();
 	}
@@ -539,7 +539,7 @@ public class Datenbank
 		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
 		testDatenbank.print();
-		Lehrer testLehrer = testDatenbank.lehrerAuslesen("Scheibe");
-		System.out.println(testLehrer);
+		String[][] kl= testDatenbank.gebeKlassenListe();
+		System.out.println(kl);
 	}
 }
