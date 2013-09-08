@@ -6,24 +6,24 @@ import java.awt.event.*;
 public class GUIKlasse extends JScrollPane
 {
 	GUI gUI;
-	Datenbank db = new Datenbank();
+	Datenbank db;
 	JPanel panel = new JPanel();
-	int lehrer_anzahl = (db.gebeLehrerListe().length);
-	String[][] klassenliste = db.gebeKlassenListe();
-	JScrollPane[] lehrer_liste = new JScrollPane[klassenliste.length];
-	JButton[][] lehrer_auswahl = new JButton[klassenliste.length][klassenliste[0].length];
+	int lehrer_anzahl;
+	String[][] klassenliste;
+	JScrollPane[] lehrer_liste;
+	JButton[][] lehrer_auswahl;
 	JTabbedPane tab = new JTabbedPane();
-	JPanel lehrer[] = new JPanel[klassenliste.length];
-	int fach_anzahl = (db.gebeFaecherListe().length);
+	JPanel lehrer[];
+	int fach_anzahl;
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
 	JTextField eingabe[] = new JTextField[3];
-	JCheckBox[] auswahl = new JCheckBox[fach_anzahl];
-	JPanel[] p_stufe = new JPanel[fach_anzahl];
-	JTextField[] stufe = new JTextField[fach_anzahl];
-	JComboBox[] lehrer_wahl = new JComboBox[fach_anzahl];
-	JComboBox klassenlehrer = new JComboBox(db.gebeLehrerListe());
-	String[] lehrerliste = new String[lehrer_anzahl + 1];
+	JCheckBox[] auswahl;
+	JPanel[] p_stufe;
+	JTextField[] stufe;
+	JComboBox[] lehrer_wahl;
+	JComboBox klassenlehrer;
+	String[] lehrerliste;
 	JLabel ausgabe = new JLabel();
 	JButton start;
 	JPanel center = new JPanel();
@@ -36,9 +36,22 @@ public class GUIKlasse extends JScrollPane
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUIKlasse(Strings sT, GUI gUI)
+	public GUIKlasse(Strings sT, GUI gUI, Datenbank db)
 	{
+		this.db=db;
 		this.gUI = gUI;
+		lehrer_anzahl = (db.gebeLehrerListe().length);
+		klassenliste = db.gebeKlassenListe();
+		lehrer_liste = new JScrollPane[klassenliste.length];
+		lehrer_auswahl = new JButton[klassenliste.length][klassenliste[0].length];
+		lehrer = new JPanel[klassenliste.length];
+		fach_anzahl = (db.gebeFaecherListe().length);
+		 auswahl = new JCheckBox[fach_anzahl];
+		 p_stufe = new JPanel[fach_anzahl];
+		 stufe = new JTextField[fach_anzahl];
+		 lehrer_wahl = new JComboBox[fach_anzahl];
+		 klassenlehrer = new JComboBox(db.gebeLehrerListe());
+		 lehrerliste = new String[lehrer_anzahl + 1];
 		setViewportView(panel);
 		sT = new Strings();
 		for (int i = 0; i < lehrer_anzahl; i++)

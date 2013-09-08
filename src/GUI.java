@@ -42,7 +42,7 @@ public class GUI extends JFrame
 		pu.setPreferredSize(new Dimension(50, 50));
 		pc.addTab(sT.fach, new GUIFach(sT, this));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
-		pc.addTab(sT.klasse, new GUIKlasse(sT, this));
+		pc.addTab(sT.klasse, new GUIKlasse(sT, this, db));
 		unten();
 		add("South", (pu));
 		add("Center", (pc));
@@ -82,7 +82,7 @@ public class GUI extends JFrame
 		pc.removeAll();
 		pc.addTab(sT.fach, new GUIFach(sT, this));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
-		pc.addTab(sT.klasse, new GUIKlasse(sT, this));
+		pc.addTab(sT.klasse, new GUIKlasse(sT, this, db));
 	}
 
 	public static void main(String args[])
