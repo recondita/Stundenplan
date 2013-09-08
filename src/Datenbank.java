@@ -84,7 +84,7 @@ public class Datenbank
 			}
 		}
 		
-		for (int i=0; i<klassenListe.length; i++)
+		for (int i=1; i<klassenListe.length; i++)
 		{
 			
 			if(!stufeExists(i))
@@ -507,7 +507,7 @@ public class Datenbank
 
 	public boolean stufeExists(int i)
 	{
-		return new File(pfad + sep + "Stufen" + i).exists();
+		return new File(pfad + sep + "Stufen" + sep + i).exists();
 	}
 	
 	public void loescheLehrer(String name)
