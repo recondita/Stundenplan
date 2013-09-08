@@ -34,6 +34,8 @@ public class GUIKlasse extends JScrollPane
 	JPanel oben = new JPanel();
 	JButton[] neu;
 	int[] zaehler;
+	JPanel neuestufe = new JPanel();
+	JTextField stufeneu;
 
 	/**
 	 * @author: Felix Schütze
@@ -73,6 +75,38 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
+		tab.addTab("+", neuestufe);
+		neuestufe.setLayout(new BorderLayout());
+		stufeneu = new JTextField(sT.neuestufe);
+		stufeneu.setPreferredSize(new Dimension(25, 25));
+		stufeneu.addFocusListener(new java.awt.event.FocusAdapter()
+		{
+			public void focusGained(java.awt.event.FocusEvent evt)
+			{
+				stufeneu.setText("");
+			}
+		});
+		stufeneu.addKeyListener(new KeyListener()
+		{
+			public void keyTyped(KeyEvent e)
+			{
+			}
+
+			public void keyReleased(KeyEvent e)
+			{
+			}
+
+			public void keyPressed(KeyEvent e)
+			{
+				int key = e.getKeyCode();
+
+				if (key == KeyEvent.VK_ENTER)
+				{
+					db.neueStufe(stufeneu.getText());
+				}
+			}
+		});
+		neuestufe.add("North", (stufeneu));
 
 		for (int i = 1; i < klassenliste.length; i++)
 		{
@@ -80,7 +114,7 @@ public class GUIKlasse extends JScrollPane
 			{
 				lehrer_liste[i] = new JScrollPane();
 				lehrer[i] = new JPanel();
-				lehrer[i].setLayout(new GridLayout(lehrer_anzahl+2, 1));
+				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
 				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
 				lehrer_liste[i].setViewportView(lehrer[i]);
 				tab.addTab(sT.stufe_anzeigen + " " + i, lehrer_liste[i]);
@@ -116,6 +150,12 @@ public class GUIKlasse extends JScrollPane
 				}
 
 			}
+		}
+		try
+		{
+			tab.setSelectedIndex(1);
+		} catch (Exception e)
+		{
 		}
 		leer.add("South", (tab));
 		center.setLayout(new GridLayout(1, 2));
@@ -211,10 +251,10 @@ public class GUIKlasse extends JScrollPane
 				fachLehrer++;
 			}
 		}
-		String[] fachLehrerListeGekuerzt = new String[fachLehrer+1];
-		for(int k=1; k<fachLehrerListeGekuerzt.length; k++)
+		String[] fachLehrerListeGekuerzt = new String[fachLehrer + 1];
+		for (int k = 1; k < fachLehrerListeGekuerzt.length; k++)
 		{
-			fachLehrerListeGekuerzt[k]=fachLehrerListe[k-1];
+			fachLehrerListeGekuerzt[k] = fachLehrerListe[k - 1];
 		}
 		lehrer_wahl[i] = new JComboBox(fachLehrerListeGekuerzt);
 		if (zaehler[i] == 0)
@@ -271,8 +311,7 @@ public class GUIKlasse extends JScrollPane
 				{
 					auswahl[i].setSelected(false);
 				}
-				gUI.aktualisieren();
-				gUI.pc.setSelectedIndex(2);
+				gUI.aktualisieren(2);
 
 			} else
 			{

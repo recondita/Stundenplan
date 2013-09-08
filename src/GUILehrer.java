@@ -185,8 +185,7 @@ public class GUILehrer extends JScrollPane
 	public void loesche()
 	{
 		db.loescheLehrer(eingabe[0].getText());
-		gUI.aktualisieren();
-		gUI.pc.setSelectedIndex(1);
+		gUI.aktualisieren(1);
 	}
 
 	public void listener()
@@ -240,9 +239,7 @@ public class GUILehrer extends JScrollPane
 						stufe[i][0].setText(sT.vonStufe);
 						stufe[i][1].setText(sT.bisStufe);
 					}
-					gUI.aktualisieren();
-					gUI.pc.setSelectedIndex(1);
-
+					gUI.aktualisieren(1);
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);

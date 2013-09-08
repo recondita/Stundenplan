@@ -32,6 +32,7 @@ public class Strings
 	String loeschen;
 	String stufe_anzeigen;
 	String neueklasse;
+	String neuestufe;
 
 	public Strings()
 	{
@@ -79,6 +80,7 @@ public class Strings
 		loeschen="Löschen";
 		stufe_anzeigen="Stufe";
 		neueklasse="Neue Klasse";
+		neuestufe="Neue Stufe";
 	}
 
 	public void englisch()
@@ -111,5 +113,6 @@ public class Strings
 		loeschen="Delete";
 		stufe_anzeigen="Grade";
 		neueklasse="New Class";
+		neuestufe="New Grade";
 	}
 }

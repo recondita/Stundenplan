@@ -72,7 +72,7 @@ public class GUI extends JFrame
 		validate();
 	}
 	
-	public void aktualisieren()
+	public void aktualisieren(int f)
 	{
 		db.aktualisiereKlassenListe();
 		db.aktualisiereFaecherListe();
@@ -81,6 +81,7 @@ public class GUI extends JFrame
 		pc.addTab(sT.fach, new GUIFach(sT, this, db));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this, db));
 		pc.addTab(sT.klasse, new GUIKlasse(sT, this, db));
+		pc.setSelectedIndex(f);
 	}
 
 	public static void main(String args[])

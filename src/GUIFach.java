@@ -46,7 +46,7 @@ public class GUIFach extends JPanel
 		{
 			db.machFach(eingabe.getText());
 			eingabe.setText("");
-			gUI.aktualisieren();
+			gUI.aktualisieren(0);
 		}
 	}
 }

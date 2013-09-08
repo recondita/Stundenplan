@@ -399,6 +399,11 @@ public class Datenbank
 		}
 		return f;
 	}
+	
+	public void neueStufe(String i)
+	{
+		
+	}
 
 	public Lehrer lehrerAuslesen(String name)
 	{
