@@ -46,7 +46,7 @@ public class Datenbank
 	public void aktualisiereKlassenListe()
 	{
 		String[] stufen = leseStufenListe();
-		int maxstufen = 0;
+		//int maxstufen = 0;
 		int maxklassen = 0;
 		for (int i = 0; i < stufen.length; i++)
 		{
@@ -54,7 +54,7 @@ public class Datenbank
 			try
 			{
 				int index = Integer.parseInt(stufen[i]);
-				maxstufen++;
+				//maxstufen++;
 				int breite = leseKlassenListe(index).length;
 				if (breite > maxklassen)
 				{
