@@ -27,7 +27,7 @@ public class GUI extends JFrame
 
 	public GUI()
 	{
-		UIManager.put("TabbedPane.contentBorderInsets", new InsetsUIResource(10,10,5,5)); 
+		UIManager.put("TabbedPane.contentBorderInsets", new InsetsUIResource(0,0,0,0)); 
 		//UIManager.put("TabbedPane.selected", Color.blue);
 		pc.updateUI();
 		setLayout(new BorderLayout());
