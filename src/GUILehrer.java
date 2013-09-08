@@ -36,7 +36,7 @@ public class GUILehrer extends JScrollPane
 	{
 		this.gUI = gUI;
 		setViewportView(panel);
-		sT = new Strings();
+		this.sT=sT;
 		start = new JButton(sT.speichern);
 		panel.setLayout(new BorderLayout());
 		oben.setLayout(new GridLayout(3, 2));
@@ -47,12 +47,12 @@ public class GUILehrer extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
-		lehrer.setLayout(new GridLayout(lehrer_anzahl, 1));
+		lehrer.setLayout(new GridLayout(lehrer_anzahl+1, 1));
 		lehrer_liste.setPreferredSize(new Dimension(250, 250));
 		lehrer_liste.setViewportView(lehrer);
 		JButton neuerLehrer = new JButton();
 		neuerLehrer.setText(sT.lehrer);
-		neuerLehrer.setBackground(Color.white);
+		neuerLehrer.setBackground(new Color(0,154,205));
 		neuerLehrer.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -61,7 +61,7 @@ public class GUILehrer extends JScrollPane
 				aktuellerName = "";
 				eingabe[1].setText("");
 				eingabe[2].setText("");
-				for (int j = 0; j < auswahl.length; j++)
+				for (int j = 0; j < fach_anzahl; j++)
 				{
 					resetFach(j);
 				}
@@ -221,8 +221,8 @@ public class GUILehrer extends JScrollPane
 
 	public void resetFach(int j)
 	{
-		stufe[j][0].setText(sT.bisStufe);
-		stufe[j][1].setText(sT.vonStufe);
+		stufe[j][0].setText(sT.vonStufe);
+		stufe[j][1].setText(sT.bisStufe);
 		auswahl[j].setSelected(false);
 	}
 
