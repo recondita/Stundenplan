@@ -56,8 +56,6 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
-		try
-		{
 			for (int i = 0; i < klassenliste.length; i++)
 			{
 				tab.addTab(""+klassenliste[i][0], lehrer_liste[i]);
@@ -84,10 +82,6 @@ public class GUIKlasse extends JScrollPane
 					
 				}
 			}
-		} catch (Exception e)
-		{
-			System.out.println("Fehler, Jan ist Schuld"+e);
-		}
 		leer.add("South", (tab));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
