@@ -120,7 +120,7 @@ public class Datenbank
 			for (int i = 0; i < verzeichnis.length; i++)
 			{
 				String[] splittArray = verzeichnis[i].split("\\.lehrer");
-				String temp = "";
+				//String temp = "";
 				/**
 				for (int j = 0; j < splittArray.length; j++)
 				{
@@ -142,19 +142,7 @@ public class Datenbank
 	{
 		try
 		{
-			String[] Liste = new String[stufenVerzeichnis.list().length];
-			for (int i = 0; i < stufenVerzeichnis.list().length; i++)
-			{
-				String[] splittArray = stufenVerzeichnis.list()[i]
-						.split("\\.lehrer");
-				String temp = "";
-				for (int j = 0; j < splittArray.length; j++)
-				{
-					temp = temp + splittArray[j];
-				}
-				Liste[i] = temp;
-				temp = "";
-			}
+			String[] Liste =stufenVerzeichnis.list();
 			return Liste;
 		} catch (Exception e)
 		{
