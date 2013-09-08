@@ -96,7 +96,7 @@ public class Datenbank
 				klassenListe[i] = null;
 			}
 		}
-		lehrer = new Lehrer[lehrerVerzeichnis.list().length];
+		//lehrer = new Lehrer[lehrerVerzeichnis.list().length];
 	}
 
 	private String[] leseFaecherListe()
@@ -400,9 +400,16 @@ public class Datenbank
 		return f;
 	}
 
+	
 	public Lehrer lehrerAuslesen(String name)
 	{
-		int lehrerInt = lehrerToInt(name);
+		return lehrerAuslesen(lehrerToInt(name));
+	}
+	
+	public Lehrer lehrerAuslesen(int lehrerInt)
+	{
+		if(lehrer.length>0)
+		{
 		if (lehrer[lehrerInt] == null)
 		{
 			String tempminh = null;
@@ -411,7 +418,7 @@ public class Datenbank
 			try
 			{
 				FileReader fr = new FileReader(new File(pfad + sep + "Lehrer"
-						+ sep + name + ".lehrer"));
+						+ sep + gebeLehrerListe()[lehrerInt] + ".lehrer"));
 				BufferedReader br = new BufferedReader(fr);
 				String temp = br.readLine();
 				while (temp != null)
@@ -466,10 +473,15 @@ public class Datenbank
 				}
 			}
 
-			lehrer[lehrerInt] = new Lehrer(name, Integer.parseInt(tempminh),
+			lehrer[lehrerInt] = new Lehrer(gebeLehrerListe()[lehrerInt], Integer.parseInt(tempminh),
 					Integer.parseInt(tempmaxh), vonFaecher, bisFaecher);
 		}
 			return lehrer[lehrerInt];
+		}
+		else
+		{
+			return null;
+		}
 		
 	}
 

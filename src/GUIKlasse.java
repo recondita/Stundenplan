@@ -120,13 +120,31 @@ public class GUIKlasse extends JScrollPane
 		}
 		beschreibung[3] = new JLabel();
 		leer_oben.add(beschreibung[3]);
+		Lehrer[] lehrer=new Lehrer[lehrerliste.length];
+		for (int i=0; i<lehrerliste.length; i++)
+		{
+			lehrer[i]=db.lehrerAuslesen(i);
+		}
+		int intStufe=Integer.parseInt(eingabe[2].getText());
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			p_stufe[i] = new JPanel();
 			p_stufe[i].setLayout(new GridLayout(1, 2));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
 			stufe[i] = new JTextField(sT.stundenanzahl);
-			lehrer_wahl[i] = new JComboBox(lehrerliste);
+			String[] fachLehrerListe= new String [lehrerliste.length];
+			int fachLehrer=0;
+			for(int j=0; j<lehrerliste.length; j++)
+			{
+				if((intStufe>lehrer[j].vonFaecher[i])&(intStufe<lehrer[j].vonFaecher[i]))
+				{
+					fachLehrerListe[fachLehrer]=lehrerliste[j];
+					fachLehrer++;
+				}
+			}
+			String[] fachLehrerListeGekuerzt=new String[fachLehrer];
+			//falls die leeren indexe störn hier weitermachen
+			lehrer_wahl[i] = new JComboBox(fachLehrerListe);
 			p_stufe[i].add(stufe[i]);
 			p_stufe[i].add(lehrer_wahl[i]);
 			mitte.add(auswahl[i]);
