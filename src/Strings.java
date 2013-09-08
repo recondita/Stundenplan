@@ -30,7 +30,7 @@ public class Strings
 	String stundenanzahl;
 	String neuerlehrer;
 	String loeschen;
-	
+	String stufe_anzeigen;
 
 	public Strings()
 	{
@@ -76,6 +76,7 @@ public class Strings
 		stundenanzahl="Stunden";
 		neuerlehrer="Neuer Lehrer";
 		loeschen="Löschen";
+		stufe_anzeigen="Stufe";
 	}
 
 	public void englisch()
@@ -106,5 +107,6 @@ public class Strings
 		stundenanzahl="Hours";
 		neuerlehrer="New teacher";
 		loeschen="Delete";
+		stufe_anzeigen="Grade";
 	}
 }
