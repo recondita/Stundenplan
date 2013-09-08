@@ -43,9 +43,9 @@ public class GUI extends JFrame
 		laeuft.setHorizontalAlignment(JLabel.CENTER);
 		laeuft.setVerticalAlignment(JLabel.CENTER);
 		pu.setPreferredSize(new Dimension(50, 50));
-		pc.addTab(sT.fach, gUIFACH);
-		pc.addTab(sT.lehrer, gUILEHRER);
-		pc.addTab(sT.klasse, gUIKLASSE);
+		pc.addTab(sT.fach, new GUIFach(sT, this));
+		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
+		pc.addTab(sT.klasse, new GUIKlasse(sT, this));
 		pc.setBackgroundAt(0, new Color(0,154,205));
 		pc.setBackgroundAt(1, new Color(0,178,238));
 		pc.setBackgroundAt(2, new Color(0,191,255));
@@ -78,12 +78,18 @@ public class GUI extends JFrame
 		validate();
 	}
 	
-	public void aktualisieren(JComponent j)
+	public void aktualisieren()
 	{
 		db.aktualisiereKlassenListe();
 		db.aktualisiereFaecherListe();
 		db.aktualisiereLehrerListe();
-		j.repaint();
+		pc.remove(0);
+		pc.remove(1);
+		pc.remove(2);
+		pc.addTab(sT.fach, new GUIFach(sT, this));
+		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
+		pc.addTab(sT.klasse, new GUIKlasse(sT, this));
+		//pc.updateUI();
 	}
 
 	public static void main(String args[])
