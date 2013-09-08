@@ -126,7 +126,7 @@ public class GUIKlasse extends JScrollPane
 				{
 					public void actionPerformed(ActionEvent arg0)
 					{
-						eingabe[2].setText("" + i2);
+						neueKlasse(i2);
 					}
 				});
 				for (int j = 0; j < klassenliste[i].length; j++)
@@ -279,6 +279,13 @@ public class GUIKlasse extends JScrollPane
 			}
 
 		});
+	}
+	
+	public void neueKlasse(int i2)
+	{
+		//gUI.aktualisieren(2);
+		//tab.setSelectedIndex(tab.getSelectedIndex());
+		eingabe[2].setText("" + i2);
 	}
 
 	public void listener()
