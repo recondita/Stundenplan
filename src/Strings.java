@@ -31,6 +31,7 @@ public class Strings
 	String neuerlehrer;
 	String loeschen;
 	String stufe_anzeigen;
+	String neueklasse;
 
 	public Strings()
 	{
@@ -53,7 +54,7 @@ public class Strings
 		name = "Recondita Stundenplan";
 		fach = "Fach erstellen";
 		lehrer = "Lehrer verwalten";
-		klasse = "Klasse erstellen";
+		klasse = "Klassen verwalten";
 		start = "Start";
 		sprachen = "Sprache";
 		laeuft = "Stundenplan wird erstellt...";
@@ -77,6 +78,7 @@ public class Strings
 		neuerlehrer="Neuer Lehrer";
 		loeschen="Löschen";
 		stufe_anzeigen="Stufe";
+		neueklasse="Neue Klasse";
 	}
 
 	public void englisch()
@@ -84,7 +86,7 @@ public class Strings
 		name = "Recondita Timetable";
 		fach = "Create Subject";
 		lehrer = "Manage Teacher";
-		klasse = "Create Class";
+		klasse = "Manage Class";
 		start = "Start";
 		sprachen = "Language";
 		laeuft = "Timetable is going to be created...";
@@ -108,5 +110,6 @@ public class Strings
 		neuerlehrer="New teacher";
 		loeschen="Delete";
 		stufe_anzeigen="Grade";
+		neueklasse="New Class";
 	}
 }

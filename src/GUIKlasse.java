@@ -32,6 +32,7 @@ public class GUIKlasse extends JScrollPane
 	JPanel leer = new JPanel();
 	JPanel leer_oben = new JPanel();
 	JPanel oben = new JPanel();
+	JButton[] neu;
 
 	/**
 	 * @author: Felix Schütze
@@ -52,6 +53,7 @@ public class GUIKlasse extends JScrollPane
 		lehrer_wahl = new JComboBox[fach_anzahl];
 		klassenlehrer = new JComboBox(db.gebeLehrerListe());
 		lehrerliste = new String[lehrer_anzahl + 1];
+		neu=new JButton[klassenliste.length];
 		setViewportView(panel);
 		sT = new Strings();
 		for (int i = 0; i < lehrer_anzahl; i++)
@@ -69,6 +71,7 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
+		
 		for (int i = 1; i < klassenliste.length; i++)
 		{
 			if (klassenliste[i] != null)
@@ -83,7 +86,7 @@ public class GUIKlasse extends JScrollPane
 
 				for (int j = 0; j < klassenliste[i].length; j++)
 				{
-					if (klassenliste[i][j]!=null)
+					if (klassenliste[i][j] != null)
 					{
 						lehrer_auswahl[i][j] = new JButton();
 						lehrer_auswahl[i][j].setText(klassenliste[i][j]);
@@ -96,8 +99,17 @@ public class GUIKlasse extends JScrollPane
 
 									}
 								});
+						neu[i]=new JButton(sT.neueklasse);
+						lehrer[i].add(neu[i]);
 						lehrer[i].add(lehrer_auswahl[i][j]);
-
+						neu[i].setBackground(new Color(0, 154, 205));
+						neu[i].addActionListener(new ActionListener()
+						{
+							public void actionPerformed(ActionEvent arg0)
+							{
+								eingabe[2].setText("");
+							}
+						});
 					}
 				}
 			}
@@ -123,32 +135,34 @@ public class GUIKlasse extends JScrollPane
 				oben.add(klassenlehrer);
 			}
 		}
+		eingabe[2].setText("5");
 		beschreibung[3] = new JLabel();
 		leer_oben.add(beschreibung[3]);
-		Lehrer[] lehrer=new Lehrer[lehrerliste.length];
-		for (int i=0; i<lehrerliste.length; i++)
+		Lehrer[] lehrer = new Lehrer[lehrerliste.length];
+		for (int i = 0; i < lehrerliste.length; i++)
 		{
-			lehrer[i]=db.lehrerAuslesen(i);
+			lehrer[i] = db.lehrerAuslesen(i);
 		}
-		int intStufe=Integer.parseInt(eingabe[2].getText());
+		int intStufe = Integer.parseInt(eingabe[2].getText());
 		for (int i = 0; i < fach_anzahl; i++)
 		{
 			p_stufe[i] = new JPanel();
 			p_stufe[i].setLayout(new GridLayout(1, 2));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
 			stufe[i] = new JTextField(sT.stundenanzahl);
-			String[] fachLehrerListe= new String [lehrerliste.length];
-			int fachLehrer=0;
-			for(int j=0; j<lehrerliste.length; j++)
+			String[] fachLehrerListe = new String[lehrerliste.length];
+			int fachLehrer = 0;
+			for (int j = 0; j < lehrerliste.length; j++)
 			{
-				if((intStufe>lehrer[j].vonFaecher[i])&(intStufe<lehrer[j].vonFaecher[i]))
+				if ((intStufe > lehrer[j].vonFaecher[i])
+						& (intStufe < lehrer[j].vonFaecher[i]))
 				{
-					fachLehrerListe[fachLehrer]=lehrerliste[j];
+					fachLehrerListe[fachLehrer] = lehrerliste[j];
 					fachLehrer++;
 				}
 			}
-			String[] fachLehrerListeGekuerzt=new String[fachLehrer];
-			//falls die leeren indexe störn hier weitermachen
+			String[] fachLehrerListeGekuerzt = new String[fachLehrer];
+			// falls die leeren indexe störn hier weitermachen
 			lehrer_wahl[i] = new JComboBox(fachLehrerListe);
 			p_stufe[i].add(stufe[i]);
 			p_stufe[i].add(lehrer_wahl[i]);
