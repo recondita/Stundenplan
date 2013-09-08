@@ -45,8 +45,12 @@ public class GUIFach extends JPanel
 		{
 			db.machFach(eingabe.getText());
 			eingabe.setText("");
-			gUI.dispose();
-			new GUI();
+			db.aktualisiereKlassenListe();
+			db.aktualisiereFaecherListe();
+			db.aktualisiereLehrerListe();
+			setVisible(false);
+			validate();
+			setVisible(true);
 		}
 	}
 }

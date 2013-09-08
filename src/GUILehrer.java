@@ -162,12 +162,17 @@ public class GUILehrer extends JScrollPane
 			}
 		});
 	}
-	
+
 	public void loesche()
 	{
 		db.loescheLehrer(eingabe[0].getText());
-		gUI.dispose();
-		new GUI();
+		db.aktualisiereKlassenListe();
+		db.aktualisiereFaecherListe();
+		db.aktualisiereLehrerListe();
+		panel.setVisible(false);
+		panel.validate();
+		validate();
+		panel.setVisible(true);
 	}
 
 	public void listener()
@@ -216,8 +221,13 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-					gUI.dispose();
-					new GUI();
+					db.aktualisiereKlassenListe();
+					db.aktualisiereFaecherListe();
+					db.aktualisiereLehrerListe();
+					panel.setVisible(false);
+					panel.validate();
+					validate();
+					panel.setVisible(true);
 
 				} else
 				{
