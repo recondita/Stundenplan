@@ -69,7 +69,7 @@ public class GUIKlasse extends JScrollPane
 				{
 					
 					lehrer_auswahl[i][j] = new JButton();
-					lehrer_auswahl[i][j].setText(db.gebeLehrerListe()[i]);
+					lehrer_auswahl[i][j].setText(klassenliste[i][j]);
 					lehrer_auswahl[i][j].setBackground(Color.white);
 					lehrer_auswahl[i][j].addActionListener(new ActionListener()
 					{
