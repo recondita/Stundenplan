@@ -19,7 +19,7 @@ public class GUILehrer extends JScrollPane
 	JCheckBox[] auswahl = new JCheckBox[fach_anzahl];
 	JPanel[] p_stufe = new JPanel[fach_anzahl];
 	JTextField[][] stufe = new JTextField[fach_anzahl][2];
-	JLabel ausgabe = new JLabel();
+	JButton ausgabe;
 	JButton start;
 	JPanel center = new JPanel();
 	JPanel unten = new JPanel();
@@ -36,7 +36,7 @@ public class GUILehrer extends JScrollPane
 	{
 		this.gUI = gUI;
 		setViewportView(panel);
-		this.sT=sT;
+		this.sT = sT;
 		start = new JButton(sT.speichern);
 		panel.setLayout(new BorderLayout());
 		oben.setLayout(new GridLayout(3, 2));
@@ -47,12 +47,11 @@ public class GUILehrer extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
-		lehrer.setLayout(new GridLayout(lehrer_anzahl+1, 1));
+		lehrer.setLayout(new GridLayout(lehrer_anzahl + 1, 1));
 		lehrer_liste.setPreferredSize(new Dimension(250, 250));
 		lehrer_liste.setViewportView(lehrer);
-		JButton neuerLehrer = new JButton();
-		neuerLehrer.setText(sT.lehrer);
-		neuerLehrer.setBackground(new Color(0,154,205));
+		JButton neuerLehrer = new JButton(sT.neuerlehrer);
+		neuerLehrer.setBackground(new Color(0, 154, 205));
 		neuerLehrer.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -145,7 +144,15 @@ public class GUILehrer extends JScrollPane
 		beschreibung[1].setText(sT.minstunden);
 		beschreibung[2].setText(sT.maxstunden);
 		beschreibung[3].setText(sT.faecher);
+		ausgabe = new JButton(sT.loeschen);
 		unten.add(ausgabe);
+		ausgabe.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				loesche();
+			}
+		});
 		unten.add(start);
 		start.addActionListener(new ActionListener()
 		{
@@ -154,6 +161,13 @@ public class GUILehrer extends JScrollPane
 				listener();
 			}
 		});
+	}
+	
+	public void loesche()
+	{
+		db.loescheLehrer(eingabe[0].getText());
+		gUI.dispose();
+		new GUI();
 	}
 
 	public void listener()
