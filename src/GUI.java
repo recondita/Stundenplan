@@ -46,9 +46,6 @@ public class GUI extends JFrame
 		pc.addTab(sT.fach, new GUIFach(sT, this));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
 		pc.addTab(sT.klasse, new GUIKlasse(sT, this));
-		pc.setBackgroundAt(0, new Color(0,154,205));
-		pc.setBackgroundAt(1, new Color(0,178,238));
-		pc.setBackgroundAt(2, new Color(0,191,255));
 		unten();
 		add("South", (pu));
 		add("Center", (pc));
@@ -83,13 +80,10 @@ public class GUI extends JFrame
 		db.aktualisiereKlassenListe();
 		db.aktualisiereFaecherListe();
 		db.aktualisiereLehrerListe();
-		pc.remove(0);
-		pc.remove(1);
-		pc.remove(2);
+		pc.removeAll();
 		pc.addTab(sT.fach, new GUIFach(sT, this));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
 		pc.addTab(sT.klasse, new GUIKlasse(sT, this));
-		//pc.updateUI();
 	}
 
 	public static void main(String args[])
