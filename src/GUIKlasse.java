@@ -178,7 +178,7 @@ public class GUIKlasse extends JScrollPane
 				oben.add(klassenlehrer);
 			}
 		}
-		eingabe[2].setText("5");
+		eingabe[2].setEditable(false);
 		beschreibung[3] = new JLabel();
 		leer_oben.add(beschreibung[3]);
 		for (int i = 0; i < fach_anzahl; i++)
@@ -234,6 +234,7 @@ public class GUIKlasse extends JScrollPane
 	public void neueStufe()
 	{
 		db.neueStufe(stufeneu.getText());
+		gUI.aktualisieren(2);
 	}
 
 	public void richtigeLehrer(int i)
