@@ -80,8 +80,7 @@ public class GUIKlasse extends JScrollPane
 			{
 				lehrer_liste[i] = new JScrollPane();
 				lehrer[i] = new JPanel();
-				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
-				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
+				lehrer[i].setLayout(new GridLayout(lehrer_anzahl+1, 1));
 				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
 				lehrer_liste[i].setViewportView(lehrer[i]);
 				tab.addTab(sT.stufe_anzeigen + " " + i, lehrer_liste[i]);
