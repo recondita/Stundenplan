@@ -55,7 +55,7 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
 		lehrer.setLayout(new GridLayout(lehrer_anzahl, 1));
-		lehrer_liste.setPreferredSize(new Dimension(250, 250));
+		lehrer_liste.setPreferredSize(new Dimension(150, 250));
 		lehrer_liste.setViewportView(lehrer);
 		for (int i = 0; i < lehrer_anzahl; i++)
 		{
@@ -158,8 +158,8 @@ public class GUIKlasse extends JScrollPane
 				{
 					auswahl[i].setSelected(false);
 				}
-				gUI.dispose();
-				new GUI();
+				gUI.aktualisieren();
+				gUI.pc.setSelectedIndex(2);
 
 			} else
 			{
