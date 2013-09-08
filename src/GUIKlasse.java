@@ -38,7 +38,7 @@ public class GUIKlasse extends JScrollPane
 	 */
 	public GUIKlasse(Strings sT, GUI gUI, Datenbank db)
 	{
-		this.db=db;
+		this.db = db;
 		this.gUI = gUI;
 		lehrer_anzahl = (db.gebeLehrerListe().length);
 		klassenliste = db.gebeKlassenListe();
@@ -46,12 +46,12 @@ public class GUIKlasse extends JScrollPane
 		lehrer_auswahl = new JButton[klassenliste.length][klassenliste[0].length];
 		lehrer = new JPanel[klassenliste.length];
 		fach_anzahl = (db.gebeFaecherListe().length);
-		 auswahl = new JCheckBox[fach_anzahl];
-		 p_stufe = new JPanel[fach_anzahl];
-		 stufe = new JTextField[fach_anzahl];
-		 lehrer_wahl = new JComboBox[fach_anzahl];
-		 klassenlehrer = new JComboBox(db.gebeLehrerListe());
-		 lehrerliste = new String[lehrer_anzahl + 1];
+		auswahl = new JCheckBox[fach_anzahl];
+		p_stufe = new JPanel[fach_anzahl];
+		stufe = new JTextField[fach_anzahl];
+		lehrer_wahl = new JComboBox[fach_anzahl];
+		klassenlehrer = new JComboBox(db.gebeLehrerListe());
+		lehrerliste = new String[lehrer_anzahl + 1];
 		setViewportView(panel);
 		sT = new Strings();
 		for (int i = 0; i < lehrer_anzahl; i++)
@@ -79,21 +79,26 @@ public class GUIKlasse extends JScrollPane
 				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
 				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
 				lehrer_liste[i].setViewportView(lehrer[i]);
+				tab.addTab(sT.stufe_anzeigen + i, lehrer_liste[i]);
+
 				for (int j = 0; j < klassenliste[i].length; j++)
 				{
-
-					lehrer_auswahl[i][j] = new JButton();
-					lehrer_auswahl[i][j].setText(klassenliste[i][j]);
-					lehrer_auswahl[i][j].setBackground(Color.white);
-					lehrer_auswahl[i][j].addActionListener(new ActionListener()
+					if (klassenliste[i][j]!=null)
 					{
-						public void actionPerformed(ActionEvent arg0)
-						{
+						lehrer_auswahl[i][j] = new JButton();
+						lehrer_auswahl[i][j].setText(klassenliste[i][j]);
+						lehrer_auswahl[i][j].setBackground(Color.white);
+						lehrer_auswahl[i][j]
+								.addActionListener(new ActionListener()
+								{
+									public void actionPerformed(ActionEvent arg0)
+									{
 
-						}
-					});
-					lehrer[i].add(lehrer_auswahl[i][j]);
-					tab.addTab(sT.stufe_anzeigen + i, lehrer_liste[i]);
+									}
+								});
+						lehrer[i].add(lehrer_auswahl[i][j]);
+
+					}
 				}
 			}
 		}
