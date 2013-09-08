@@ -8,10 +8,10 @@ public class GUILehrer extends JScrollPane
 	GUI gUI;
 	Datenbank db = new Datenbank();
 	JPanel panel = new JPanel();
-	JScrollPane lehrer_liste=new JScrollPane();
+	JScrollPane lehrer_liste = new JScrollPane();
 	int lehrer_anzahl = (db.gebeLehrerListe().length);
-	JButton[] lehrer_auswahl=new JButton[lehrer_anzahl];
-	JPanel lehrer=new JPanel();
+	JButton[] lehrer_auswahl = new JButton[lehrer_anzahl];
+	JPanel lehrer = new JPanel();
 	int fach_anzahl = (db.gebeFaecherListe().length);
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
@@ -33,7 +33,7 @@ public class GUILehrer extends JScrollPane
 	 */
 	public GUILehrer(Strings sT, GUI gUI)
 	{
-		this.gUI=gUI;
+		this.gUI = gUI;
 		setViewportView(panel);
 		sT = new Strings();
 		start = new JButton(sT.speichern);
@@ -43,37 +43,48 @@ public class GUILehrer extends JScrollPane
 		unten.setPreferredSize(new Dimension(25, 25));
 		mitte.setLayout(new GridLayout(fach_anzahl, 2));
 		leer.setLayout(new BorderLayout());
-		leer_oben.setPreferredSize(new Dimension(25,25));
-		leer_oben.setLayout(new GridLayout(1,1));
-		leer.add("North",(leer_oben));
-		lehrer.setLayout(new GridLayout(lehrer_anzahl,1));
-		lehrer_liste.setPreferredSize(new Dimension(250,250));
+		leer_oben.setPreferredSize(new Dimension(25, 25));
+		leer_oben.setLayout(new GridLayout(1, 1));
+		leer.add("North", (leer_oben));
+		lehrer.setLayout(new GridLayout(lehrer_anzahl, 1));
+		lehrer_liste.setPreferredSize(new Dimension(250, 250));
 		lehrer_liste.setViewportView(lehrer);
-		for(int i=0;i<lehrer_anzahl;i++)
+		for (int i = 0; i < lehrer_anzahl; i++)
 		{
-			lehrer_auswahl[i]=new JButton();
+			lehrer_auswahl[i] = new JButton();
 			lehrer_auswahl[i].setText(db.gebeLehrerListe()[i]);
 			lehrer_auswahl[i].setBackground(Color.white);
 			lehrer_auswahl[i].addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent arg0)
 				{
-					Object Quelle=arg0.getSource();
-					for(int i=0; i<lehrer_auswahl.length; i++)
+					Object Quelle = arg0.getSource();
+					for (int i = 0; i < lehrer_auswahl.length; i++)
 					{
-						if(Quelle==lehrer_auswahl[i])
+						if (Quelle == lehrer_auswahl[i])
 						{
-							Lehrer lehrer=db.lehrerAuslesen(lehrer_auswahl[i].getText());
+							Lehrer lehrer = db.lehrerAuslesen(lehrer_auswahl[i]
+									.getText());
 							eingabe[0].setText(lehrer.name);
-							eingabe[1].setText(lehrer.minstunden+"");
-							eingabe[2].setText(lehrer.maxstunden+"");
+							eingabe[1].setText(lehrer.minstunden + "");
+							eingabe[2].setText(lehrer.maxstunden + "");
+							for (int j = 0; j < auswahl.length; j++)
+							{
+								if ((lehrer.vonFaecher[j] != 0)
+										& (lehrer.bisFaecher[j] != 0))
+								{
+									auswahl[j].setSelected(true);
+									stufe[j][0].setText(lehrer.vonFaecher[j]+"");
+									stufe[j][1].setText(lehrer.vonFaecher[j]+"");
+								}
+							}
 						}
 					}
 				}
 			});
 			lehrer.add(lehrer_auswahl[i]);
 		}
-		leer.add("South",(lehrer_liste));
+		leer.add("South", (lehrer_liste));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
 		center.add(mitte);
@@ -140,8 +151,10 @@ public class GUILehrer extends JScrollPane
 						if (auswahl[i].isSelected())
 						{
 							fach[f] = db.gebeFaecherListe()[i];
-							vonStufe[f]=Integer.parseInt(stufe[i][0].getText());
-							bisStufe[f]=Integer.parseInt(stufe[i][1].getText());
+							vonStufe[f] = Integer.parseInt(stufe[i][0]
+									.getText());
+							bisStufe[f] = Integer.parseInt(stufe[i][1]
+									.getText());
 							f++;
 						}
 					}
@@ -159,7 +172,7 @@ public class GUILehrer extends JScrollPane
 					}
 					gUI.dispose();
 					new GUI();
-					
+
 				} else
 				{
 					// ausgabe.setText(sT.allefelder);
