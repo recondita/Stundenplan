@@ -66,7 +66,7 @@ public class Datenbank
 			}
 		}
 
-		klassenListe = new String[Integer.parseInt(stufen[stufen.length-1])][maxklassen];
+		klassenListe = new String[Integer.parseInt(stufen[stufen.length-1])+1][maxklassen];
 		for (int i = 0; i < stufen.length; i++)
 		{
 
@@ -159,7 +159,7 @@ public class Datenbank
 			String[] Liste = new String[Verzeichnis.list().length];
 			for (int i = 0; i < Verzeichnis.list().length; i++)
 			{
-				String[] splittArray = Verzeichnis.list()[i].split("\\.fach");
+				String[] splittArray = Verzeichnis.list()[i].split("\\.klasse");
 				String temp = "";
 				for (int j = 0; j < splittArray.length; j++)
 				{
@@ -441,12 +441,15 @@ public class Datenbank
 			bisFaecher[i] = 0;
 		}
 
+		if(tempfaecher.length>0)
+		{
 		for (int i = 0; i < tempfaecher.length; i = i + 2)
 		{
 			int index = fachToInt(tempfaecher[i]);
 			String[] stufenSplit=tempfaecher[i + 1].split("\\-");
 			vonFaecher[index] = Integer.parseInt(stufenSplit[0]);
 			bisFaecher[index] = Integer.parseInt(stufenSplit[1]);
+		}
 		}
 
 		return new Lehrer(name, Integer.parseInt(tempminh),
@@ -461,7 +464,7 @@ public class Datenbank
 		try
 		{
 			FileReader fr = new FileReader(new File(pfad + sep + "Klassen"
-					+ sep + stufe + sep + name + ".lehrer"));
+					+ sep + stufe + sep + name + ".klasse"));
 			BufferedReader br = new BufferedReader(fr);
 			String temp = br.readLine();
 			while (temp != null)
@@ -536,9 +539,9 @@ public class Datenbank
 
 	public static void main(String args[])
 	{
-		System.out.println(System.getProperty("user.dir"));
+//		System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
-		testDatenbank.print();
+//		testDatenbank.print();
 		String[][] kl= testDatenbank.gebeKlassenListe();
 		System.out.println(kl);
 	}
