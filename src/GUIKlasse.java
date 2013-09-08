@@ -86,7 +86,7 @@ public class GUIKlasse extends JScrollPane
 			}
 		} catch (Exception e)
 		{
-			System.out.println("Fehler, Jan ist Schuld");
+			System.out.println("Fehler, Jan ist Schuld"+e);
 		}
 		leer.add("South", (tab));
 		center.setLayout(new GridLayout(1, 2));
