@@ -53,7 +53,7 @@ public class GUIKlasse extends JScrollPane
 		lehrer_wahl = new JComboBox[fach_anzahl];
 		klassenlehrer = new JComboBox(db.gebeLehrerListe());
 		lehrerliste = new String[lehrer_anzahl + 1];
-		neu=new JButton[klassenliste.length];
+		neu = new JButton[klassenliste.length];
 		setViewportView(panel);
 		sT = new Strings();
 		for (int i = 0; i < lehrer_anzahl; i++)
@@ -71,7 +71,7 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
-		
+
 		for (int i = 1; i < klassenliste.length; i++)
 		{
 			if (klassenliste[i] != null)
@@ -99,7 +99,7 @@ public class GUIKlasse extends JScrollPane
 
 									}
 								});
-						neu[i]=new JButton(sT.neueklasse);
+						neu[i] = new JButton(sT.neueklasse);
 						lehrer[i].add(neu[i]);
 						lehrer[i].add(lehrer_auswahl[i][j]);
 						neu[i].setBackground(new Color(0, 154, 205));
