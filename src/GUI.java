@@ -25,6 +25,7 @@ public class GUI extends JFrame
 	JButton klasse = new JButton(sT.klasse);
 	JButton start = new JButton(sT.start);
 	JLabel laeuft = new JLabel(sT.laeuft);
+	JProgressBar fortschritt =new JProgressBar();
 
 	public GUI()
 	{
@@ -71,6 +72,8 @@ public class GUI extends JFrame
 		start.setEnabled(false);
 		remove(pc);
 		add("Center", (laeuft));
+		add("North",(fortschritt));
+		fortschritt.setValue(10);
 		validate();
 	}
 
