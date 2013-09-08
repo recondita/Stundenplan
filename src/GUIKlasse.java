@@ -150,6 +150,7 @@ public class GUIKlasse extends JScrollPane
 			p_stufe[i].setLayout(new GridLayout(1, 2));
 			auswahl[i] = new JCheckBox(db.gebeFaecherListe()[i]);
 			stufe[i] = new JTextField(sT.stundenanzahl);
+			String[] lehrerliste=db.gebeLehrerListe();
 			String[] fachLehrerListe = new String[lehrerliste.length];
 			int fachLehrer = 0;
 			for (int j = 0; j < lehrerliste.length; j++)
