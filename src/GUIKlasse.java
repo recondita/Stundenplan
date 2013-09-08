@@ -60,7 +60,6 @@ public class GUIKlasse extends JScrollPane
 		{
 			if (klassenliste[i] != null)
 			{
-				//tab.addTab(sT.stufe_anzeigen + i, lehrer_liste[i]);
 				lehrer_liste[i] = new JScrollPane();
 				lehrer[i] = new JPanel();
 				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
@@ -81,7 +80,7 @@ public class GUIKlasse extends JScrollPane
 						}
 					});
 					lehrer[i].add(lehrer_auswahl[i][j]);
-					tab.addTab(sT.stufe_anzeigen + i, lehrer_auswahl[i][j]);
+					tab.addTab(sT.stufe_anzeigen + i, lehrer_liste[i]);
 				}
 			}
 		}
