@@ -82,8 +82,18 @@ public class GUIKlasse extends JScrollPane
 				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
 				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
 				lehrer_liste[i].setViewportView(lehrer[i]);
-				tab.addTab(sT.stufe_anzeigen + i, lehrer_liste[i]);
-
+				tab.addTab(sT.stufe_anzeigen +" "+ i, lehrer_liste[i]);
+				neu[i] = new JButton(sT.neueklasse);
+				lehrer[i].add(neu[i]);
+				neu[i].setBackground(new Color(0, 154, 205));
+				final int i2=i;
+				neu[i].addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent arg0)
+					{
+						eingabe[2].setText(""+i2);
+					}
+				});
 				for (int j = 0; j < klassenliste[i].length; j++)
 				{
 					if (klassenliste[i][j] != null)
@@ -99,19 +109,11 @@ public class GUIKlasse extends JScrollPane
 
 									}
 								});
-						neu[i] = new JButton(sT.neueklasse);
-						lehrer[i].add(neu[i]);
+						
 						lehrer[i].add(lehrer_auswahl[i][j]);
-						neu[i].setBackground(new Color(0, 154, 205));
-						neu[i].addActionListener(new ActionListener()
-						{
-							public void actionPerformed(ActionEvent arg0)
-							{
-								eingabe[2].setText("");
-							}
-						});
 					}
 				}
+				
 			}
 		}
 		leer.add("South", (tab));
