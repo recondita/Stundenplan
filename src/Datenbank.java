@@ -60,10 +60,10 @@ public class Datenbank
 				{
 					maxklassen = breite;
 				}
-
 			} catch (Exception e)
 			{
 			}
+
 		}
 
 		klassenListe = new String[Integer.parseInt(stufen[stufen.length - 1]) + 1][maxklassen];
@@ -81,6 +81,15 @@ public class Datenbank
 
 			} catch (Exception e)
 			{
+			}
+		}
+		
+		for (int i=0; i<klassenListe.length; i++)
+		{
+			
+			if(!stufeExists(i))
+			{
+				klassenListe[i]=null;
 			}
 		}
 
@@ -496,6 +505,11 @@ public class Datenbank
 
 	}
 
+	public boolean stufeExists(int i)
+	{
+		return new File(pfad + sep + "Stufen" + i).exists();
+	}
+	
 	public void loescheLehrer(String name)
 	{
 		File lehrer = new File(pfad + sep + "Lehrer" + sep + name + ".lehrer");
