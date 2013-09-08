@@ -52,6 +52,8 @@ public class Datenbank
 		String[] stufen = leseStufenListe();
 		// int maxstufen = 0;
 		int maxklassen = 0;
+		int zweiteStelle=0;
+		int letzterIndex=0;
 		for (int i = 0; i < stufen.length; i++)
 		{
 
@@ -64,13 +66,18 @@ public class Datenbank
 				{
 					maxklassen = breite;
 				}
+				if(index>letzterIndex)
+				{
+					zweiteStelle=i;
+					letzterIndex=index;
+				}
 			} catch (Exception e)
 			{
 			}
 
 		}
 
-		klassenListe = new String[Integer.parseInt(stufen[stufen.length - 1]) + 1][maxklassen];
+		klassenListe = new String[Integer.parseInt(stufen[zweiteStelle]) + 1][maxklassen];
 		for (int i = 0; i < stufen.length; i++)
 		{
 
