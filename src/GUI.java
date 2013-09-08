@@ -15,9 +15,6 @@ public class GUI extends JFrame
 	Datenbank db=new Datenbank();
 	Strings sT = new Strings();
 	Generator gENERATOR;
-	//GUIKlasse gUIKLASSE=new GUIKlasse(sT, this, db);
-	//GUIFach gUIFach=new GUIFach(sT, this, db);
-	//GUILehrer gUILEHRER=new GUILehrer(sT, this, db);
 	Menuleiste mL = new Menuleiste(sT, this);
 	JTabbedPane pc = new JTabbedPane();
 	JPanel pu = new JPanel();

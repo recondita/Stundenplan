@@ -204,8 +204,8 @@ public class GUIKlasse extends JScrollPane
 		int fachLehrer = 0;
 		for (int j = 0; j < lehrerliste.length; j++)
 		{
-			if ((intStufe > lehrer[j].vonFaecher[i])
-					& (intStufe < lehrer[j].vonFaecher[i]))
+			if ((intStufe >= lehrer[j].vonFaecher[i])
+					& (intStufe <= lehrer[j].bisFaecher[i]))
 			{
 				fachLehrerListe[fachLehrer] = lehrerliste[j];
 				fachLehrer++;
