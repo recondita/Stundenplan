@@ -66,7 +66,7 @@ public class Datenbank
 			}
 		}
 
-		klassenListe = new String[maxstufen][maxklassen];
+		klassenListe = new String[Integer.parseInt(stufen[stufen.length-1])][maxklassen];
 		for (int i = 0; i < stufen.length; i++)
 		{
 
