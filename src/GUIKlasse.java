@@ -211,8 +211,12 @@ public class GUIKlasse extends JScrollPane
 				fachLehrer++;
 			}
 		}
-		String[] fachLehrerListeGekuerzt = new String[fachLehrer];
-		lehrer_wahl[i] = new JComboBox(fachLehrerListe);
+		String[] fachLehrerListeGekuerzt = new String[fachLehrer+1];
+		for(int k=1; k<fachLehrerListeGekuerzt.length; k++)
+		{
+			fachLehrerListeGekuerzt[k]=fachLehrerListe[k-1];
+		}
+		lehrer_wahl[i] = new JComboBox(fachLehrerListeGekuerzt);
 		if (zaehler[i] == 0)
 		{
 			p_stufe[i].add(lehrer_wahl[i]);
