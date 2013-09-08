@@ -8,10 +8,12 @@ public class GUIKlasse extends JScrollPane
 	GUI gUI;
 	Datenbank db = new Datenbank();
 	JPanel panel = new JPanel();
-	JScrollPane lehrer_liste = new JScrollPane();
 	int lehrer_anzahl = (db.gebeLehrerListe().length);
-	JButton[] lehrer_auswahl = new JButton[lehrer_anzahl];
-	JPanel lehrer = new JPanel();
+	String[][] klassenliste = db.gebeKlassenListe();
+	JScrollPane[] lehrer_liste = new JScrollPane[klassenliste.length];
+	JButton[][] lehrer_auswahl = new JButton[klassenliste.length][klassenliste[0].length];
+	JTabbedPane tab =new JTabbedPane();
+	JPanel lehrer[] = new JPanel[klassenliste.length];
 	int fach_anzahl = (db.gebeFaecherListe().length);
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
@@ -54,24 +56,39 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setPreferredSize(new Dimension(25, 25));
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
-		lehrer.setLayout(new GridLayout(lehrer_anzahl, 1));
-		lehrer_liste.setPreferredSize(new Dimension(150, 250));
-		lehrer_liste.setViewportView(lehrer);
-		for (int i = 0; i < lehrer_anzahl; i++)
+		try
 		{
-			lehrer_auswahl[i] = new JButton();
-			lehrer_auswahl[i].setText(db.gebeLehrerListe()[i]);
-			lehrer_auswahl[i].setBackground(Color.white);
-			lehrer_auswahl[i].addActionListener(new ActionListener()
+			for (int i = 0; i < klassenliste.length; i++)
 			{
-				public void actionPerformed(ActionEvent arg0)
+				tab.addTab(""+klassenliste[i][0], lehrer_liste[i]);
+				lehrer_liste[i]=new JScrollPane();
+				lehrer[i]=new JPanel();
+				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
+				lehrer[i].setLayout(new GridLayout(lehrer_anzahl, 1));
+				lehrer_liste[i].setPreferredSize(new Dimension(150, 250));
+				lehrer_liste[i].setViewportView(lehrer[i]);
+				for (int j = 0; j < klassenliste[0].length; j++)
 				{
+					
+					lehrer_auswahl[i][j] = new JButton();
+					lehrer_auswahl[i][j].setText(db.gebeLehrerListe()[i]);
+					lehrer_auswahl[i][j].setBackground(Color.white);
+					lehrer_auswahl[i][j].addActionListener(new ActionListener()
+					{
+						public void actionPerformed(ActionEvent arg0)
+						{
 
+						}
+					});
+					lehrer[i].add(lehrer_auswahl[i][j]);
+					
 				}
-			});
-			lehrer.add(lehrer_auswahl[i]);
+			}
+		} catch (Exception e)
+		{
+			System.out.println("Fehler, Jan ist Schuld");
 		}
-		leer.add("South", (lehrer_liste));
+		leer.add("South", (tab));
 		center.setLayout(new GridLayout(1, 2));
 		center.add(leer);
 		center.add(mitte);
@@ -87,8 +104,7 @@ public class GUIKlasse extends JScrollPane
 			if (i != 1)
 			{
 				oben.add(eingabe[i]);
-			}
-			else
+			} else
 			{
 				oben.add(klassenlehrer);
 			}
@@ -149,7 +165,8 @@ public class GUIKlasse extends JScrollPane
 				}
 				db.schreibeKlassenEigeschaften(eingabe[0].getText(),
 						Integer.parseInt(eingabe[2].getText()), vonStufe,
-						bisStufe, db.gebeFaecherListe()[klassenlehrer.getSelectedIndex()]);
+						bisStufe,
+						db.gebeFaecherListe()[klassenlehrer.getSelectedIndex()]);
 				for (int i = 0; i < 3; i++)
 				{
 					eingabe[i].setText("");

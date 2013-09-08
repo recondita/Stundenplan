@@ -87,20 +87,27 @@ public class GUILehrer extends JScrollPane
 							aktuellerName = lehrer.name;
 							eingabe[1].setText(lehrer.minstunden + "");
 							eingabe[2].setText(lehrer.maxstunden + "");
-							for (int j = 0; j < auswahl.length; j++)
+							try
 							{
-								if ((lehrer.vonFaecher[j] != 0)
-										& (lehrer.bisFaecher[j] != 0))
+								for (int j = 0; j < auswahl.length; j++)
 								{
-									auswahl[j].setSelected(true);
-									stufe[j][0].setText(lehrer.vonFaecher[j]
-											+ "");
-									stufe[j][1].setText(lehrer.bisFaecher[j]
-											+ "");
-								} else
-								{
-									resetFach(j);
+									if ((lehrer.vonFaecher[j] != 0)
+											& (lehrer.bisFaecher[j] != 0))
+									{
+										auswahl[j].setSelected(true);
+										stufe[j][0]
+												.setText(lehrer.vonFaecher[j]
+														+ "");
+										stufe[j][1]
+												.setText(lehrer.bisFaecher[j]
+														+ "");
+									} else
+									{
+										resetFach(j);
+									}
 								}
+							} catch (Exception e)
+							{
 							}
 						}
 					}
@@ -216,7 +223,7 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-					for(int i=0;i<fach_anzahl;i++)
+					for (int i = 0; i < fach_anzahl; i++)
 					{
 						stufe[i][0].setText(sT.vonStufe);
 						stufe[i][1].setText(sT.bisStufe);
