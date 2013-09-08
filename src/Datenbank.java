@@ -399,10 +399,26 @@ public class Datenbank
 		}
 		return f;
 	}
-	
+
 	public void neueStufe(String i)
 	{
-		
+		try
+		{
+		String path = (System.getProperty("user.dir"));
+		String dirName = i;
+		File dir = new File(path +sep+"Stufen"+sep+ dirName);
+
+		if (dir.mkdir())
+		{
+			//System.out.println("Datei erstellt: " + file.createNewFile());
+		} else
+		{
+			System.out.println(dir + " konnte nicht erstellt werden");
+		}
+		}
+		catch(Exception e)
+		{
+		}
 	}
 
 	public Lehrer lehrerAuslesen(String name)
