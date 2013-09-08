@@ -404,19 +404,18 @@ public class Datenbank
 	{
 		try
 		{
-		String path = (System.getProperty("user.dir"));
-		String dirName = i;
-		File dir = new File(path +sep+"Stufen"+sep+ dirName);
+			String dirName = i;
+			File dir = new File(pfad + sep + "Stufen" + sep + dirName);
 
-		if (dir.mkdir())
-		{
-			//System.out.println("Datei erstellt: " + file.createNewFile());
-		} else
-		{
-			System.out.println(dir + " konnte nicht erstellt werden");
-		}
-		}
-		catch(Exception e)
+			if (dir.mkdir())
+			{
+				// System.out.println("Datei erstellt: " +
+				// file.createNewFile());
+			} else
+			{
+				System.out.println(dir + " konnte nicht erstellt werden");
+			}
+		} catch (Exception e)
 		{
 		}
 	}
@@ -581,6 +580,22 @@ public class Datenbank
 		}
 	}
 
+	public void loescheStufe(int name)
+	{
+		deleteDir(new File(pfad + sep + "Stufe" + sep + name));
+	}
+
+	public void deleteDir(File path)
+	{
+		for (File file : path.listFiles())
+		{
+			if (file.isDirectory())
+				deleteDir(file);
+			file.delete();
+		}
+		path.delete();
+	}
+
 	public void print()
 	{
 		for (int i = 0; i < gebeLehrerListe().length; i++)
@@ -598,7 +613,6 @@ public class Datenbank
 		// System.out.println(System.getProperty("user.dir"));
 		Datenbank testDatenbank = new Datenbank();
 		// testDatenbank.print();
-		String[][] kl = testDatenbank.gebeKlassenListe();
-		System.out.println(kl);
+		// testDatenbank.loescheStufe(11);
 	}
 }
