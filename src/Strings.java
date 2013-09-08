@@ -23,6 +23,12 @@ public class Strings
 	String wahlfach;
 	String vonStufe;
 	String bisStufe;
+	String klassenlehrer;
+	String stufe;
+	String klassenname;
+	String wunschlehrer;
+	String stundenanzahl;
+	
 
 	public Strings()
 	{
@@ -61,6 +67,11 @@ public class Strings
 		wahlfach="Wahlfach erstellen";
 		vonStufe="von Stufe";
 		bisStufe="bis Stufe";
+		klassenlehrer="Klassenlehrer:";
+		stufe="Stufe eingeben:";
+		klassenname="Name der Klasse:";
+		wunschlehrer="Lehrer";
+		stundenanzahl="Stunden";
 	}
 
 	public void englisch()
@@ -84,5 +95,10 @@ public class Strings
 		wahlfach="Create choseabel lesson";
 		vonStufe="by grade level";
 		bisStufe="to grade level";
+		klassenlehrer="Class teacher:";
+		stufe="Insert grade:";
+		klassenname="Name of Class:";
+		wunschlehrer="Teacher";
+		stundenanzahl="Hours";
 	}
 }

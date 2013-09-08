@@ -13,7 +13,7 @@ public class GUI extends JFrame
 	 * Das DropDown Menü ist Dynamisch, aber gelöscht
 	 */
 	Strings sT = new Strings();
-	GUIKlasse gUIKLASSE=new GUIKlasse(sT);
+	GUIKlasse gUIKLASSE=new GUIKlasse(sT, this);
 	GUILehrer gUILEHRER=new GUILehrer(sT, this);
 	GUIFach gUIFACH=new GUIFach(sT, this);
 	Generator gENERATOR;
