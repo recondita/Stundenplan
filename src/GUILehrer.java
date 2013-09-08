@@ -75,7 +75,7 @@ public class GUILehrer extends JScrollPane
 								{
 									auswahl[j].setSelected(true);
 									stufe[j][0].setText(lehrer.vonFaecher[j]+"");
-									stufe[j][1].setText(lehrer.vonFaecher[j]+"");
+									stufe[j][1].setText(lehrer.bisFaecher[j]+"");
 								}
 							}
 						}
