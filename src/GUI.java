@@ -77,9 +77,11 @@ public class GUI extends JFrame
 	
 	public void aktualisieren()
 	{
+		/**
 		db.aktualisiereKlassenListe();
 		db.aktualisiereFaecherListe();
 		db.aktualisiereLehrerListe();
+		*/
 		pc.removeAll();
 		pc.addTab(sT.fach, new GUIFach(sT, this));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
