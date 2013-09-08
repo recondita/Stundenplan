@@ -166,13 +166,7 @@ public class GUILehrer extends JScrollPane
 	public void loesche()
 	{
 		db.loescheLehrer(eingabe[0].getText());
-		db.aktualisiereKlassenListe();
-		db.aktualisiereFaecherListe();
-		db.aktualisiereLehrerListe();
-		panel.setVisible(false);
-		panel.validate();
-		validate();
-		panel.setVisible(true);
+		gUI.aktualisieren(this);
 	}
 
 	public void listener()
@@ -221,13 +215,12 @@ public class GUILehrer extends JScrollPane
 					{
 						auswahl[i].setSelected(false);
 					}
-					db.aktualisiereKlassenListe();
-					db.aktualisiereFaecherListe();
-					db.aktualisiereLehrerListe();
-					panel.setVisible(false);
-					panel.validate();
-					validate();
-					panel.setVisible(true);
+					for(int i=0;i<fach_anzahl;i++)
+					{
+						stufe[i][0].setText(sT.vonStufe);
+						stufe[i][1].setText(sT.bisStufe);
+					}
+					gUI.aktualisieren(this);
 
 				} else
 				{

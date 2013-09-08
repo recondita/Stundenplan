@@ -12,6 +12,7 @@ public class GUI extends JFrame
 	 * by me;
 	 * Das DropDown Menü ist Dynamisch, aber gelöscht
 	 */
+	Datenbank db=new Datenbank();
 	Strings sT = new Strings();
 	GUIKlasse gUIKLASSE=new GUIKlasse(sT, this);
 	GUILehrer gUILEHRER=new GUILehrer(sT, this);
@@ -75,6 +76,14 @@ public class GUI extends JFrame
 		add("North",(fortschritt));
 		fortschritt.setValue(10);
 		validate();
+	}
+	
+	public void aktualisieren(JComponent j)
+	{
+		db.aktualisiereKlassenListe();
+		db.aktualisiereFaecherListe();
+		db.aktualisiereLehrerListe();
+		j.repaint();
 	}
 
 	public static void main(String args[])
