@@ -6,7 +6,7 @@ public class GUIFach extends JPanel
 {
 	Strings sT;
 	JPanel p = new JPanel();
-	Datenbank db = new Datenbank();
+	Datenbank db;
 	JLabel beschreibung;
 	JTextField eingabe = new JTextField();
 	JPanel leer = new JPanel();
@@ -16,9 +16,10 @@ public class GUIFach extends JPanel
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUIFach(Strings sT, GUI gUI)
+	public GUIFach(Strings sT, GUI gUI, Datenbank db)
 	{
 		this.gUI = gUI;
+		this.db=db;
 		p.setPreferredSize(new Dimension(80, 80));
 		this.sT = sT;
 		beschreibung = new JLabel(sT.facheingeben);

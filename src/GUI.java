@@ -40,8 +40,8 @@ public class GUI extends JFrame
 		laeuft.setHorizontalAlignment(JLabel.CENTER);
 		laeuft.setVerticalAlignment(JLabel.CENTER);
 		pu.setPreferredSize(new Dimension(50, 50));
-		pc.addTab(sT.fach, new GUIFach(sT, this));
-		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
+		pc.addTab(sT.fach, new GUIFach(sT, this, db));
+		pc.addTab(sT.lehrer, new GUILehrer(sT, this, db));
 		pc.addTab(sT.klasse, new GUIKlasse(sT, this, db));
 		unten();
 		add("South", (pu));
@@ -80,8 +80,8 @@ public class GUI extends JFrame
 		db.aktualisiereLehrerListe();
 		*/
 		pc.removeAll();
-		pc.addTab(sT.fach, new GUIFach(sT, this));
-		pc.addTab(sT.lehrer, new GUILehrer(sT, this));
+		pc.addTab(sT.fach, new GUIFach(sT, this, db));
+		pc.addTab(sT.lehrer, new GUILehrer(sT, this, db));
 		pc.addTab(sT.klasse, new GUIKlasse(sT, this, db));
 	}
 

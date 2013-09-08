@@ -6,19 +6,19 @@ import java.awt.event.*;
 public class GUILehrer extends JScrollPane
 {
 	GUI gUI;
-	Datenbank db = new Datenbank();
+	Datenbank db;
 	JPanel panel = new JPanel();
 	JScrollPane lehrer_liste = new JScrollPane();
-	int lehrer_anzahl = (db.gebeLehrerListe().length);
-	JButton[] lehrer_auswahl = new JButton[lehrer_anzahl];
+	int lehrer_anzahl;
+	JButton[] lehrer_auswahl;
 	JPanel lehrer = new JPanel();
-	int fach_anzahl = (db.gebeFaecherListe().length);
+	int fach_anzahl;
 	Strings sT;
 	JLabel beschreibung[] = new JLabel[4];
 	JTextField eingabe[] = new JTextField[3];
-	JCheckBox[] auswahl = new JCheckBox[fach_anzahl];
-	JPanel[] p_stufe = new JPanel[fach_anzahl];
-	JTextField[][] stufe = new JTextField[fach_anzahl][2];
+	JCheckBox[] auswahl;
+	JPanel[] p_stufe;
+	JTextField[][] stufe;
 	JButton ausgabe;
 	JButton start;
 	JPanel center = new JPanel();
@@ -32,9 +32,16 @@ public class GUILehrer extends JScrollPane
 	/**
 	 * @author: Felix Schütze
 	 */
-	public GUILehrer(Strings sT, GUI gUI)
+	public GUILehrer(Strings sT, GUI gUI, Datenbank db)
 	{
+		this.db=db;
 		this.gUI = gUI;
+		lehrer_anzahl = (db.gebeLehrerListe().length);
+		lehrer_auswahl = new JButton[lehrer_anzahl];
+		fach_anzahl = (db.gebeFaecherListe().length);
+		auswahl = new JCheckBox[fach_anzahl];
+		p_stufe = new JPanel[fach_anzahl];
+		stufe = new JTextField[fach_anzahl][2];
 		setViewportView(panel);
 		this.sT = sT;
 		start = new JButton(sT.speichern);
@@ -76,41 +83,7 @@ public class GUILehrer extends JScrollPane
 			{
 				public void actionPerformed(ActionEvent arg0)
 				{
-					Object Quelle = arg0.getSource();
-					for (int i = 0; i < lehrer_auswahl.length; i++)
-					{
-						if (Quelle == lehrer_auswahl[i])
-						{
-							Lehrer lehrer = db.lehrerAuslesen(lehrer_auswahl[i]
-									.getText());
-							eingabe[0].setText(lehrer.name);
-							aktuellerName = lehrer.name;
-							eingabe[1].setText(lehrer.minstunden + "");
-							eingabe[2].setText(lehrer.maxstunden + "");
-							try
-							{
-								for (int j = 0; j < auswahl.length; j++)
-								{
-									if ((lehrer.vonFaecher[j] != 0)
-											& (lehrer.bisFaecher[j] != 0))
-									{
-										auswahl[j].setSelected(true);
-										stufe[j][0]
-												.setText(lehrer.vonFaecher[j]
-														+ "");
-										stufe[j][1]
-												.setText(lehrer.bisFaecher[j]
-														+ "");
-									} else
-									{
-										resetFach(j);
-									}
-								}
-							} catch (Exception e)
-							{
-							}
-						}
-					}
+					lade(arg0);
 				}
 			});
 			lehrer.add(lehrer_auswahl[i]);
@@ -168,6 +141,45 @@ public class GUILehrer extends JScrollPane
 				listener();
 			}
 		});
+	}
+	
+	public void lade(ActionEvent arg0)
+	{
+		Object Quelle = arg0.getSource();
+		for (int i = 0; i < lehrer_auswahl.length; i++)
+		{
+			if (Quelle == lehrer_auswahl[i])
+			{
+				Lehrer lehrer = db.lehrerAuslesen(lehrer_auswahl[i]
+						.getText());
+				eingabe[0].setText(lehrer.name);
+				aktuellerName = lehrer.name;
+				eingabe[1].setText(lehrer.minstunden + "");
+				eingabe[2].setText(lehrer.maxstunden + "");
+				try
+				{
+					for (int j = 0; j < auswahl.length; j++)
+					{
+						if ((lehrer.vonFaecher[j] != 0)
+								& (lehrer.bisFaecher[j] != 0))
+						{
+							auswahl[j].setSelected(true);
+							stufe[j][0]
+									.setText(lehrer.vonFaecher[j]
+											+ "");
+							stufe[j][1]
+									.setText(lehrer.bisFaecher[j]
+											+ "");
+						} else
+						{
+							resetFach(j);
+						}
+					}
+				} catch (Exception e)
+				{
+				}
+			}
+		}
 	}
 
 	public void loesche()
