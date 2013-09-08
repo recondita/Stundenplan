@@ -102,7 +102,7 @@ public class GUIKlasse extends JScrollPane
 
 				if (key == KeyEvent.VK_ENTER)
 				{
-					db.neueStufe(stufeneu.getText());
+					neueStufe();
 				}
 			}
 		});
@@ -229,6 +229,11 @@ public class GUIKlasse extends JScrollPane
 				listener();
 			}
 		});
+	}
+	
+	public void neueStufe()
+	{
+		db.neueStufe(stufeneu.getText());
 	}
 
 	public void richtigeLehrer(int i)
