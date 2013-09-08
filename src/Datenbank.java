@@ -96,7 +96,7 @@ public class Datenbank
 				klassenListe[i] = null;
 			}
 		}
-		//lehrer = new Lehrer[lehrerVerzeichnis.list().length];
+		// lehrer = new Lehrer[lehrerVerzeichnis.list().length];
 	}
 
 	private String[] leseFaecherListe()
@@ -400,89 +400,89 @@ public class Datenbank
 		return f;
 	}
 
-	
 	public Lehrer lehrerAuslesen(String name)
 	{
 		return lehrerAuslesen(lehrerToInt(name));
 	}
-	
+
 	public Lehrer lehrerAuslesen(int lehrerInt)
 	{
-		if(lehrer.length>0)
+		if (lehrer.length > 0)
 		{
-		if (lehrer[lehrerInt] == null)
-		{
-			String tempminh = null;
-			String tempmaxh = null;
-			String[] tempfaecher = new String[1];
-			try
+			if (lehrer[lehrerInt] == null)
 			{
-				FileReader fr = new FileReader(new File(pfad + sep + "Lehrer"
-						+ sep + gebeLehrerListe()[lehrerInt] + ".lehrer"));
-				BufferedReader br = new BufferedReader(fr);
-				String temp = br.readLine();
-				while (temp != null)
+				String tempminh = null;
+				String tempmaxh = null;
+				String[] tempfaecher = new String[1];
+				try
 				{
-					String split[] = temp.split("\\:");
-					if (split.length > 1)
+					FileReader fr = new FileReader(new File(pfad + sep
+							+ "Lehrer" + sep + gebeLehrerListe()[lehrerInt]
+							+ ".lehrer"));
+					BufferedReader br = new BufferedReader(fr);
+					String temp = br.readLine();
+					while (temp != null)
 					{
-						if (split[0].equals("minh"))
+						String split[] = temp.split("\\:");
+						if (split.length > 1)
 						{
-							tempminh = split[1];
-						} else
-						{
-							if (split[0].equals("maxh"))
+							if (split[0].equals("minh"))
 							{
-								tempmaxh = split[1];
+								tempminh = split[1];
 							} else
 							{
-								if (split[0].equals("faecher"))
+								if (split[0].equals("maxh"))
 								{
-									tempfaecher = split[1].split("\\,");
+									tempmaxh = split[1];
+								} else
+								{
+									if (split[0].equals("faecher"))
+									{
+										tempfaecher = split[1].split("\\,");
+									}
 								}
 							}
 						}
+						temp = br.readLine();
+
 					}
-					temp = br.readLine();
-
-				}
-				br.close();
-			} catch (Exception e)
-			{
-				System.out.println(e);
-				tempminh = null;
-			}
-
-			int[] vonFaecher = new int[gebeFaecherListe().length];
-			int[] bisFaecher = new int[gebeFaecherListe().length];
-
-			for (int i = 0; i < vonFaecher.length; i++)
-			{
-				vonFaecher[i] = 0;
-				bisFaecher[i] = 0;
-			}
-
-			if (tempfaecher.length > 1)
-			{
-				for (int i = 0; i < tempfaecher.length; i = i + 2)
+					br.close();
+				} catch (Exception e)
 				{
-					int index = fachToInt(tempfaecher[i]);
-					String[] stufenSplit = tempfaecher[i + 1].split("\\-");
-					vonFaecher[index] = Integer.parseInt(stufenSplit[0]);
-					bisFaecher[index] = Integer.parseInt(stufenSplit[1]);
+					System.out.println(e);
+					tempminh = null;
 				}
-			}
 
-			lehrer[lehrerInt] = new Lehrer(gebeLehrerListe()[lehrerInt], Integer.parseInt(tempminh),
-					Integer.parseInt(tempmaxh), vonFaecher, bisFaecher);
-		}
+				int[] vonFaecher = new int[gebeFaecherListe().length];
+				int[] bisFaecher = new int[gebeFaecherListe().length];
+
+				for (int i = 0; i < vonFaecher.length; i++)
+				{
+					vonFaecher[i] = 0;
+					bisFaecher[i] = 0;
+				}
+
+				if (tempfaecher.length > 1)
+				{
+					for (int i = 0; i < tempfaecher.length; i = i + 2)
+					{
+						int index = fachToInt(tempfaecher[i]);
+						String[] stufenSplit = tempfaecher[i + 1].split("\\-");
+						vonFaecher[index] = Integer.parseInt(stufenSplit[0]);
+						bisFaecher[index] = Integer.parseInt(stufenSplit[1]);
+					}
+				}
+
+				lehrer[lehrerInt] = new Lehrer(gebeLehrerListe()[lehrerInt],
+						Integer.parseInt(tempminh), Integer.parseInt(tempmaxh),
+						vonFaecher, bisFaecher);
+			}
 			return lehrer[lehrerInt];
-		}
-		else
+		} else
 		{
 			return null;
 		}
-		
+
 	}
 
 	public Klasse klasseAuslesen(int stufe, String name)
