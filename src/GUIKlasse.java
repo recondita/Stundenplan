@@ -193,13 +193,13 @@ public class GUIKlasse extends JScrollPane
 
 	public void richtigeLehrer(int i)
 	{
+		String[] lehrerliste = db.gebeLehrerListe();
 		Lehrer[] lehrer = new Lehrer[lehrerliste.length];
 		for (int f = 0; f < lehrerliste.length; f++)
 		{
 			lehrer[f] = db.lehrerAuslesen(i);
 		}
 		int intStufe = Integer.parseInt(eingabe[2].getText());
-		String[] lehrerliste = db.gebeLehrerListe();
 		String[] fachLehrerListe = new String[lehrerliste.length];
 		int fachLehrer = 0;
 		for (int j = 0; j < lehrerliste.length; j++)
