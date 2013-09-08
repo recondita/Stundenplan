@@ -50,6 +50,24 @@ public class GUILehrer extends JScrollPane
 		lehrer.setLayout(new GridLayout(lehrer_anzahl, 1));
 		lehrer_liste.setPreferredSize(new Dimension(250, 250));
 		lehrer_liste.setViewportView(lehrer);
+		JButton neuerLehrer = new JButton();
+		neuerLehrer.setText(sT.lehrer);
+		neuerLehrer.setBackground(Color.white);
+		neuerLehrer.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				eingabe[0].setText("");
+				aktuellerName = "";
+				eingabe[1].setText("");
+				eingabe[2].setText("");
+				for (int j = 0; j < auswahl.length; j++)
+				{
+					resetFach(j);
+				}
+			}
+		});
+		lehrer.add(neuerLehrer);
 		for (int i = 0; i < lehrer_anzahl; i++)
 		{
 			lehrer_auswahl[i] = new JButton();
@@ -67,7 +85,7 @@ public class GUILehrer extends JScrollPane
 							Lehrer lehrer = db.lehrerAuslesen(lehrer_auswahl[i]
 									.getText());
 							eingabe[0].setText(lehrer.name);
-							aktuellerName=lehrer.name;
+							aktuellerName = lehrer.name;
 							eingabe[1].setText(lehrer.minstunden + "");
 							eingabe[2].setText(lehrer.maxstunden + "");
 							for (int j = 0; j < auswahl.length; j++)
@@ -76,14 +94,13 @@ public class GUILehrer extends JScrollPane
 										& (lehrer.bisFaecher[j] != 0))
 								{
 									auswahl[j].setSelected(true);
-									stufe[j][0].setText(lehrer.vonFaecher[j]+"");
-									stufe[j][1].setText(lehrer.bisFaecher[j]+"");
-								}
-								else
+									stufe[j][0].setText(lehrer.vonFaecher[j]
+											+ "");
+									stufe[j][1].setText(lehrer.bisFaecher[j]
+											+ "");
+								} else
 								{
-									stufe[j][0].setText("");
-									stufe[j][1].setText("");
-									auswahl[j].setSelected(false);
+									resetFach(j);
 								}
 							}
 						}
@@ -143,7 +160,7 @@ public class GUILehrer extends JScrollPane
 	{
 		try
 		{
-			
+
 			if (Integer.parseInt(eingabe[1].getText()) <= Integer
 					.parseInt(eingabe[2].getText()))
 			{
@@ -171,12 +188,12 @@ public class GUILehrer extends JScrollPane
 							Integer.parseInt(eingabe[1].getText()),
 							Integer.parseInt(eingabe[2].getText()), fach,
 							vonStufe, bisStufe);
-					
-					if(!eingabe[0].getText().equals(aktuellerName))
+
+					if (!eingabe[0].getText().equals(aktuellerName))
 					{
 						db.loescheLehrer(aktuellerName);
 					}
-					aktuellerName="";
+					aktuellerName = "";
 					for (int i = 0; i < 3; i++)
 					{
 						eingabe[i].setText("");
@@ -200,6 +217,13 @@ public class GUILehrer extends JScrollPane
 		{
 			// ausgabe.setText(sT.nurzahlen);
 		}
+	}
+
+	public void resetFach(int j)
+	{
+		stufe[j][0].setText(sT.bisStufe);
+		stufe[j][1].setText(sT.vonStufe);
+		auswahl[j].setSelected(false);
 	}
 
 	public void klickLeer()
