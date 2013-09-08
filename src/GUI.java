@@ -15,6 +15,9 @@ public class GUI extends JFrame
 	Datenbank db=new Datenbank();
 	Strings sT = new Strings();
 	Generator gENERATOR;
+	//GUIKlasse gUIKLASSE=new GUIKlasse(sT, this, db);
+	//GUIFach gUIFach=new GUIFach(sT, this, db);
+	//GUILehrer gUILEHRER=new GUILehrer(sT, this, db);
 	Menuleiste mL = new Menuleiste(sT, this);
 	JTabbedPane pc = new JTabbedPane();
 	JPanel pu = new JPanel();
@@ -74,11 +77,9 @@ public class GUI extends JFrame
 	
 	public void aktualisieren()
 	{
-		/**
 		db.aktualisiereKlassenListe();
 		db.aktualisiereFaecherListe();
 		db.aktualisiereLehrerListe();
-		*/
 		pc.removeAll();
 		pc.addTab(sT.fach, new GUIFach(sT, this, db));
 		pc.addTab(sT.lehrer, new GUILehrer(sT, this, db));
