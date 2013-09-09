@@ -28,7 +28,7 @@ public class Generator
 		// boolean[5][10][lehrer.length][klasse.length];
 	}
 
-	private Stundenplan generiereZufallsPlan(int stufe, int klasse)
+	private int[][] generiereZufallsPlan(int stufe, int klasse)
 	{
 		int[] fachStunden = klassen[stufe][klasse].fachStunden.clone();
 		int[][] stunden = new int[10][5];
@@ -55,6 +55,6 @@ public class Generator
 			}
 
 		}
-		return null;
+		return stunden;
 	}
 }
