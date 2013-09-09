@@ -305,10 +305,10 @@ public class GUIKlasse extends JScrollPane
 					{
 						fach[f] = db.gebeFaecherListe()[i];
 						bisStufe[f] = db.gebeFaecherListe()[lehrer_wahl[f]
-								.getSelectedIndex()];
+								.getSelectedItem()];// Hier liegt der Fehler
 						f++;
-					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
-							.parseInt(stufe[i].getText());
+						vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
+								.parseInt(stufe[i].getText());
 					}
 				}
 				db.schreibeKlassenEigeschaften(eingabe[0].getText(),
@@ -321,6 +321,7 @@ public class GUIKlasse extends JScrollPane
 			{
 				// ausgabe.setText(sT.allefelder);
 			}
+
 		} catch (Exception e)
 		{
 			System.out.println(e);
