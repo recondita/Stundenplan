@@ -230,7 +230,7 @@ public class GUIKlasse extends JScrollPane
 			}
 		});
 	}
-	
+
 	public void neueStufe()
 	{
 		db.neueStufe(stufeneu.getText());
@@ -280,11 +280,11 @@ public class GUIKlasse extends JScrollPane
 
 		});
 	}
-	
+
 	public void neueKlasse(int i2)
 	{
-		//gUI.aktualisieren(2);
-		//tab.setSelectedIndex(tab.getSelectedIndex());
+		// gUI.aktualisieren(2);
+		// tab.setSelectedIndex(tab.getSelectedIndex());
 		eingabe[2].setText("" + i2);
 	}
 
@@ -293,7 +293,6 @@ public class GUIKlasse extends JScrollPane
 		try
 		{
 			if (!eingabe[0].getText().equals("")
-					&& !eingabe[1].getText().equals("")
 					&& !eingabe[2].getText().equals(""))
 			{
 				String[] fach = new String[arrayZaehler()];
@@ -308,22 +307,14 @@ public class GUIKlasse extends JScrollPane
 						bisStufe[f] = db.gebeFaecherListe()[lehrer_wahl[f]
 								.getSelectedIndex()];
 						f++;
-					}
 					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
 							.parseInt(stufe[i].getText());
+					}
 				}
 				db.schreibeKlassenEigeschaften(eingabe[0].getText(),
 						Integer.parseInt(eingabe[2].getText()), vonStufe,
 						bisStufe,
 						db.gebeFaecherListe()[klassenlehrer.getSelectedIndex()]);
-				for (int i = 0; i < 3; i++)
-				{
-					eingabe[i].setText("");
-				}
-				for (int i = 0; i < fach_anzahl; i++)
-				{
-					auswahl[i].setSelected(false);
-				}
 				gUI.aktualisieren(2);
 
 			} else
@@ -332,7 +323,7 @@ public class GUIKlasse extends JScrollPane
 			}
 		} catch (Exception e)
 		{
-			// ausgabe.setText(sT.nurzahlen);
+			System.out.println(e);
 		}
 	}
 
