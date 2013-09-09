@@ -290,42 +290,47 @@ public class GUIKlasse extends JScrollPane
 
 	public void listener()
 	{
-		try
+		// try
+		// {
+		if (!eingabe[0].getText().equals("")
+				&& !eingabe[2].getText().equals(""))
 		{
-			if (!eingabe[0].getText().equals("")
-					&& !eingabe[2].getText().equals(""))
+			String[] fach = new String[arrayZaehler()];
+			int[] vonStufe = new int[fach_anzahl];
+			String[] bisStufe = new String[arrayZaehler()];
+			int f = 0;
+			for (int i = 0; i < fach_anzahl; i++)
 			{
-				String[] fach = new String[arrayZaehler()];
-				int[] vonStufe = new int[fach_anzahl];
-				String[] bisStufe = new String[arrayZaehler()];
-				int f = 0;
-				for (int i = 0; i < fach_anzahl; i++)
+				if (auswahl[i].isSelected())
 				{
-					if (auswahl[i].isSelected())
-					{
-						fach[f] = db.gebeFaecherListe()[i];
-						bisStufe[f] = db.gebeFaecherListe()[lehrer_wahl[f]
-								.getSelectedItem()];// Hier liegt der Fehler
-						f++;
-						vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
-								.parseInt(stufe[i].getText());
-					}
+					String s = "";
+					Object object = lehrer_wahl[i].getSelectedItem();// Hier liegt der Fehler
+					if (object != null)
+						s = object.toString();
+					else
+						s = "";
+					fach[f] = db.gebeFaecherListe()[i];
+					bisStufe[f] = s;
+					f++;
+					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
+							.parseInt(stufe[i].getText());
 				}
-				db.schreibeKlassenEigeschaften(eingabe[0].getText(),
-						Integer.parseInt(eingabe[2].getText()), vonStufe,
-						bisStufe,
-						db.gebeFaecherListe()[klassenlehrer.getSelectedIndex()]);
-				gUI.aktualisieren(2);
-
-			} else
-			{
-				// ausgabe.setText(sT.allefelder);
 			}
+			Object object = klassenlehrer.getSelectedItem();
+			db.schreibeKlassenEigeschaften(eingabe[0].getText(),
+					Integer.parseInt(eingabe[2].getText()), vonStufe, bisStufe,
+					object.toString());
+			gUI.aktualisieren(2);
 
-		} catch (Exception e)
+		} else
 		{
-			System.out.println(e);
+			// ausgabe.setText(sT.allefelder);
 		}
+
+		// } catch (Exception e)
+		// {
+		// System.out.println(e);
+		// }
 	}
 
 	public void klickLeer()
