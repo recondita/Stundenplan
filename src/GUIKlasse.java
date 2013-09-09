@@ -304,7 +304,7 @@ public class GUIKlasse extends JScrollPane
 				if (auswahl[i].isSelected())
 				{
 					String s = "";
-					Object object = lehrer_wahl[i].getSelectedItem();// Hier liegt der Fehler
+					Object object = lehrer_wahl[i].getSelectedItem();// Hier lag der Fehler
 					if (object != null)
 						s = object.toString();
 					else
@@ -314,6 +314,10 @@ public class GUIKlasse extends JScrollPane
 					f++;
 					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
 							.parseInt(stufe[i].getText());
+				}
+				else
+				{
+					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = 0;
 				}
 			}
 			Object object = klassenlehrer.getSelectedItem();
