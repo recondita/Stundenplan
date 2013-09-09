@@ -34,7 +34,7 @@ public class Generator
 		int[][] stunden = new int[10][5];
 		for (int i = 0; i < stunden.length; i++)
 		{
-			for (int j = 0; i < stunden[j].length; j++)
+			for (int j = 0; j < stunden[j].length; j++)
 			{
 				int[] fachIndex = new int[faecher.length];
 				int verfuegbar = 0;
@@ -56,5 +56,41 @@ public class Generator
 
 		}
 		return stunden;
+	}
+
+	public int[][] lehrerPlan(int stufe, int klasse, int[][] faecherPlan)
+	{
+		int[][] lehrerPlan = new int[faecherPlan.length][faecherPlan[0].length];
+		for (int i = 0; i < lehrerPlan.length; i++)
+		{
+			for (int j = 0; j < lehrerPlan[j].length; j++)
+			{
+				if (klassen[stufe][klasse].fachLehrer[faecherPlan[i][j]] >= 0)
+				{
+					lehrerPlan[i][j] = klassen[stufe][klasse].fachLehrer[faecherPlan[i][j]];
+				} else
+				{
+					// soll später für
+					// performence
+					// ausgelagert und
+					// nurnoch ein,al
+					// ausgeführt werden
+					int[] moeglicheLehrer =new int[lehrer.length];
+					int menge=0;
+					for (int k = 0; k < lehrer.length; k++) 
+					{
+						if((lehrer[k].vonFaecher[faecherPlan[i][j]]>=stufe)&(lehrer[k].bisFaecher[faecherPlan[i][j]]<=stufe))
+						{
+							moeglicheLehrer[menge]=k;
+							menge++;
+						}
+					}
+					int zufall=(int)Math.random()*menge;
+					lehrerPlan[i][j]=moeglicheLehrer[zufall];
+				}
+			}
+		}
+
+		return lehrerPlan;
 	}
 }
