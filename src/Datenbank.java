@@ -351,7 +351,7 @@ public class Datenbank
 	{
 		try
 		{
-			return new FileWriter(new File(pfad + sep + "Klassen" + sep + stufe
+			return new FileWriter(new File(pfad + sep + "Stufen" + sep + stufe
 					+ sep + name + ".klasse"));
 		} catch (IOException e)
 		{
