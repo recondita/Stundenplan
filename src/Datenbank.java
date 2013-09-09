@@ -554,6 +554,19 @@ public class Datenbank
 
 	}
 
+	public Fach fachAuslesen(String name)
+	{
+		
+		if(new File(pfad+ sep + "Faecher" + name).exists())
+		{
+		return new Fach(name);
+		}
+		else
+			return null;
+	}
+	
+
+	
 	public boolean stufeExists(int i)
 	{
 		return new File(pfad + sep + "Stufen" + sep + i).exists();
