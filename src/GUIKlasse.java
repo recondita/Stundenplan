@@ -295,10 +295,10 @@ public class GUIKlasse extends JScrollPane
 		if (!eingabe[0].getText().equals("")
 				&& !eingabe[2].getText().equals(""))
 		{
-			String[] fach = new String[arrayZaehler()];
+			//String[] fach = new String[fach_anzahl];
 			int[] vonStufe = new int[fach_anzahl];
-			String[] bisStufe = new String[arrayZaehler()];
-			int f = 0;
+			String[] bisStufe = new String[fach_anzahl];
+			//int f = 0;
 			for (int i = 0; i < fach_anzahl; i++)
 			{
 				if (auswahl[i].isSelected())
@@ -309,15 +309,16 @@ public class GUIKlasse extends JScrollPane
 						s = object.toString();
 					else
 						s = "";
-					fach[f] = db.gebeFaecherListe()[i];
-					bisStufe[f] = s;
-					f++;
+					//fach[f] = db.gebeFaecherListe()[i];
+					bisStufe[db.fachToInt(db.gebeFaecherListe()[i])] = s;
+					//f++;
 					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
 							.parseInt(stufe[i].getText());
 				}
 				else
 				{
 					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = 0;
+					bisStufe[db.fachToInt(db.gebeFaecherListe()[i])]="";
 				}
 			}
 			Object object = klassenlehrer.getSelectedItem();
