@@ -76,6 +76,7 @@ public class GUIKlasse extends JScrollPane
 		leer_oben.setLayout(new GridLayout(1, 1));
 		leer.add("North", (leer_oben));
 		tab.addTab("+", neuestufe);
+		tab.setPreferredSize(new Dimension(250,250));
 		neuestufe.setLayout(new BorderLayout());
 		stufeneu = new JTextField(sT.neuestufe);
 		stufeneu.setPreferredSize(new Dimension(25, 25));
@@ -290,52 +291,54 @@ public class GUIKlasse extends JScrollPane
 
 	public void listener()
 	{
-		// try
-		// {
-		if (!eingabe[0].getText().equals("")
-				&& !eingabe[2].getText().equals(""))
+		try
 		{
-			//String[] fach = new String[fach_anzahl];
-			int[] vonStufe = new int[fach_anzahl];
-			String[] bisStufe = new String[fach_anzahl];
-			//int f = 0;
-			for (int i = 0; i < fach_anzahl; i++)
+			if (!eingabe[0].getText().equals("")
+					&& !eingabe[2].getText().equals(""))
 			{
-				if (auswahl[i].isSelected())
+				// String[] fach = new String[fach_anzahl];
+				int[] vonStufe = new int[fach_anzahl];
+				String[] bisStufe = new String[fach_anzahl];
+				// int f = 0;
+				for (int i = 0; i < fach_anzahl; i++)
 				{
-					String s = "";
-					Object object = lehrer_wahl[i].getSelectedItem();// Hier lag der Fehler
-					if (object != null)
-						s = object.toString();
-					else
-						s = "";
-					//fach[f] = db.gebeFaecherListe()[i];
-					bisStufe[db.fachToInt(db.gebeFaecherListe()[i])] = s;
-					//f++;
-					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
-							.parseInt(stufe[i].getText());
+					if (auswahl[i].isSelected())
+					{
+						String s = "";
+						Object object = lehrer_wahl[i].getSelectedItem();// Hier
+																			// lag
+																			// der
+																			// Fehler
+						if (object != null)
+							s = object.toString();
+						else
+							s = "";
+						// fach[f] = db.gebeFaecherListe()[i];
+						bisStufe[db.fachToInt(db.gebeFaecherListe()[i])] = s;
+						// f++;
+						vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = Integer
+								.parseInt(stufe[i].getText());
+					} else
+					{
+						vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = 0;
+						bisStufe[db.fachToInt(db.gebeFaecherListe()[i])] = "";
+					}
 				}
-				else
-				{
-					vonStufe[db.fachToInt(db.gebeFaecherListe()[i])] = 0;
-					bisStufe[db.fachToInt(db.gebeFaecherListe()[i])]="";
-				}
+				Object object = klassenlehrer.getSelectedItem();
+				db.schreibeKlassenEigeschaften(eingabe[0].getText(),
+						Integer.parseInt(eingabe[2].getText()), vonStufe,
+						bisStufe, object.toString());
+				gUI.aktualisieren(2);
+
+			} else
+			{
+				// ausgabe.setText(sT.allefelder);
 			}
-			Object object = klassenlehrer.getSelectedItem();
-			db.schreibeKlassenEigeschaften(eingabe[0].getText(),
-					Integer.parseInt(eingabe[2].getText()), vonStufe, bisStufe,
-					object.toString());
-			gUI.aktualisieren(2);
 
-		} else
+		} catch (Exception e)
 		{
-			// ausgabe.setText(sT.allefelder);
+			System.out.println(e);
 		}
-
-		// } catch (Exception e)
-		// {
-		// System.out.println(e);
-		// }
 	}
 
 	public void klickLeer()
