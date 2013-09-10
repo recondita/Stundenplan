@@ -565,8 +565,6 @@ public class Datenbank
 			return null;
 	}
 	
-
-	
 	public boolean stufeExists(int i)
 	{
 		return new File(pfad + sep + "Stufen" + sep + i).exists();
