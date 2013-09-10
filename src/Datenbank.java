@@ -565,6 +565,11 @@ public class Datenbank
 			return null;
 	}
 	
+	public Fach fachAuslesen(int name)
+	{
+		return fachAuslesen(gebeFaecherListe()[name]);
+	}
+	
 	public boolean stufeExists(int i)
 	{
 		return new File(pfad + sep + "Stufen" + sep + i).exists();
